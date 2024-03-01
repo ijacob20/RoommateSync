@@ -1,0 +1,81 @@
+main {
+    font-family: "Oswald", sans-serif;
+
+    height: 95vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    align-self: center;
+    align-content: center;
+}
+
+.roommate{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.roommate div {
+    display: flex;
+    background: gray;
+    justify-content: center;
+    border-color: black;
+    margin-bottom: 1rem;
+}
+
+.roommate-h1 {
+    width: 35vw;
+    border-radius: 20px;
+}
+
+.roommate-img {
+    justify-content: center;
+    align-items: center;
+    width: 120px;
+    height: 120px;
+    border-radius: 100%;
+}
+
+.roommate img{
+    
+    height: 100px;
+    width: auto;
+}
+
+.account {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 1rem;
+}
+
+.account input {
+    width: 200px;
+}
+
+.account img{
+    height: 40px;
+    width: auto;
+}
+
+.password{
+    display: flex;
+    justify-content: center;
+    margin-bottom: 1rem;
+}
+
+.password input {
+    width: 200px;
+}
+
+.password img{
+    height: 40px;
+    width: auto;
+}
+
+.signup-buttons {
+    display: flex;
+    justify-content: center;
+    border-radius: 10px;
+    gap: 4rem;
+}

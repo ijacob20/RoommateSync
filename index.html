@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <!-- https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP -->
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="default-src 'self'; script-src 'self'"
+    />
+    <meta
+      http-equiv="X-Content-Security-Policy"
+      content="default-src 'self'; script-src 'self'"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@200..700&family=PT+Serif&family=Patua+One&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="./public/css/style.css">
+    <title>Roommate Sync</title>
+  </head>
+  <body>
+    <main>
+      <div class="roommate">
+        <div class="roommate-h1">
+          <h1>Roommate Sync</h1>
+        </div>
+        <div class="roommate-img">
+          <img src="./public/images/roommate-sync-logo.png" alt="roommate sync logo">
+        </div>
+      </div>
+  
+      <form action="#">
+        <div class="account">
+          <!-- <label for="username">Username</label> -->
+          <img src="./public/images/accountjpg.jpg" alt="account logo">
+          <input type="text" placeholder=" Please enter username" id="username" name="username" required>
+        </div>
+  
+        <div class="password">
+          <!-- <label for="password">Password</label> -->
+          <img src="./public/images/password-logo.png" alt="password logo">
+          <input type="text" placeholder=" Please enter password" id="password" name="password" required>
+        </div>
+      </form>
+  
+      <div class="signup-buttons">
+        <button>Sign Up</button>
+        <button>Login</button>
+      </div>
+    </main>
+  </body>
+  <script src="./renderer.js"></script>
+</html>
