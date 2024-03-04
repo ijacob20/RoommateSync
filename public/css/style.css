@@ -43,6 +43,22 @@ main {
     width: auto;
 }
 
+#newAccount {
+    font-family:Verdana, Geneva, Tahoma, sans-serif;
+    color: rgb(26,115,232);
+    text-decoration: none;
+    padding: 0.5rem;
+
+}
+#newAccount:hover {
+    color: rgb(23,78,166);
+    /* border: 20px solid gray; */
+    background-color: #9d99b115;
+    border-radius: 5px;
+
+}
+
+
 .account {
     display: flex;
     justify-content: center;
@@ -64,6 +80,7 @@ main {
     margin-bottom: 1rem;
 }
 
+
 .password input {
     width: 200px;
 }
@@ -78,4 +95,72 @@ main {
     justify-content: center;
     border-radius: 10px;
     gap: 4rem;
+}
+
+
+
+/* Container for the login form */
+.login-container {
+    display: grid;
+    gap: 20px; /* Gap between columns */
+    max-width: 4000px; /* Max width of the container */
+    margin: 0 auto; /* Center the container horizontally */
+    width: 100;
+}
+
+/* Style for the input fields */
+.login-input {
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: rgb(19, 19, 19);
+    border: none;
+    color: white;
+}
+
+/* Style for the login button */
+.login-button {
+    /* width: 100%; */
+    padding: 10px;
+    font-size: 16px;
+    border: none;
+    border-radius: 5px;
+    background-color: #007bff;
+    color: #fff;
+    cursor: pointer;
+}
+
+/* Style for the login button on hover */
+.login-button:hover {
+    background-color: #0056b3;
+}
+
+.form-container {
+    padding: 1.5rem 7rem;
+    background-color: rgb(49, 51, 56);
+    border-radius: 7px;
+    
+}
+
+body {
+    background-image: url("https://cdn.discordapp.com/attachments/1214340030609489991/1214343736704901130/rsbackground2x.jpg?ex=65f8c4bc&is=65e64fbc&hm=e535b97ee083fa2f7f73e2f33fae2ed7c7faeccce82fb3502d389d2d32deccc6&");
+  
+    /* Full height */
+    height: 100%;
+  
+    /* Center and scale the image nicely */
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+label {
+   color: rgb(153, 151, 151);
+   font-weight: 500;
+}
+
+input:focus {
+    outline: none;
 }

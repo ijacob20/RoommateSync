@@ -29,3 +29,7 @@ app.on('window-all-closed', () => {
     app.quit()
   }
 })
+
+ipcMain.on('goToSecondScreen', () => {
+  mainWindow.loadFile('second_screen.html');
+});
