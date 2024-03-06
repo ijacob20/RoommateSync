@@ -1,3 +1,4 @@
+/* index.html */
 main {
     font-family: "Oswald", sans-serif;
 
@@ -16,20 +17,32 @@ main {
     align-items: center;
 }
 
-.roommate div {
+/* .roommate div {
     display: flex;
     background: gray;
     justify-content: center;
     border-color: black;
     margin-bottom: 1rem;
-}
+} */
 
 .roommate-h1 {
+    display: flex;
+    background: gray;
+    justify-content: center;
+    border-color: black;
+    margin-bottom: 1rem;
+
     width: 35vw;
     border-radius: 20px;
 }
 
 .roommate-img {
+    display: flex;
+    background: gray;
+    justify-content: center;
+    border-color: black;
+    margin-bottom: 1rem;
+
     justify-content: center;
     align-items: center;
     width: 120px;
@@ -78,4 +91,49 @@ main {
     justify-content: center;
     border-radius: 10px;
     gap: 4rem;
+}
+
+/* menu.html */
+.menu-choices {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 3rem;
+    grid-auto-rows: minmax(100px, auto);
+}
+/* TODO: PUT CALENDER AND MESSAGES ON THE SIDES TO TAKE UP WHITE SPACE */
+/*       POTENTIALLY RECENELTY OPENED TABS OR PUT FEATURE CHOICES ON THE SIDE AS WELL*/
+
+.menu-choices a {
+    background-color: gray;
+    text-decoration: none;
+    color: black;
+    width: 10rem;
+}
+
+.menu-choices a h2 {
+    text-align: center;
+    vertical-align: text-top;
+    margin-top: 2.2rem;
+}
+
+/* .menu-choices div {
+    background-color: gray;
+}
+
+.menu-choices div h2 {
+    text-align: center;
+    vertical-align: text-top;
+    margin-top: 2.2rem
+} */
+
+.container {
+    display: flex;
+    justify-content: center;
+    margin-left: 6rem;
+}
+
+.logout {
+    height: 50px;
+    width: 80px;
+    margin-left: 3rem;
 }

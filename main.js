@@ -4,11 +4,15 @@ const path = require('node:path')
 const createWindow = () => {
   const win = new BrowserWindow({
     width: 800,
-    height: 600,
+    height: 650,
     webPreferences: {
         preload: path.join(__dirname, 'preload.js')
       }
   })
+  
+  // This puts the app window in the top left
+  // its for convience while coding.
+  /* win.setPosition(-6, -1); */
 
   win.loadFile('index.html')
 }
