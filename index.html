@@ -22,7 +22,7 @@
     <main>
       <div class="roommate">
         <div class="roommate-h1">
-          <h1>Roommate Sync</h1>
+          <h1 id="test">Roommate Sync</h1>
         </div>
         <div class="roommate-img">
           <img src="./public/images/roommate-sync-logo.png" alt="roommate sync logo">
@@ -33,20 +33,25 @@
         <div class="account">
           <!-- <label for="username">Username</label> -->
           <img src="./public/images/accountjpg.jpg" alt="account logo">
-          <input type="text" placeholder=" Please enter username" id="username" name="username" required>
+          <input type="email" placeholder="Email" id="email" name="email" required>
         </div>
   
         <div class="password">
           <!-- <label for="password">Password</label> -->
           <img src="./public/images/password-logo.png" alt="password logo">
-          <input type="text" placeholder=" Please enter password" id="password" name="password" required>
+          <input type="password" placeholder="Password" id="password" name="password" required>
         </div>
-      </form>
+
   
       <div class="signup-buttons">
-        <a href=""><button>Sign Up</button></a>
-        <a href="./views/menu.html"><button>Login</button></a>
+
+        <a id="newAccount" href="signup.html">Create account</a>
+        
+        <input type="submit" value="Login">     
+
       </div>
+    </form>
+
     </main>
   </body>
   <script src="./renderer.js"></script>
