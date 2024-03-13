@@ -11,7 +11,7 @@ main {
     align-content: center;
 }
 
-.roommate{
+.roommate {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -50,21 +50,22 @@ main {
     border-radius: 100%;
 }
 
-.roommate img{
-    
+.roommate img {
+
     height: 100px;
     width: auto;
 }
 
 #newAccount {
-    font-family:Verdana, Geneva, Tahoma, sans-serif;
-    color: rgb(26,115,232);
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    color: rgb(26, 115, 232);
     text-decoration: none;
     padding: 0.5rem;
 
 }
+
 #newAccount:hover {
-    color: rgb(23,78,166);
+    color: rgb(23, 78, 166);
     /* border: 20px solid gray; */
     background-color: #9d99b115;
     border-radius: 5px;
@@ -82,12 +83,12 @@ main {
     width: 200px;
 }
 
-.account img{
+.account img {
     height: 40px;
     width: auto;
 }
 
-.password{
+.password {
     display: flex;
     justify-content: center;
     margin-bottom: 1rem;
@@ -98,7 +99,7 @@ main {
     width: 200px;
 }
 
-.password img{
+.password img {
     height: 40px;
     width: auto;
 }
@@ -117,6 +118,7 @@ main {
     gap: 3rem;
     grid-auto-rows: minmax(100px, auto);
 }
+
 /* TODO: PUT CALENDER AND MESSAGES ON THE SIDES TO TAKE UP WHITE SPACE */
 /*       POTENTIALLY RECENELTY OPENED TABS OR PUT FEATURE CHOICES ON THE SIDE AS WELL*/
 
@@ -158,9 +160,12 @@ main {
 /* Container for the login form */
 .login-container {
     display: grid;
-    gap: 20px; /* Gap between columns */
-    max-width: 4000px; /* Max width of the container */
-    margin: 0 auto; /* Center the container horizontally */
+    gap: 20px;
+    /* Gap between columns */
+    max-width: 4000px;
+    /* Max width of the container */
+    margin: 0 auto;
+    /* Center the container horizontally */
     width: 100;
 }
 
@@ -197,26 +202,37 @@ main {
     padding: 1.5rem 7rem;
     background-color: rgb(49, 51, 56);
     border-radius: 7px;
-    
+
 }
 
 body {
     background-image: url("https://cdn.discordapp.com/attachments/1214340030609489991/1214343736704901130/rsbackground2x.jpg?ex=65f8c4bc&is=65e64fbc&hm=e535b97ee083fa2f7f73e2f33fae2ed7c7faeccce82fb3502d389d2d32deccc6&");
-  
+
     /* Full height */
     height: 100%;
-  
+
     /* Center and scale the image nicely */
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
+
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+
+
 }
 
 label {
-   color: rgb(153, 151, 151);
-   font-weight: 500;
+    color: rgb(153, 151, 151);
+    font-weight: 500;
 }
 
 input:focus {
     outline: none;
 }
+
+
+
+
+/* Style for Message Page */
