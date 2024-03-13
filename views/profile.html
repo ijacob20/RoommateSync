@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Profile Page</title>
+<style>
+    .profile-page {
+        font-family: 'Arial', sans-serif;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    .header {
+        width: 100%;
+        padding: 20px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+    .profile {
+        text-align: center;
+        margin: 50px 0;
+    }
+    .profile-icon {
+        border-radius: 50%;
+        width: 100px;
+        height: 100px;
+        margin-bottom: 40px;
+    }
+    .profile-name {
+        font-size: 24px;
+        font-weight: bold;
+        margin-bottom: 10px;
+    }
+    .edit-profile {
+        background: none;
+        border: 1px solid black;
+        padding: 10px 20px;
+        cursor: pointer;
+    }
+    .menu-item {
+        display: flex;
+        align-items: center;
+        padding: 20px;
+        width: 90%;
+        margin: 10px 0;
+        border-radius: 10px;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+    .dropdown {
+        width: 30px;
+        height: 30px;
+        margin-right: 20px;
+    }
+    .nav-arrow {
+        width: 30px;
+        height: 30px;
+        margin-left: 20px;
+    }
+</style>
+</head>
+<body>
+<div class="profile-page">
+<div class="header">
+    <div class="nav-arrow">
+        <a href="menu.html"> <img src="../public/images/back-arrow.jpg" alt="profile account logo" width="35" height="35"> </a>
+    </div>
+    <div class="dropdown">
+        <a> <img src="../public/images/drop-down.jpg" alt="profile account logo" width="45" height="45"> </a>
+    </div>
+</div>
+
+<div class="profile">
+    <div class="profile-icon">
+            <img src="../public/images/profile-icon.jpg" alt="profile account logo" width="130" height="130">
+    </div>
+    <div class="profile-name">John Smith</div>
+    <button class="edit-profile">Edit profile</button>
+</div>
+
+<div class="menu-item">
+    <div class="menu-icon">
+        <img src="../public/images/calendar.jpg" alt="profile account logo" width="40" height="40">
+    </div>
+    Appointment
+</div>
+
+<div class="menu-item">
+    <div class="menu-icon">
+        <img src="../public/images/billing.jpg" alt="profile account logo" width="40" height="40">
+    </div>
+    Billing
+</div>
+
+<div class="menu-item">
+    <div class="menu-icon">
+        <img src="../public/images/message.jpg" alt="profile account logo" width="30" height="30">
+    </div>
+    Message
+</div>
+
+</div>
+</body>
+</html>
