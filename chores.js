@@ -65,12 +65,12 @@ chores.forEach(chore=> {
 //   });
 
 
-const newButton = document.querySelector('button');
+const newButton = document.querySelector('#addButton');
 
 const form = document.querySelector('form');
 
 newButton.addEventListener('click', e => {
-    form.classList.remove('hidden');
+    form.classList.toggle('hidden');
    
 });
 
@@ -94,11 +94,12 @@ function addChore(e) {
           }
         // console.log(chore);
         let host = document.getElementById('host').value;
-        console.log(host);
         let newChore = { image, host};
         chores.push(newChore);
-        console.log(chores);
-            addChores(newChore)
+        addChores(newChore);
+
+        document.getElementById('host').value = '';
+
     }
 }
 submitBtn.addEventListener('click', addChore);
