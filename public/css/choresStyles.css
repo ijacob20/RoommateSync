@@ -1,46 +1,79 @@
 body {
-    font-family: Arial, sans-serif;
     margin: 0;
+    padding: 0;
+    height: 100%;
+    font-family: Arial, sans-serif;
+}
+
+.container {
+    display: grid;
+    grid-template-columns: 1fr 0.25fr;
+    height: 100vh;
+}
+
+.chores {
+    background-color: #e0e0e0;
+}
+
+.legend {
+    background-color: #cccccc;
+}
+
+.card {
+    border-radius: 8px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    margin: 20px;
+}
+
+h2 {
+    margin-top: 0;
+}
+
+ul {
+    list-style: none;
     padding: 0;
 }
 
-header {
+ul li {
+    margin-bottom: 10px;
     display: flex;
-    justify-content: space-between;
     align-items: center;
-    background-color: #f8f8f8;
-    padding: 10px;
-    font-size: 24px;
 }
 
-.back-button {
-    border: none;
-    background: none;
-    font-size: 16px;
-    cursor: pointer;
+ul li .profilePic {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    margin-right: 10px;
 }
 
-
-
-.header-title {
-    font-size: 24px;
+.choreIcon {
+    width: 40px;
+    height: 40px;
+    /* border-radius: 50%; */
+    margin-right: 10px;
 }
 
-main {
-    display: grid;
-    grid-template-columns: auto auto;
-    gap: 2rem;
-    padding: 1rem;
-    
+.divider {
+    border-right: 2px solid #ccc;
+    height: 40px; 
+    margin-right: 10px;
 }
 
-.chores-container {
-    background-color: gray;
-    border-radius: 4px;
+.legend-item {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    margin-right: 10px;
+    border: 1px solid #333;
+    border-radius: 50%;
 }
 
-.legend-container {
-    background-color: gold;
-    border-radius: 4px;
+.done {
+    background-color: #333;
+}
 
+.hidden {
+    display: none;
 }

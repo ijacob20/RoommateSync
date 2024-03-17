@@ -23,7 +23,7 @@ const createWindow = () => {
   // its for convience while coding.
   /* win.setPosition(-6, -1); */
 
-  win.loadFile('views/chores.html')
+  win.loadFile('index.html')
 }
 
 app.whenReady().then(() => {
