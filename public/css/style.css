@@ -110,43 +110,17 @@ main {
     gap: 4rem;
 }
 
-/* menu.html */
-.menu-choices {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 3rem;
-    grid-auto-rows: minmax(100px, auto);
-}
-/* TODO: PUT CALENDER AND MESSAGES ON THE SIDES TO TAKE UP WHITE SPACE */
-/*       POTENTIALLY RECENELTY OPENED TABS OR PUT FEATURE CHOICES ON THE SIDE AS WELL*/
-
-.menu-choices a {
-    background-color: gray;
-    text-decoration: none;
-    color: black;
-    width: 10rem;
-}
-
-.menu-choices a h2 {
-    text-align: center;
-    vertical-align: text-top;
-    margin-top: 2.2rem;
-}
-
-/* .menu-choices div {
-    background-color: gray;
-}
-
-.menu-choices div h2 {
-    text-align: center;
-    vertical-align: text-top;
-    margin-top: 2.2rem
-} */
-
+/* signup.html */
 .container {
     display: flex;
     justify-content: center;
     margin-left: 6rem;
+}
+
+.logout-container {
+    height: 50px;
+    width: 80px;
+    margin-left: 3rem;
 }
 
 .logout {
@@ -200,7 +174,7 @@ main {
     
 }
 
-body {
+.signup-body {
     background-image: url("https://cdn.discordapp.com/attachments/1214340030609489991/1214343736704901130/rsbackground2x.jpg?ex=65f8c4bc&is=65e64fbc&hm=e535b97ee083fa2f7f73e2f33fae2ed7c7faeccce82fb3502d389d2d32deccc6&");
   
     /* Full height */
@@ -219,4 +193,258 @@ label {
 
 input:focus {
     outline: none;
+}
+
+
+/* menu.html */
+.menu-main {
+  height: 95vh;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    align-self: center;
+    align-content: center;
+}
+
+.menu-section{
+  display: flex;
+}
+
+.menu-choices {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 3rem;
+    grid-auto-rows: minmax(100px, auto);
+}
+/* TODO: PUT CALENDER AND MESSAGES ON THE SIDES TO TAKE UP WHITE SPACE */
+/*       POTENTIALLY RECENELTY OPENED TABS OR PUT FEATURE CHOICES ON THE SIDE AS WELL*/
+
+.menu-choices a {
+    background-color: gray;
+    text-decoration: none;
+    color: black;
+    width: 10rem;
+}
+
+.menu-choices a h2 {
+    text-align: center;
+    vertical-align: text-top;
+    margin-top: 2.2rem;
+}
+
+/* .menu-choices div {
+    background-color: gray;
+}
+
+.menu-choices div h2 {
+    text-align: center;
+    vertical-align: text-top;
+    margin-top: 2.2rem
+} */
+
+
+/* calendar.html */
+/* Import Google font - Poppins */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap');
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
+}
+
+/* comment this, after moving calendar from calendar.html to menu.html */
+/* .calendar-body{
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 0 10px;
+  justify-content: center;
+  min-height: 100vh;
+  background: #9B59B6;
+}
+ */
+
+.calendar-wrapper{
+  width: 450px;
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 0 15px 40px rgba(0,0,0,0.12);
+  border: 10px, solid, black;
+}
+.calendar-wrapper header{
+  display: flex;
+  align-items: center;
+  padding: 25px 30px 10px;
+  justify-content: space-between;
+}
+header .icons{
+  display: flex;
+}
+header .icons span{
+  height: 38px;
+  width: 38px;
+  margin: 0 1px;
+  cursor: pointer;
+  color: #878787;
+  text-align: center;
+  line-height: 38px;
+  font-size: 1.9rem;
+  user-select: none;
+  border-radius: 50%;
+}
+.icons span:last-child{
+  margin-right: -10px;
+}
+header .icons span:hover{
+  background: #f2f2f2;
+}
+header .current-date{
+  font-size: 1.45rem;
+  font-weight: 500;
+}
+.calendar{
+  padding: 20px;
+}
+.calendar ul{
+  display: flex;
+  flex-wrap: wrap;
+  list-style: none;
+  text-align: center;
+}
+.calendar .days{
+  margin-bottom: 20px;
+}
+.calendar li{
+  color: #333;
+  width: calc(100% / 7);
+  font-size: 1.07rem;
+}
+.calendar .weeks li{
+  font-weight: 500;
+  cursor: default;
+}
+.calendar .days li{
+  z-index: 1;
+  cursor: pointer;
+  position: relative;
+  margin-top: 30px;
+}
+.days li.inactive{
+  color: #aaa;
+}
+
+.days li.active{
+  /* current day text color */
+  /* color: #fff; */
+}
+.days li::before{
+  position: absolute;
+  content: "";
+  left: 50%;
+  top: 50%;
+  height: 40px;
+  width: 40px;
+  z-index: -1;
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+}
+.days li.active::before{
+  /* current day background color */
+  /* background: #9B59B6; */
+  background: #aaa;
+}
+/* .selected-day {
+  top: 50%;
+  height: 30px;
+  width: 5px;
+  border-radius: 50%;
+  background: #dcdcdc;
+} */
+.days li:not(.active):hover::before{
+  background: #f2f2f2;
+}
+
+
+/* Calendar event section */
+.event-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  width: 28rem;
+  border: 10px, solid, black;
+  border-radius: 10px;
+  box-shadow: 0 15px 40px rgba(0,0,0,0.12);
+}
+
+.event-title-container {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin-right: 6rem;
+}
+
+.header-wrapper {
+  display: flex;
+  justify-content: left;
+  flex-direction: row;
+  gap: 1rem;
+}
+
+.hidden {
+  display: none;
+}
+
+.header-wrapper p {
+  margin-top: 1rem;
+}
+
+.event-container {
+  display: flex;
+  justify-content: center;
+}
+
+.plus {
+  font-size: xx-large;
+  margin-top: 0.4rem;
+  margin-right: 1rem;
+  justify-content: right;
+  text-align: right;
+  cursor: pointer;
+  border-radius: 10px;
+}
+
+.plus:hover{
+  background: #f2f2f2;
+  
+}
+
+.formInput {
+  margin-bottom: 1rem;
+}
+
+.formInput label {
+  color: black;
+}
+
+.event-input {
+  width: 100%;
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #878787;
+    border: none;
+    color: white;
+}
+
+.calendar-section{  
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  align-items: center;
+  padding: 0 10px;
+  justify-content: center;
+  height: 50vh;
 }

@@ -3,62 +3,124 @@
   <head>
     <meta charset="UTF-8" />
     <!-- https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP -->
-    <meta
+    
+    <!-- <meta
       http-equiv="Content-Security-Policy"
       content="default-src 'self'; script-src 'self'"
-    />
-    <meta
+    /> -->
+    <!-- <meta
       http-equiv="X-Content-Security-Policy"
       content="default-src 'self'; script-src 'self'"
-    />
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@200..700&family=PT+Serif&family=Patua+One&display=swap" rel="stylesheet">
+    /> -->
 
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@200..700&family=PT+Serif&family=Patua+One&display=swap" rel="stylesheet">
+
+
+    <meta charset="utf-8">
     <link rel="stylesheet" href="../public/css/style.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Google Font Link for Icons -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200">
+
+    <script src="../renderer.js" defer></script>
+
     <title>Roommate Sync</title>
   </head>
   <body>
-    <main>
-        <div class="container">
-            <div class="roommate">
-                <div class="roommate-img">
-                    <img src="../public/images/roommate-sync-logo.png" alt="roommate sync logo">
+    <main class="menu-main">
+        <section class="calendar-section">
+            <div class="calendar-wrapper">
+                <header>
+                  <p class="current-date"></p>
+                  <div class="icons">
+                    <span id="prev" class="material-symbols-rounded">chevron_left</span>
+                    <span id="next" class="material-symbols-rounded">chevron_right</span>
+                  </div>
+                </header>
+                <div class="calendar">
+                  <ul class="weeks">
+                    <li>Sun</li>
+                    <li>Mon</li>
+                    <li>Tue</li>
+                    <li>Wed</li>
+                    <li>Thu</li>
+                    <li>Fri</li>
+                    <li>Sat</li>
+                  </ul>
+                  <ul class="days"></ul>
+                </div>
+              </div>
+              <article class="event-wrapper">
+                <div class="event-container">
+                  <div class="event-title-container">
+                    <div class="header-wrapper">
+                      <p class="event-header"></p>
+                      <!-- TODO: ADD DISPLAY: NONE -->
+                      <p class="event-title">*Today's Event Title*</p>
+                      <!-- <h2 class="plus">&#43</h2> -->
+                    </div>
+                    <p class="event-title">*Today's Event Desc*</p>
+                  </div>
+                  <h2 class="plus">&#43</h2>
                 </div>
                 
-                <div class="menu-choices">
-                    <a href="" class="menu-choice-1">
-                        <!-- add friends should be a button inside the roommates page-->
-                        <h2>Roommates</h2>
-                    </a>
-                    <a href="" class="menu-choice-2">
-                        <!-- add friends should be a button inside the roommates page-->
-                        <h2>Messages</h1>
-                    </a>
-                    <a href="" class="menu-choice-3">
-                        <!-- add friends should be a button inside the roommates page-->
-                        <h2>Calender</h2>
-                    </a>
-                    <a href="" class="menu-choice-4">
-                        <!-- add friends should be a button inside the roommates page-->
-                        <h2>Profile</h2>
-                    </a>
-                    <a href="" class="menu-choice-5">
-                        <!-- add friends should be a button inside the roommates page-->
-                        <h2>Chores</h2>
-                    </a>
-                    <a href="" class="menu-choice-6">
-                        <!-- add friends should be a button inside the roommates page-->
-                        <h2>Bill Splitting</h2>
-                    </a>
+                <form action="#">
+                  <div class="event-input-container hidden">
+                      <div class="formInput">
+                          <label for="firstName">Event title:</label>
+                          <input type="text" class="event-input" id="firstName" name="firstName" required>
+                      </div>
+              
+                      <div class="formInput">
+                          <label for="lastName">Event Info</label>
+                          <input type="text" class="event-input" id="lastName" name="lastName" required>
+                      </div>
+              
+                      <button type="submit" class="login-button">Register</button>
+                    </div>
+                  </form>
+              </article>
+        </section>
+        <section class="menu-section">
+            <div class="container">
+                <div class="roommate">
+                    <div class="roommate-img">
+                        <img src="../public/images/roommate-sync-logo.png" alt="roommate sync logo">
+                    </div>
+                    
+                    <div class="menu-choices">
+                        <a href="" class="menu-choice-1">
+                            <!-- add friends should be a button inside the roommates page-->
+                            <h2>Roommates</h2>
+                        </a>
+                        <a href="" class="menu-choice-2">
+                            <!-- add friends should be a button inside the roommates page-->
+                            <h2>Messages</h1>
+                        </a>
+                        <a href="./calendar.html" class="menu-choice-3">
+                            <!-- add friends should be a button inside the roommates page-->
+                            <h2>Calender</h2>
+                        </a>
+                        <a href="" class="menu-choice-4">
+                            <!-- add friends should be a button inside the roommates page-->
+                            <h2>Profile</h2>
+                        </a>
+                        <a href="" class="menu-choice-5">
+                            <!-- add friends should be a button inside the roommates page-->
+                            <h2>Chores</h2>
+                        </a>
+                        <a href="" class="menu-choice-6">
+                            <!-- add friends should be a button inside the roommates page-->
+                            <h2>Bill Splitting</h2>
+                        </a>
+                    </div>
                 </div>
+                <a class="logout-container"  href="../index.html"><button class="logout">Logout</button></a>
             </div>
-            <a  href="../index.html"><button class="logout">Logout</button></a>
-        </div>
-        
-        
-        
+        </section>
     </main>
 </body>
-<script src="./renderer.js"></script>
+
 </html>

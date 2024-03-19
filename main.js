@@ -3,8 +3,12 @@ const path = require('node:path')
 
 const createWindow = () => {
   const win = new BrowserWindow({
-    width: 800,
-    height: 650,
+    //width: 800,
+    //height: 650,
+    
+    width: 1080,
+    height: 3000,
+
     webPreferences: {
         preload: path.join(__dirname, 'preload.js')
       }
@@ -12,9 +16,12 @@ const createWindow = () => {
   
   // This puts the app window in the top left
   // its for convience while coding.
-  /* win.setPosition(-6, -1); */
+  win.setPosition(-6, -1);
+  win.loadFile('./views/menu.html');
 
-  win.loadFile('index.html')
+  /* win.loadFile('signup.html') */
+
+  /* win.loadFile('index.html') */
 }
 
 app.whenReady().then(() => {
