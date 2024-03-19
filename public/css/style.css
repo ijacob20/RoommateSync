@@ -392,9 +392,7 @@ header .current-date{
   gap: 1rem;
 }
 
-.hidden {
-  display: none;
-}
+
 
 .header-wrapper p {
   margin-top: 1rem;
@@ -402,13 +400,14 @@ header .current-date{
 
 .event-container {
   display: flex;
-  justify-content: center;
+  
 }
 
 .plus {
   font-size: xx-large;
   margin-top: 0.4rem;
-  margin-right: 1rem;
+  /* margin-right: 1rem; */
+  margin-left: 2rem;
   justify-content: right;
   text-align: right;
   cursor: pointer;
@@ -447,4 +446,13 @@ header .current-date{
   padding: 0 10px;
   justify-content: center;
   height: 50vh;
+}
+
+.hidden {
+  display: none;
+}
+
+.justify-right {
+  justify-content: right;
+  margin-right: 0.7rem;
 }

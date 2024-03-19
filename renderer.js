@@ -157,6 +157,7 @@ const renderCalendar = () => {
         });
     }
 
+    const eventContainer = document.querySelector(".event-container");
     const eventTitle = document.querySelector(".event-title-container");
     const eventTitleDesc = document.querySelector(".event-title-container div h2");
     const eventInput = document.querySelector(".event-input-container");
@@ -169,6 +170,8 @@ const renderCalendar = () => {
 
         eventTitle.classList.toggle("hidden");
         console.log(eventTitle.style.display);
+
+        eventContainer.classList.toggle("justify-right");
 
         eventInput.classList.toggle("hidden");
         console.log(eventInput.style.display);
