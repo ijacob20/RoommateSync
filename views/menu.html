@@ -24,7 +24,7 @@
     <!-- Google Font Link for Icons -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200">
 
-    <script src="../renderer.js" defer></script>
+    <script src="../calendar.js" defer></script>
 
     <title>Roommate Sync</title>
   </head>
@@ -58,27 +58,27 @@
                     <div class="header-wrapper">
                       <p class="event-header"></p>
                       <!-- TODO: ADD DISPLAY: NONE -->
-                      <p class="event-title">*Today's Event Title*</p>
+                      <p class="event-title"></p>
                       <!-- <h2 class="plus">&#43</h2> -->
                     </div>
-                    <p class="event-title">*Today's Event Desc*</p>
+                    <p class="event-desc">No Event Today</p>
                   </div>
                   <h2 class="plus">&#43</h2>
                 </div>
                 
-                <form action="#">
+                <form>
                   <div class="event-input-container hidden">
                       <div class="formInput">
                           <label for="firstName">Event title:</label>
-                          <input type="text" class="event-input" id="firstName" name="firstName" required>
+                          <input type="text" id="event-title-input" class="event-input" id="firstName" name="firstName" required>
                       </div>
               
                       <div class="formInput">
                           <label for="lastName">Event Info</label>
-                          <input type="text" class="event-input" id="lastName" name="lastName" required>
+                          <input type="text" id="event-desc-input" class="event-input" id="lastName" name="lastName" required>
                       </div>
               
-                      <button type="submit" class="login-button">Register</button>
+                      <button type="submit" class="login-button">Add Event</button>
                     </div>
                   </form>
               </article>
