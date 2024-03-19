@@ -83,6 +83,8 @@ ul li .profilePic {
 #addButton {
     font-size: 2rem;
     color: rgb(49, 148, 240);
+    cursor: pointer;
+
 }
 #addButton:hover {
     font-size: 2rem;
@@ -151,4 +153,25 @@ select:focus {
 a {
     text-decoration: none;
     color: black;
+}
+
+/* .chores-wrapper {
+    display: flex;
+} */
+
+.choresList li {
+    /* color: green; */
+    border: 5px solid #cccccc00;
+    border-radius: 16px;
+}
+
+.choresList li:hover {
+    color: green;
+    border: 5px solid #ccc;
+    border-radius: 16px;
+}
+
+.deleteIcon {
+    display: flex;
+justify-content:  right;
 }
