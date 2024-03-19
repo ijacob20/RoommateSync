@@ -1,0 +1,154 @@
+body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    font-family: Arial, sans-serif;
+}
+
+.container {
+    display: grid;
+    grid-template-columns: 1fr 0.25fr;
+    height: 100vh;
+}
+
+.chores {
+    background-color: #e0e0e0;
+}
+
+.legend {
+    background-color: #cccccc;
+}
+
+.card {
+    border-radius: 8px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    margin: 20px;
+}
+
+h2 {
+    margin-top: 0;
+    font-style: oblique;
+
+}
+
+ul {
+    list-style: none;
+    padding: 0;
+}
+
+ul li {
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+}
+
+ul li .profilePic {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    margin-right: 10px;
+}
+
+.choreIcon {
+    width: 40px;
+    height: 40px;
+    /* border-radius: 50%; */
+    margin-right: 10px;
+}
+
+.divider {
+    border-right: 2px solid #ccc;
+    height: 40px; 
+    margin-right: 10px;
+}
+
+.legend-item {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    margin-right: 10px;
+    border: 1px solid #333;
+    border-radius: 50%;
+}
+
+.done {
+    background-color: #333;
+}
+
+.hidden {
+    display: none;
+}
+
+#addButton {
+    font-size: 2rem;
+    color: rgb(49, 148, 240);
+}
+#addButton:hover {
+    font-size: 2rem;
+    color: rgb(45, 131, 211);
+}
+
+input {
+    width: auto;
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: rgb(255, 255, 255);
+    border: none;
+    color: black;
+}
+
+input:focus {
+    outline: none;
+}
+
+select:focus {
+    outline: none;
+}
+
+#submit {
+    /* width: 100%; */
+    padding: 10px;
+    font-size: 16px;
+    border: none;
+    border-radius: 5px;
+    background-color: rgb(49, 148, 240);
+    color: #fff;
+    cursor: pointer;
+}
+
+#submit:hover {
+    background-color: rgb(45, 131, 211);
+
+}
+.header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#logo {
+    transition: transform .2s;
+
+    width: 80px;
+    height: 80px;
+    border-radius: 100%;
+    padding: 1rem;
+    /* display: block; */
+    /* margin-left: auto; */
+    /* margin-right: auto; */
+    /* width: 50%; */
+
+}
+
+#logo:hover {
+    transform:scale(1.25);
+
+
+}
+a {
+    text-decoration: none;
+    color: black;
+}

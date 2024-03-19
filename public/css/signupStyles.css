@@ -1,0 +1,243 @@
+/* index.html */
+main {
+    font-family: "Oswald", sans-serif;
+
+    height: 95vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    align-self: center;
+    align-content: center;
+}
+
+.roommate {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* .roommate div {
+    display: flex;
+    background: gray;
+    justify-content: center;
+    border-color: black;
+    margin-bottom: 1rem;
+} */
+
+.roommate-h1 {
+    display: flex;
+    background: gray;
+    justify-content: center;
+    border-color: black;
+    margin-bottom: 1rem;
+
+    width: 35vw;
+    border-radius: 20px;
+}
+
+.roommate-img {
+    display: flex;
+    background: gray;
+    justify-content: center;
+    border-color: black;
+    margin-bottom: 1rem;
+
+    justify-content: center;
+    align-items: center;
+    width: 120px;
+    height: 120px;
+    border-radius: 100%;
+}
+
+.roommate img {
+
+    height: 100px;
+    width: auto;
+}
+
+#newAccount {
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    color: rgb(26, 115, 232);
+    text-decoration: none;
+    padding: 0.5rem;
+
+}
+
+#newAccount:hover {
+    color: rgb(23, 78, 166);
+    /* border: 20px solid gray; */
+    background-color: #9d99b115;
+    border-radius: 5px;
+
+}
+
+
+.account {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 1rem;
+}
+
+.account input {
+    width: 200px;
+}
+
+.account img {
+    height: 40px;
+    width: auto;
+}
+
+.password {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 1rem;
+}
+
+
+.password input {
+    width: 200px;
+}
+
+.password img {
+    height: 40px;
+    width: auto;
+}
+
+.signup-buttons {
+    display: flex;
+    justify-content: center;
+    border-radius: 10px;
+    gap: 4rem;
+}
+
+/* menu.html */
+.menu-choices {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 3rem;
+    grid-auto-rows: minmax(100px, auto);
+}
+
+/* TODO: PUT CALENDER AND MESSAGES ON THE SIDES TO TAKE UP WHITE SPACE */
+/*       POTENTIALLY RECENELTY OPENED TABS OR PUT FEATURE CHOICES ON THE SIDE AS WELL*/
+
+.menu-choices a {
+    background-color: gray;
+    text-decoration: none;
+    color: black;
+    width: 10rem;
+}
+
+.menu-choices a h2 {
+    text-align: center;
+    vertical-align: text-top;
+    margin-top: 2.2rem;
+}
+
+/* .menu-choices div {
+    background-color: gray;
+}
+
+.menu-choices div h2 {
+    text-align: center;
+    vertical-align: text-top;
+    margin-top: 2.2rem
+} */
+
+.container {
+    display: flex;
+    justify-content: center;
+    margin-left: 6rem;
+}
+
+.logout {
+    height: 50px;
+    width: 80px;
+    margin-left: 3rem;
+}
+
+/* Container for the login form */
+.login-container {
+    display: grid;
+    gap: 20px;
+    /* Gap between columns */
+    max-width: 4000px;
+    /* Max width of the container */
+    margin: 0 auto;
+    /* Center the container horizontally */
+    width: 100;
+}
+
+/* Style for the input fields */
+.login-input {
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: rgb(19, 19, 19);
+    border: none;
+    color: white;
+}
+
+/* Style for the login button */
+.login-button {
+    /* width: 100%; */
+    padding: 10px;
+    font-size: 16px;
+    border: none;
+    border-radius: 5px;
+    background-color: #007bff;
+    color: #fff;
+    cursor: pointer;
+}
+
+/* Style for the login button on hover */
+.login-button:hover {
+    background-color: #0056b3;
+}
+
+.form-container {
+    padding: 1.5rem 7rem;
+    background-color: rgb(49, 51, 56);
+    border-radius: 7px;
+
+}
+
+/** Profile Page  **/
+
+/**TODO: Transfer styles to this CSS page **/
+
+
+body {
+    background-image: url("https://cdn.discordapp.com/attachments/1214340030609489991/1214343736704901130/rsbackground2x.jpg?ex=65f8c4bc&is=65e64fbc&hm=e535b97ee083fa2f7f73e2f33fae2ed7c7faeccce82fb3502d389d2d32deccc6&");
+
+    /* Full height */
+    height: 100%;
+
+    /* Center and scale the image nicely */
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+
+
+}
+
+label {
+    color: rgb(153, 151, 151);
+    font-weight: 500;
+}
+
+input:focus {
+    outline: none;
+}
+
+
+
+
+/* Style for Message Page */

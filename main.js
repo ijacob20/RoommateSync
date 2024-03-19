@@ -3,16 +3,30 @@ const path = require('node:path')
 
 const createWindow = () => {
   const win = new BrowserWindow({
+
     //width: 800,
     //height: 650,
     
-    width: 1080,
-    height: 3000,
+    //width: 1080,
+    //height: 3000,
+
+
+    show: false,
+    width: 1024,
+    height: 768,
 
     webPreferences: {
         preload: path.join(__dirname, 'preload.js')
-      }
-  })
+      } 
+    })
+    
+  win.setMenuBarVisibility(false)
+  win.setMinimumSize(800,600)
+
+  win.once('ready-to-show', () => {
+    win.show()
+  });
+
   
   // This puts the app window in the top left
   // its for convience while coding.

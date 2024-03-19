@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Roommate Sync</title>
+    <link rel="stylesheet" href="../public/css/choresStyles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+    <script src="../chores.js" defer></script></head>
+<body>
+    <div class="container">
+        
+        <div class="chores">
+            <div class="header">
+                <a href="menu.html"><img id="logo" src="../public/images/roommate-sync-logo.png" alt=""></a>
+                <a href="menu.html"> <h1>Roommate Sync</h1></a>
+            </div>
+            <div class="card">
+                <h2>Chores</h2>
+                <div class="chores-wrapper">
+                <ul class="choresList">
+                   
+                </ul>
+            </div>
+            </div>
+            <div class="card">
+               <i id="addButton" class="fa-solid fa-circle-plus"></i>
+                <form class="hidden">
+                    <label for="Chore">Choose a chore:</label>
+                    <select name="chore">
+                    <option value="Wash Dishes">Wash Dishes</option>
+                    <option value="Laundry">Laundry</option>
+                    <option value="Take out trash">Take out trash</option>
+                    <option value="Vacuum">Vacuum</option>
+                    </select>
+                    <label for="appointee">Whose task is this?:</label>
+                    <input id="host" type="text">
+                    <button id="submit" type="submit">Add</button>
+                    
+                </form>
+            </div>
+        </div>
+        <div class="legend">
+            <div class="card">
+                <h2>Legend</h2>
+                <ul>
+                    <li><img class="choreIcon" src="../public/images/laundryIcon.png" alt="Chore">Laundry</li>
+                    <li><img class="choreIcon" src="../public/images/dishesIcon.png" alt="Chore">Wash Dishes</li>
+                    <li><img class="choreIcon" src="../public/images/trashIcon.png" alt="Chore">Take Out Trash</li>
+                    <li><img class="choreIcon" src="../public/images/vacuumIcon.png" alt="Chore">Vacuum</li>
+
+                </ul>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
