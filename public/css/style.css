@@ -138,6 +138,10 @@ main {
     margin-top: 2.2rem;
 }
 
+.menu-choice-6 {
+  /* margin-left: 10rem; */
+}
+
 /* .menu-choices div {
     background-color: gray;
 }
@@ -459,18 +463,19 @@ header .current-date{
 
 .event-container {
   display: flex;
-  
+  justify-content: space-between
 }
 
 .plus {
   font-size: xx-large;
   margin-top: 0.4rem;
   /* margin-right: 1rem; */
-  margin-left: 2rem;
+  /* margin-left: 4rem; */
   justify-content: right;
   text-align: right;
   cursor: pointer;
   border-radius: 10px;
+  
 }
 
 .plus:hover{
@@ -516,7 +521,9 @@ header .current-date{
   margin-right: 0.7rem;
 }
 
-
+.plus-location {
+  margin-right: 11px;
+}
 
 /* Style for Message Page */
 

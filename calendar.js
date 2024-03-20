@@ -5,10 +5,11 @@ prevNextIcon = document.querySelectorAll(".icons span");
 const eventHeader = document.querySelector(".event-header");
 
 const eventContainer = document.querySelector(".event-container");
-    const eventTitleContainer = document.querySelector(".event-title-container");
-    const eventTitleDesc = document.querySelector(".event-title-container div h2");
-    const eventInput = document.querySelector(".event-input-container");
-    const plusIcon = document.querySelector(".plus");
+const eventTitleContainer = document.querySelector(".event-title-container");
+const eventTitleDesc = document.querySelector(".event-title-container div h2");
+const eventInput = document.querySelector(".event-input-container");
+const plusIcon = document.querySelector(".plus");
+const plusLocation = document.querySelector(".plus-location");
 
 // getting new date, current year and month
 let date = new Date(),
@@ -114,6 +115,8 @@ const renderCalendar = () => {
         });
     }
 
+    plusIcon.classList.toggle("plus-location");
+
     plusIcon.addEventListener("click", function() {
         inputHide();
     });
@@ -122,13 +125,12 @@ const renderCalendar = () => {
 renderCalendar();
 
 function inputHide(){
-    eventTitleContainer.classList.toggle("hidden");
-        console.log(eventTitleContainer.style.display);
+        plusIcon.classList.toggle("plus-location");
+        eventTitleContainer.classList.toggle("hidden");
 
         eventContainer.classList.toggle("justify-right");
 
         eventInput.classList.toggle("hidden");
-        console.log(eventInput.style.display);
 }
 
 const eventTitle = document.querySelector('.event-title');
@@ -140,14 +142,19 @@ function addChore(e) {
     e.preventDefault();
     if(form.reportValidity()) {
 
-        let title = document.getElementById('event-title-input').value;
-        let desc = document.getElementById('event-desc-input').value;
+        let title = document.getElementById('event-title-input');
+        let desc = document.getElementById('event-desc-input');
         
-        eventTitle.innerHTML = title;
-        eventDesc.innerHTML = desc;
+        eventTitle.innerHTML = title.value;
+        eventDesc.innerHTML = desc.value;
 
+        //console.log(title);
+        //console.log(title.value);
         title.value = '';
         desc.value = '';
+        //console.log(document.getElementById('event-title-input'));
+        //console.log(document.getElementById('event-title-input').value);
+        
         inputHide();
     }
 }
