@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bills</title>
+</head>
+<body>
+  <style>
+    body {
+      margin: 0;
+      background-color: #e8e8e8;
+    }
+    .bill-container {
+      background-color: #f7f7f7;
+      width: 100vw; /* Takes up full width of the viewport */
+      height: 100vh; /* Takes up full height of the viewport */
+      font-family: Arial, sans-serif;
+      border-radius: 20px;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+      overflow: auto;
+      text-align: center;
+    }
+    .bill-header {
+      background-color: #fff;
+      padding: 20px;
+      border-bottom: 1px solid #eee;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .bill-header h2 {
+      margin: 0;
+      color: #333;
+    }
+    .bill-content {
+      padding: 20px;
+    }
+    .bill-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px 0;
+      border-bottom: 1px solid #eee;
+    }
+    .bill-item:last-child {
+      border-bottom: none;
+    }
+    .item-name {
+      color: #888;
+      text-align: left;
+      flex: 1;
+    }
+    .item-value {
+      font-weight: bold;
+      text-align: right;
+      flex: 1;
+    }
+    .bill-chart {
+      padding: 20px;
+      border-top: 1px solid #eee;
+    }
+    .nav-arrow img, .dropdown img {
+      width: auto; /* Sets width to auto to maintain aspect ratio */
+      height: 35px; /* Adjusts height to fit the header */
+    }
+    .dropdown img {
+      height: 45px;
+    }
+  </style>
+</head>
+<body>
+<div class="bill-container">
+  <div class="bill-header">
+    <div class="nav-arrow">
+      <a href="menu.html"> <img src="../public/images/back-arrow.jpg" alt="back arrow" width="35" height="35"> </a>
+    </div>
+    <h2>Split Bill</h2>
+    <div class="dropdown">
+      <a> <img src="../public/images/drop-down.jpg" alt="dropdown" width="45" height="45"> </a>
+    </div>
+  </div>
+  <div class="bill-content">
+    <div class="bill-item">
+      <div class="item-name">Bills</div>
+      <div class="item-value">$1250</div>
+    </div>
+    <div class="bill-item">
+      <div class="item-name">Share</div>
+      <div class="item-value">$90</div>
+    </div>
+    <div class="bill-item">
+      <div class="item-name">Rent</div>
+      <div class="item-value">$800</div>
+    </div>
+    <div class="bill-item">
+      <div class="item-name">Groceries</div>
+      <div class="item-value">$250</div>
+    </div>
+    <div class="bill-item">
+      <div class="item-name">Utilities</div>
+      <div class="item-value">$70</div>
+    </div>
+    <div class="bill-item">
+      <div class="item-name">Insurance</div>
+      <div class="item-value">$40</div>
+    </div>
+    <div class="bill-chart">
+      <img src="../public/images/bills.jpg" alt="bill chart" height="250" width="400">
+   </div>
+  </div>
+  </div>
+</body>
+</html>
