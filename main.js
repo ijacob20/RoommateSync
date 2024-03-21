@@ -81,6 +81,8 @@ const mongoose = require('mongoose');
 const session = require('express-session');
 const MongoStore = require('connect-mongo');
 const flash = require('connect-flash');
+const mainRoutes = require('./routes/mainRoutes');
+const userRoutes = require('./routes/userRoutes');
 
 //create application
 const application = express();
@@ -92,7 +94,7 @@ let url = 'mongodb+srv://demo:demo123@cluster0.pxbjzad.mongodb.net/4155-finalpro
 application.set('view engine', 'ejs');
 
 //connect to MongoDB
-mongoose.connect('mongodb://localhost:27017/demos', 
+mongoose.connect(url, 
                 {useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true })
 .then(()=>{
   application.listen(port, host, ()=>{
@@ -112,22 +114,21 @@ application.use(session({
     resave: false, 
     saveUninitialized: false,
     cookie:{maxAge: 60*60*1000},
-    store: new MongoStore({mongoUrl: 'mongodb://localhost:27017/demos'})
+    store: new MongoStore({mongoUrl: 'mongodb+srv://demo:demo123@cluster0.pxbjzad.mongodb.net/4155-finalproject?retryWrites=true&w=majority&appName=Cluster0'})
 }));
 
 application.use(flash());
 
 application.use((req, res, next)=>{
     //console.log(req.session);
-    res.locals.successMessages = req.flash('success');
+    res.locals.user = req.session.user || null; // We are storing the user in session into res.locals.user variable. If the user doesn't exist then this variable will be initialized to null. We do this because we can easily access this in view templates. So now the user in session will avaliable in view template
     res.locals.errorMessages = req.flash('error');
+    res.locals.successMessages = req.flash('success');
     next();
 });
 
 //set up routes
-app.get('/', (req, res)=>{
-  res.render('index');
-});
+app.use('/', mainRoutes);
 
 app.use('/users', userRoutes);
 
