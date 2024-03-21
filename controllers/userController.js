@@ -1,7 +1,7 @@
 const User = require('../models/user');
 
 exports.new = (req, res) => {
-    return res.render('./user/new');
+    return res.render('signup');
 };
 
 exports.create = (req, res, next) => {
@@ -9,23 +9,23 @@ exports.create = (req, res, next) => {
     user.save()
     .then(()=>{
         req.flash('success', 'Registration succeded!');
-        res.redirect('/users/login');
+        res.redirect('index');
     })
     .catch(err=>{
         if(err.name === 'ValidationError') {
             req.flash('error', err.message);
-            return res.redirect('/users/new');
+            return res.redirect('signup');
         }
         if(err.code === 11000) {
             req.flash('error', 'Email address has been used');
-            return res.redirect('/users/new');
+            return res.redirect('signup');
         }
         next(err);
     });
 };
 
 exports.getUserLogin = (req, res) => {
-    res.render('./user/login');
+    res.render('index');
 };
 
 exports.login = (req, res, next) => {
@@ -39,17 +39,17 @@ exports.login = (req, res, next) => {
         if (!user) {
             console.log('wrong email address');
             req.flash('error', 'Incorrect email address!');  
-            res.redirect('/users/login');
+            res.redirect('index');
             } else {
             user.comparePassword(password)
             .then(result=>{
                 if(result) {
                     req.session.user = {id: user._id, firstName: user.firstName};
                     req.flash('success', 'You have successfully logged in');
-                    res.redirect('/users/profile');
+                    res.redirect('menu');
             } else {
                 req.flash('error', 'Incorrect password!');      
-                res.redirect('/users/login');
+                res.redirect('index');
             }
             });     
         } 
@@ -67,6 +67,16 @@ exports.login = (req, res, next) => {
 //     .catch(err=>next(err));
 // };
 
+//temp route
+exports.profile = (req, res) => {
+    return res.render('profile');
+};
+
+//temp route
+exports.chore = (req, res) => {
+    return res.render('chores');
+};
+
 exports.logout = (req, res, next) => {
     req.session.destroy(err=>{
         if(err) {
@@ -76,5 +86,3 @@ exports.logout = (req, res, next) => {
         }
     });
 };
-
-
