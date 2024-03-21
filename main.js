@@ -128,17 +128,17 @@ application.use((req, res, next)=>{
 });
 
 //set up routes
-app.use('/', mainRoutes);
+application.use('/', mainRoutes);
 
-app.use('/users', userRoutes);
+application.use('/users', userRoutes);
 
-app.use((req, res, next) => {
+application.use((req, res, next) => {
   let err = new Error('The server cannot locate ' + req.url);
   err.status = 404;
   next(err);
 });
 
-app.use((err, req, res, next)=>{
+application.use((err, req, res, next)=>{
   console.log(err.stack);
   if(!err.status) {
       err.status = 500;
