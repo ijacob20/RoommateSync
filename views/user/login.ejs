@@ -15,8 +15,8 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@200..700&family=PT+Serif&family=Patua+One&display=swap" rel="stylesheet">
 
-    <link rel="stylesheet" href="./public/css/style.css">
-    <title>Roommate Sync</title>
+  <link rel="stylesheet" href="/css/style.css">
+  <title>Roommate Sync</title>
     <script src="./renderer.js"></script>
   </head>
   <body>
@@ -26,27 +26,27 @@
           <h1 id="test">Roommate Sync</h1>
         </div>
         <div class="roommate-img">
-          <img src="./public/images/roommate-sync-logo.png" alt="roommate sync logo">
+          <a href="/"><img src="/images/roommate-sync-logo.png"  alt="roommate sync logo"></a>
         </div>
       </div>
   
-      <form action="views/menu.html">
+      <form action = '/users/login' method = 'POST'>
         <div class="account">
           <!-- <label for="username">Username</label> -->
-          <img src="./public/images/accountjpg.jpg" alt="account logo">
+          <img src="/images/accountjpg.jpg" alt="account logo">
           <input type="email" placeholder="Email" id="email" name="email" required>
         </div>
   
         <div class="password">
           <!-- <label for="password">Password</label> -->
-          <img src="./public/images/password-logo.png" alt="password logo">
+          <img src="/images/password-logo.png" alt="password logo">
           <input type="password" placeholder="Password" id="password" name="password" required>
         </div>
 
   
       <div class="signup-buttons">
 
-        <a id="newAccount" href="views/signup.html">Create account</a>
+        <a id="newAccount" href="/users/new">Create account</a>
         
         <input type="submit" value="Login">
 
@@ -54,6 +54,22 @@
     </form>
 
     </main>
+    <% if(errorMessages.length > 0) {%>
+      <% errorMessages.forEach(message=>{%>
+          <div class='error'>
+              <%=message%>
+          </div>
+          <%});%>
+              <%}%>
+  
+                  <% if(successMessages.length > 0) {%>
+  
+                      <% successMessages.forEach(message=>{%>
+                          <div class='success'>
+                              <%=message%>
+                          </div>
+                          <%});%>
+                              <%}%>
   </body>
   
 </html>
