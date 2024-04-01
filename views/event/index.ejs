@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Roommate Sync</title>
+    <link rel="stylesheet" href="/css/choresStyles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+    <script src="/js/chores.js" defer></script></head>
+<body>
+    <div class="container">
+        
+        <div class="chores">
+            <div class="header">
+                <a href="/"><img id="logo" src="/images/roommate-sync-logo.png" alt=""></a>
+                <a href="menu.html"> <h1>Roommate Sync</h1></a>
+            </div>
+            <div class="card">
+                <h2><%-user.firstName%>'s Chores</h2>
+                <div class="chores-wrapper">
+                <ul class="choresList">
+                    <%if (events.length) {%>
+                        <%categories.forEach(category => { %>
+                            <h3><%= category %></h3>
+                            <%events.forEach(event=> {%>
+                                <% if(event.category === category){ %>
+                                    <li>
+                                        <% if(event.title === 'Vacuum'){ %>
+                                            <img src="/images/vacuumIcon.png" alt="" class="choreIcon">
+                                            <% } else if(event.title === 'Laundry') { %>
+                                                <img src="/images/laundryIcon.png" alt="" class="choreIcon">
+                                                <% } else if(event.title === 'Wash Dishes') { %>
+                                                    <img src="/images/dishesIcon.png" alt="" class="choreIcon">
+                                                    <% } else if(event.title === 'Trash') { %>
+                                                        <img src="/images/trashIcon.png" alt="" class="choreIcon">
+                                                        <% } %>
+
+                                            <div class="divider"></div>
+                                            <img src="<%- event.hostName.profile %>" alt="profile pic" class="profilePic">
+                                            <span><%-event.hostName.firstName + ' ' + event.hostName.lastName%></span>
+                                            <!-- <a href="/events/<%- event.id %>"><span><%-event.hostName.firstName %></span></a> -->
+                                            <!-- <a href="/events/<%- event.id %>"><span><%-event.hostName + ' ' + event.hostName.lastName %></span></a> -->
+                                            <i class="fa-solid fa-trash deleteIcon"></i>
+
+                                    </li>
+                    <%}    });  }); } else { %>
+                            <p>There are no events to display.</p>
+                        <%}%>
+                </ul>
+            </div>
+            </div>
+            <div class="card">
+               <i id="addButton" class="fa-solid fa-circle-plus"></i>
+              <form action = '/events' enctype="multipart/form-data" method='POST' class="hidden">
+                <label for="category">Day</label>
+                <select name="category" required>
+                 <option value="">--Select a day--</option>
+                 <option value="Sunday">Sunday</option>
+                 <option value="Monday">Monday</option>
+                 <option value="Tuesday">Tuesday</option>
+                 <option value="Wednesday">Wednesday</option>
+                 <option value="Thursday">Thursday</option>
+                 <option value="Friday">Friday</option>
+                 <option value="Saturday">Saturday</option>
+                </select>
+                    <div class="formDiv">
+                        <label for="title">Title</label>
+                        <input type="text" id="title" name="title" placeholder="title" required>
+                    
+                </div class="formDiv">
+                     <br>
+                     <div>
+                        <input type="submit" value="Submit">
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="legend">
+            <div class="card">
+                <h2>Legend</h2>
+                <ul>
+                    <li><img class="choreIcon" src="/images/laundryIcon.png" alt="Chore">Laundry</li>
+                    <li><img class="choreIcon" src="/images/dishesIcon.png" alt="Chore">Wash Dishes</li>
+                    <li><img class="choreIcon" src="/images/trashIcon.png" alt="Chore">Take Out Trash</li>
+                    <li><img class="choreIcon" src="/images/vacuumIcon.png" alt="Chore">Vacuum</li>
+
+                </ul>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

@@ -211,7 +211,7 @@ main {
 
 
 body {
-    background-image: url("https://cdn.discordapp.com/attachments/1214340030609489991/1214343736704901130/rsbackground2x.jpg?ex=65f8c4bc&is=65e64fbc&hm=e535b97ee083fa2f7f73e2f33fae2ed7c7faeccce82fb3502d389d2d32deccc6&");
+    background-image: url('/images/rsbackground2x.jpg');
 
     /* Full height */
     height: 100%;
