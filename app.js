@@ -15,7 +15,7 @@ const createWindow = () => {
     }
   })
 
-  mainWindow.setMenuBarVisibility(false)
+  mainWindow.setMenuBarVisibility(true)
   mainWindow.setMinimumSize(800,600)
 
   mainWindow.once('ready-to-show', () => {
@@ -73,22 +73,54 @@ const userRoutes = require('./routes/userRoutes');
 // create app
 const application = express();
 
+const http = require('http');
+const socketIo = require('socket.io');
+
+const server = http.createServer(application);
+const io = socketIo(server);
+
 // configure app
 let port = 3000;
 let host = 'localhost';
+// For packaging:
 application.set("views", path.join(__dirname, "..", "/app/views"));
+
+// For terminal views
+// application.set("views", path.join(__dirname,  "/views"));
+
+
 application.set('view engine', 'ejs');
 
 // connect to MongoDB
 mongoose.connect('mongodb+srv://kolaman:lol123@cluster0.uhyntkz.mongodb.net/RoommateSync?retryWrites=true&w=majority&appName=Cluster0', 
                 {useNewUrlParser: true, useUnifiedTopology: true})
-.then(()=> {
-    //start the server
-    application.listen(port, host, ()=>{
-    console.log('Server is running on port', port);
-});
-})
-.catch(err=>console.log(err.message));
+    .then(() => {
+
+        // Start the server
+        server.listen(port, host, () => {
+            console.log('Server is running on port', port);
+        });
+
+        // Socket.IO event handling
+        io.on('connection', socket => {
+          console.log('New WS connection');
+          socket.emit('message', 'Welcome to messages');
+
+          // Broadcast when a user connects
+          socket.broadcast.emit('message', 'A user has joined the chat');
+
+          // Runs when client disconnects
+          socket.on('disconnect', () => {
+            io.emit('message', 'A user has left the chat');
+          })
+
+          // Listen for chat message
+          socket.on('chatMessage', (msg) => {
+            io.emit('message', msg);
+          })
+        })
+    })
+    .catch(err => console.log(err.message));
 
 // mount middleware
 application.use(

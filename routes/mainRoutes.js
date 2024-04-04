@@ -7,7 +7,7 @@ const {isGuest, isLoggedIn} = require('../middleware/auth');
 
 router.get('/', isLoggedIn, controller.index);
 
-router.get('/about', controller.about);
+router.get('/messages', controller.messages);
 
 router.get('/contact', controller.contact);
 
