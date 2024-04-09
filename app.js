@@ -16,7 +16,7 @@ const createWindow = () => {
   })
 
   mainWindow.setMenuBarVisibility(true)
-  mainWindow.setMinimumSize(800,600)
+  mainWindow.setMinimumSize(800, 600)
 
   mainWindow.once('ready-to-show', () => {
     mainWindow.show()
@@ -24,10 +24,10 @@ const createWindow = () => {
 
 
   // and load the index.html of the app.
-  setTimeout(function() {
+  setTimeout(function () {
     console.log('waiting ....');
     mainWindow.loadURL('http://localhost:3000/');
-},1000);
+  }, 1000);
   // Open the DevTools.
   // mainWindow.webContents.openDevTools()
 }
@@ -66,6 +66,7 @@ const flash = require('connect-flash');
 const eventRoutes = require('./routes/eventRoutes');
 const mainRoutes = require('./routes/mainRoutes');
 const userRoutes = require('./routes/userRoutes');
+const messageRoutes = require('./routes/messageRoutes');
 
 
 
@@ -83,68 +84,101 @@ const io = socketIo(server);
 let port = 3000;
 let host = 'localhost';
 // For packaging:
-application.set("views", path.join(__dirname, "..", "/app/views"));
+// application.set("views", path.join(__dirname, "..", "/app/views"));
 
 // For terminal views
-// application.set("views", path.join(__dirname,  "/views"));
+application.set("views", path.join(__dirname, "/views"));
 
 
 application.set('view engine', 'ejs');
 
 // connect to MongoDB
-mongoose.connect('mongodb+srv://kolaman:lol123@cluster0.uhyntkz.mongodb.net/RoommateSync?retryWrites=true&w=majority&appName=Cluster0', 
-                {useNewUrlParser: true, useUnifiedTopology: true})
-    .then(() => {
+mongoose.connect('mongodb+srv://kolaman:lol123@cluster0.uhyntkz.mongodb.net/RoommateSync?retryWrites=true&w=majority&appName=Cluster0',
+  { useNewUrlParser: true, useUnifiedTopology: true })
 
-        // Start the server
-        server.listen(port, host, () => {
-            console.log('Server is running on port', port);
-        });
 
-        // Socket.IO event handling
-        io.on('connection', socket => {
-          console.log('New WS connection');
-          socket.emit('message', 'Welcome to messages');
+const messagesSchema = new mongoose.Schema({
+  // sender: { type: Schema.Types.ObjectId, ref: 'User' },
+  message: { type: String, required: [true, "Text message is required"] },
+  date: {
+    type: Date,
+    default: Date.now, // Set default value to current date and time
+    // Optionally, specify a custom format for the date using the `get` method
+    get: function (date) {
+      return date.toLocaleString(); // Format date using the built-in `toLocaleString` method
+      // You can use other date formatting methods here as per your requirement
+    }
+  }
+});
 
-          // Broadcast when a user connects
-          socket.broadcast.emit('message', 'A user has joined the chat');
+const Message = mongoose.model('Mssg', messagesSchema);
+// Start the server
+server.listen(port, host, () => {
+  console.log('Server is running on port', port);
+});
 
-          // Runs when client disconnects
-          socket.on('disconnect', () => {
-            io.emit('message', 'A user has left the chat');
-          })
+// Socket.IO event handling
+let socketsConnected = new Set()
 
-          // Listen for chat message
-          socket.on('chatMessage', (msg) => {
-            io.emit('message', msg);
-          })
-        })
-    })
-    .catch(err => console.log(err.message));
+io.on('connection', onConnected)
+
+function onConnected(socket) {
+  console.log('Socket connected', socket.id)
+  socketsConnected.add(socket.id)
+  io.emit('clients-total', socketsConnected.size)
+
+  socket.on('disconnect', () => {
+    console.log('Socket disconnected', socket.id)
+    socketsConnected.delete(socket.id)
+    io.emit('clients-total', socketsConnected.size)
+  })
+
+  socket.on('message', async (data) => {
+    console.log(data);
+
+    // Save message to the database
+    try {
+      const newMessage = new Message({
+        username: data.username,
+        message: data.message
+      });
+      await newMessage.save();
+      console.log('Message saved to database:', newMessage);
+    } catch (error) {
+      console.error('Error saving message:', error);
+    }
+
+    socket.broadcast.emit('chat-message', data);
+  })
+
+  socket.on('feedback', (data) => {
+    socket.broadcast.emit('feedback', data)
+  })
+}
 
 // mount middleware
 application.use(
-    session({
-        secret: "ajfeirf90aeu9eroejfoefj",
-        resave: false,
-        saveUninitialized: false,
-        store: new MongoStore({mongoUrl: 'mongodb+srv://kolaman:lol123@cluster0.uhyntkz.mongodb.net/RoommateSync?retryWrites=true&w=majority&appName=Cluster0'}),
-        cookie: {maxAge: 60*60*1000}
-        })
+  session({
+    secret: "ajfeirf90aeu9eroejfoefj",
+    resave: false,
+    saveUninitialized: false,
+    store: new MongoStore({ mongoUrl: 'mongodb+srv://kolaman:lol123@cluster0.uhyntkz.mongodb.net/RoommateSync?retryWrites=true&w=majority&appName=Cluster0' }),
+    cookie: { maxAge: 60 * 60 * 1000 }
+  })
 );
 application.use(flash());
 
 application.use((req, res, next) => {
-    // console.log(req.session);
-    res.locals.user = req.session.user||null;
-    // res.locals.fName = req.session.fName;
-    res.locals.errorMessages = req.flash('error');
-    res.locals.successMessages = req.flash('success');
-    next();
+  // console.log(req.session);
+  res.locals.user = req.session.user || null;
+  // res.locals.fName = req.session.fName;
+  res.locals.errorMessages = req.flash('error');
+  res.locals.successMessages = req.flash('success');
+  next();
 });
 
 application.use(express.static(path.join(__dirname, "..", "/app/public")));
-application.use(express.urlencoded({extended: true}));
+application.use(express.urlencoded({ extended: true }));
 application.use(morgan('tiny'));
 application.use(methodOverride('_method'));
 
@@ -157,21 +191,23 @@ application.use('/events', eventRoutes);
 
 application.use('/users', userRoutes);
 
+application.use('/messages', messageRoutes);
 
-application.use((req, res, next)=> {
-    let err = new Error('The server cannot locate ' + req.url);
-    err.status = 404;
-    next(err);
+
+application.use((req, res, next) => {
+  let err = new Error('The server cannot locate ' + req.url);
+  err.status = 404;
+  next(err);
 });
 
-application.use((err, req, res, next)=>{
-    console.log(err.stack);
-    if (!err.status) {
-        err.status = 500;
-        err.message = ("Internal server error");
-    }
+application.use((err, req, res, next) => {
+  console.log(err.stack);
+  if (!err.status) {
+    err.status = 500;
+    err.message = ("Internal server error");
+  }
 
-    res.status(err.status);
-    res.render('error', {error: err});
+  res.status(err.status);
+  res.render('error', { error: err });
 });
 
