@@ -1,6 +1,7 @@
 node_modules
 RoommateSync-win32-x64
 RoommateSync-darwin-arm64
+RoommateSync-darwin-x64
 # Logs
 logs
 *.log
