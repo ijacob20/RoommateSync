@@ -4,12 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
-
-
-
     <title>Contact List</title>
     <style>
         body {
@@ -18,27 +13,37 @@
             padding: 0;
         }
 
-        .header {
+        .top-bar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
             background: white;
             padding: 10px;
-            text-align: center;
             font-size: 24px;
             font-weight: bold;
             border-bottom: 1px solid #ccc;
         }
 
-        /* Search bar improvements */
+        .back-icon {
+            font-size: 24px;
+            color: #333;
+            cursor: pointer;
+            padding-right: 20px;
+        }
+
+        .header {
+            flex-grow: 1;
+            text-align: center;
+        }
+
         .search-bar {
             background: #F8F8F8;
-            /* Lighter background for the search bar */
             margin: 10px;
             padding: 10px 15px;
             border-radius: 25px;
-            /* Fully rounded ends for the search bar */
             display: flex;
             align-items: center;
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-            /* Consistent with the list shadow */
         }
 
         .search-bar input[type="text"] {
@@ -54,7 +59,6 @@
             margin: 0;
             padding: 0;
             width: 100%;
-            /* Adjust width as necessary */
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
         }
 
@@ -64,34 +68,27 @@
             display: flex;
             align-items: center;
             border-bottom: 1px solid #f0f0f0;
-            /* Lighter border for a subtle divider */
         }
 
         .contact-list li:last-child {
             border-bottom: none;
-            /* Remove bottom border for the last item */
         }
 
         .contact-avatar {
             border-radius: 50%;
             width: 50px;
-            /* Adjust to match screenshot */
             height: 50px;
-            /* Adjust to match screenshot */
             margin-right: 15px;
         }
 
         .contact-info {
             flex-grow: 1;
-
         }
 
         .contact-name {
             font-size: 20px;
-            /* Adjust to match screenshot */
             font-weight: bold;
             color: #333;
-            /* Darker font color for better readability */
             margin: 0;
             margin-bottom: 5px;
         }
@@ -104,13 +101,11 @@
             margin-right: 10px;
             position: relative;
             top: -1px;
-            /* Adjust to align with text */
         }
 
         .contact-status {
             font-size: 14px;
             color: #666;
-            /* Lighter font color for status text */
         }
 
         .available {
@@ -129,45 +124,138 @@
             display: flex;
             align-items: center;
             gap: 10px;
-            /* this adds space between the icons */
         }
 
-        /* Icon adjustments for proper spacing and sizing */
         .contact-actions i {
             font-size: 24px;
-            /* Bigger icons to match the screenshot */
             margin-right: 15px;
-            /* Space out icons */
             color: #666;
-            /* Match icon color to the screenshot */
         }
 
-        .contact-actions {
-            display: flex;
-            align-items: center;
-        }
-
-        /* Prevent the search bar input from having an outline on focus to maintain a clean look */
         .search-bar input[type="text"]:focus {
             outline: none;
         }
 
-        /* Placeholder color */
         .search-bar input[type="text"]::placeholder {
             color: #999;
         }
 
-        /* Search icon in the search bar */
-        .search-icon {
+        /* Optional: Spacer to help center the header text */
+        .header-spacer {
+            width: 48px;
+            /* This should be double the size of the back-icon to maintain balance */
+        }
+
+
+        #addFriendModal {
             display: none;
-            /* Hide the icon by default */
+            /* Hidden by default */
+            position: fixed;
+            /* Stay in place */
+            z-index: 10;
+            /* Sit on top */
+            left: 0;
+            top: 0;
+            width: 100%;
+            /* Full width */
+            height: 100%;
+            /* Full height */
+            overflow: auto;
+            /* Enable scroll if needed */
+            background-color: rgba(0, 0, 0, 0.6);
+            /* Dimmed background */
+        }
+
+        #addFriendContent {
+            background-color: #fff;
+            margin: 15% auto;
+            /* 15% from the top and centered */
+            padding: 20px;
+            border-radius: 5px;
+            width: 30%;
+            /* Width in percentage of the screen width */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            text-align: center;
+            /* Centered text */
+        }
+
+        #closeModal {
+            color: #777;
+            font-size: 24px;
+            font-weight: bold;
+            position: absolute;
+            right: 20px;
+            top: 10px;
+        }
+
+        #addFriendModal h2 {
+            margin-top: 0;
+            color: #333;
+        }
+
+        #friendSearchInput {
+            width: calc(100% - 40px);
+            /* Full width minus padding */
+            padding: 10px;
+            margin-top: 20px;
+            margin-bottom: 20px;
+            border-radius: 4px;
+            border: 1px solid #ddd;
+            font-size: 16px;
+        }
+
+        #searchFriendBtn {
+            padding: 10px 20px;
+            font-size: 16px;
+            border: none;
+            border-radius: 4px;
+            background-color: #5cb85c;
+            color: white;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+
+        #searchFriendBtn:hover {
+            background-color: #4cae4c;
+            /* Slightly darker green */
+        }
+
+        #closeModal:hover,
+        #closeModal:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        /* Add a bit more spacing around the icons */
+        .fa-user-plus,
+        .fa-solid {
+            padding: 0 15px;
         }
     </style>
-
 </head>
 
 <body>
-    <div class="header">Friends</div>
+    <div class="top-bar">
+        <a href="mainpage.html" class="back-icon">
+            <i class="fa-solid fa-angles-left"></i>
+        </a>
+
+        <div class="header">Friends</div>
+        <!-- Add Friend Icon -->
+        <i class="fa-solid fa-user-plus" id="addFriendBtn"></i>
+    </div>
+
+    <div id="addFriendModal">
+        <!-- Modal Content -->
+        <div id="addFriendContent">
+            <span id="closeModal">&times;</span>
+            <h2>Add a Friend</h2>
+            <input type="text" id="friendSearchInput" placeholder="Type friend's name...">
+            <button id="searchFriendBtn">Search</button>
+        </div>
+    </div>
+
     <div class="search-bar">
         <input type="text" placeholder="Search">
     </div>
@@ -184,27 +272,64 @@
                 <i class="fa-regular fa-comment-dots" aria-label="Send message"></i>
                 <i class="fa-solid fa-clipboard-list" aria-label="Details"></i>
             </div>
-
         </li>
-
         <li>
             <img src="/public/images/cool-profile-picture-87h46gcobjl5e4xu.jpg" class="contact-avatar" alt="Avatar">
             <div class="contact-info">
-                <p class="contact-name">Sergio Joya</p>
+                <p class="contact-name">Isaiah Jacob</p>
+                <span class="status-indicator busy"></span>
+                <span class="contact-status">Busy</span>
+            </div>
+            <div class="contact-actions">
+                <i class="fa-regular fa-comment-dots" aria-label="Send message"></i>
+                <i class="fa-solid fa-clipboard-list" aria-label="Details"></i>
+            </div>
+        </li>
+        <!-- Repeat for each contact -->
+
+        <li>
+            <img src="/public/images/4d60260f-b986-496d-8b12-f508aa2628d2-anime-boy-glaring-into-the-distance-4k-anime-boy-profile-picture-4.png"
+                class="contact-avatar" alt="Avatar">
+            <div class="contact-info">
+                <p class="contact-name">Yuanjie</p>
                 <span class="status-indicator available"></span>
                 <span class="contact-status">Available</span>
             </div>
             <div class="contact-actions">
                 <i class="fa-regular fa-comment-dots" aria-label="Send message"></i>
                 <i class="fa-solid fa-clipboard-list" aria-label="Details"></i>
-
-
             </div>
-
         </li>
-
-        <!-- Repeat for each contact -->
     </ul>
+
+
+    <script>
+        // Get the modal
+        var modal = document.getElementById("addFriendModal");
+
+        // Get the button that opens the modal
+        var btn = document.getElementById("addFriendBtn");
+
+        // Get the <span> element that closes the modal
+        var span = document.getElementById("closeModal");
+
+        // When the user clicks the button, open the modal 
+        btn.onclick = function () {
+            modal.style.display = "block";
+        }
+
+        // When the user clicks on <span> (x), close the modal
+        span.onclick = function () {
+            modal.style.display = "none";
+        }
+
+        // When the user clicks anywhere outside of the modal, close it
+        window.onclick = function (event) {
+            if (event.target == modal) {
+                modal.style.display = "none";
+            }
+        }
+    </script>
 </body>
 
 </html>
