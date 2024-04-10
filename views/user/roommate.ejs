@@ -147,6 +147,7 @@
         }
 
 
+        /* Enhanced modal styles */
         #addFriendModal {
             display: none;
             /* Hidden by default */
@@ -168,7 +169,7 @@
 
         #addFriendContent {
             background-color: #fff;
-            margin: 15% auto;
+            margin: 5% auto;
             /* 15% from the top and centered */
             padding: 20px;
             border-radius: 5px;
@@ -220,17 +221,57 @@
             /* Slightly darker green */
         }
 
-        #closeModal:hover,
-        #closeModal:focus {
-            color: black;
-            text-decoration: none;
+        /* Additional styling for the "Add Friend" button */
+        .fa-user-plus {
             cursor: pointer;
+            padding: 0 15px;
         }
 
-        /* Add a bit more spacing around the icons */
-        .fa-user-plus,
-        .fa-solid {
-            padding: 0 15px;
+        /* Styles for the request lists */
+        .request-list {
+            list-style-type: none;
+            /* Removes the default list bullet */
+            padding: 0;
+        }
+
+        .request-list li {
+            display: flex;
+            align-items: center;
+            background-color: #f2f2f2;
+            margin-bottom: 10px;
+            border-radius: 8px;
+            padding: 10px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .request-list li img {
+            width: 50px;
+            /* Adjust as needed */
+            height: 50px;
+            /* Adjust as needed */
+            border-radius: 50%;
+            margin-right: 15px;
+        }
+
+        .request-list li p {
+            flex-grow: 1;
+            margin: 0;
+        }
+
+        .request-list li .accept,
+        .request-list li .decline {
+            padding: 10px;
+            cursor: pointer;
+            font-size: 1.5em;
+            /* Adjust size as needed */
+        }
+
+        .request-list li .accept {
+            color: #28a745;
+        }
+
+        .request-list li .decline {
+            color: #dc3545;
         }
     </style>
 </head>
@@ -249,10 +290,32 @@
     <div id="addFriendModal">
         <!-- Modal Content -->
         <div id="addFriendContent">
+            <!-- Close Button -->
             <span id="closeModal">&times;</span>
+
+            <!-- Modal Title -->
             <h2>Add a Friend</h2>
+
+            <!-- Search Input -->
             <input type="text" id="friendSearchInput" placeholder="Type friend's name...">
+
+            <!-- Search Button -->
             <button id="searchFriendBtn">Search</button>
+
+            <!-- Feedback Message -->
+            <div id="feedbackMessage"></div>
+
+            <!-- Friend Requests List -->
+            <h3>Friend Request</h3>
+            <ul class="request-list" id="friendRequestsList">
+                <!-- Friend request items will be added here -->
+            </ul>
+
+            <!-- Pending Requests List -->
+            <h3>Pending Request</h3>
+            <ul class="request-list" id="pendingRequestsList">
+                <!-- Pending request items will be added here -->
+            </ul>
         </div>
     </div>
 
@@ -329,6 +392,42 @@
                 modal.style.display = "none";
             }
         }
+
+        function populateRequests() {
+            // Dummy data - replace with actual server data
+            const friendRequests = ["John Smith", "Isaiah Jacob"];
+            const pendingRequests = ["Brian Ramirez"];
+            // Get the list elements
+            const friendRequestsList = document.getElementById("friendRequestsList");
+            const pendingRequestsList = document.getElementById("pendingRequestsList");
+            // Clear existing content
+            friendRequestsList.innerHTML = '';
+            pendingRequestsList.innerHTML = '';
+            // Add friend requests
+            friendRequests.forEach(function (name) {
+                const li = document.createElement("li");
+                li.innerHTML = '<img src="path-to-avatar.jpg" alt="">' +
+                    '<p>' + name + '</p>' +
+                    '<i class="fa fa-times decline"></i>' +
+                    '<i class="fa fa-check accept"></i>';
+                friendRequestsList.appendChild(li);
+            });
+            // Add pending requests
+            pendingRequests.forEach(function (name) {
+                const li = document.createElement("li");
+                li.innerHTML = '<img src="path-to-avatar.jpg" alt="">' +
+                    '<p>' + name + '</p>' +
+                    '<i class="fa fa-times decline"></i>';
+                pendingRequestsList.appendChild(li);
+            });
+        }
+
+        // Call populateRequests when the modal is displayed
+        document.getElementById("addFriendBtn").onclick = function () {
+            populateRequests();
+            // Show the modal
+            document.getElementById("addFriendModal").style.display = "block";
+        };
     </script>
 </body>
 
