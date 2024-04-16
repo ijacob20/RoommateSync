@@ -2,7 +2,7 @@ const { DateTime } = require('luxon');
 const Chore = require('../models/chore'); 
 const User = require('../models/user'); 
 
-//GET /: send all tasks to user
+//GET /: send all chores to user
 exports.index = (req, res, next) => {
     let userId = req.session.user.id;
 
@@ -22,7 +22,7 @@ exports.index = (req, res, next) => {
     .catch(err=>next(err));
 };
 
-//GET /active: send tasks in progess
+//GET /active: send chores in progess
 exports.active = (req, res, next) => {
     let userId = req.session.user.id;
 
@@ -47,14 +47,14 @@ exports.active = (req, res, next) => {
     .catch(err=>next(err));
 };
 
-//GET /: send tasks assigned to other users
+//GET /: send chores assigned to other users
 exports.assigned = (req, res, next) => {
     let userId = req.session.user.id;
 
     Promise.all([
         User.find(),
         Chore.find({
-            createdBy: userId, // Filter tasks created by the current user
+            createdBy: userId, // Filter chores created by the current user
             assignTo: { $ne: null},
             completed: false 
         })
@@ -71,7 +71,7 @@ exports.assigned = (req, res, next) => {
     .catch(err=>next(err));
 };
 
-//GET /: send all completed tasks to user
+//GET /: send all completed chores to user
 exports.completed = (req, res, next) => {
     let userId = req.session.user.id;
 
@@ -108,7 +108,7 @@ exports.create = (req, res, next) => {
             console.log(err);
             err.status = 400;
             req.flash('error', err.message);
-            return res.redirect('/sdasdasd');
+            return res.redirect('back');
         }
         next(err)
     });
