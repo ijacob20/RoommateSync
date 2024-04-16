@@ -67,7 +67,7 @@ const eventRoutes = require('./routes/eventRoutes');
 const mainRoutes = require('./routes/mainRoutes');
 const userRoutes = require('./routes/userRoutes');
 
-
+const choreRoutes = require('./routes/choreRoutes');
 
 
 // create app
@@ -80,7 +80,7 @@ application.set("views", path.join(__dirname, "..", "/app/views"));
 application.set('view engine', 'ejs');
 
 // connect to MongoDB
-mongoose.connect('mongodb+srv://kolaman:lol123@cluster0.uhyntkz.mongodb.net/RoommateSync?retryWrites=true&w=majority&appName=Cluster0', 
+mongoose.connect('mongodb+srv://demo:demo123@cluster0.pxbjzad.mongodb.net/4155-finalproject?retryWrites=true&w=majority&appName=Cluster0', 
                 {useNewUrlParser: true, useUnifiedTopology: true})
 .then(()=> {
     //start the server
@@ -96,7 +96,7 @@ application.use(
         secret: "ajfeirf90aeu9eroejfoefj",
         resave: false,
         saveUninitialized: false,
-        store: new MongoStore({mongoUrl: 'mongodb+srv://kolaman:lol123@cluster0.uhyntkz.mongodb.net/RoommateSync?retryWrites=true&w=majority&appName=Cluster0'}),
+        store: new MongoStore({mongoUrl: 'mongodb+srv://demo:demo123@cluster0.pxbjzad.mongodb.net/4155-finalproject?retryWrites=true&w=majority&appName=Cluster0'}),
         cookie: {maxAge: 60*60*1000}
         })
 );
@@ -118,13 +118,9 @@ application.use(methodOverride('_method'));
 
 // set up routes
 application.use('/', mainRoutes);
-
-
-
 application.use('/events', eventRoutes);
-
 application.use('/users', userRoutes);
-
+application.use('/chores', choreRoutes);
 
 application.use((req, res, next)=> {
     let err = new Error('The server cannot locate ' + req.url);
