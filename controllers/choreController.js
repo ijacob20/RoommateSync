@@ -101,7 +101,7 @@ exports.create = (req, res, next) => {
     chore.save()
     .then(()=>{
         req.flash('success', 'Chore was succesfully created!');
-        res.redirect('/');
+        res.redirect('/chores');
     })
     .catch(err=>{
         if(err.name === 'ValidationError') {

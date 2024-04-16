@@ -1,6 +1,6 @@
 const express = require('express');
 const controller = require('../controllers/choreController');
-const {isLoggedIn} = require('../middlewares/auth');
+const {isLoggedIn} = require('../middleware/auth');
 const router = express.Router();
 
 //GET /: send all chores to user
