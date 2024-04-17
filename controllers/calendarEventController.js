@@ -1,25 +1,8 @@
-const model = require('../models/main');
+const model = require('../models/calendarEvent');
 
-exports.index = (req, res) => {
-    //res.send('send all events');
-    //console.log('send all events');
-    //res.send(model.find());
-    // let events = model.find();
-    res.render('index');
-};
-
-/* exports.addEvent = (req, res) =>{
-    
-} */
-
-exports.about = (req, res) => {
-    res.render('about');
-};
-
-
-exports.contact = (req, res) => {
-    res.render('contact');
-};
+// create export.create
+// create export.(show/index) [Something to display the values already entered, this comes second]
+// maybe use mainRoutes/Controller. Not sure but main.index opens up to the main menu file and you do not leave that page
 
 exports.create = (req, res, next)=>{
     //res.send('Created a new event');
@@ -42,7 +25,7 @@ exports.create = (req, res, next)=>{
     calendarEvent.save()
     .then((calendarEvent)=>{
         console.log(calendarEvent);
-        res.redirect('/mains/about')
+        res.redirect('/calendarEvents')
     })
     .catch(err=>{
         next(err);

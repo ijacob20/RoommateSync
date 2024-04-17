@@ -66,6 +66,7 @@ const flash = require('connect-flash');
 const eventRoutes = require('./routes/eventRoutes');
 const mainRoutes = require('./routes/mainRoutes');
 const userRoutes = require('./routes/userRoutes');
+const calendarEventRoutes = require('./routes/calendarEventRoutes');
 
 
 
@@ -119,11 +120,11 @@ application.use(methodOverride('_method'));
 // set up routes
 application.use('/', mainRoutes);
 
-
-
 application.use('/events', eventRoutes);
 
 application.use('/users', userRoutes);
+
+application.use('/calendarEvents', calendarEventRoutes);
 
 
 application.use((req, res, next)=> {

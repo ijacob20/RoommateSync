@@ -59,35 +59,39 @@
                 </div>
               </div>
               <article class="event-wrapper">
-                <div class="event-container">
-                  <div class="event-title-container">
-                    <div class="header-wrapper">
-                      <p class="event-header"></p>
-                      <!-- TODO: ADD DISPLAY: NONE -->
-                      <p class="event-title"></p>
-                      <!-- <h2 class="plus">&#43</h2> -->
+                  <div class="event-container">
+                    <div class="event-title-container">
+                      <div class="header-wrapper">
+                        <p class="event-header"></p>
+                        <!-- TODO: ADD DISPLAY: NONE -->
+                        <p class="event-title"></p>
+                        <!-- <h2 class="plus">&#43</h2> -->
+                      </div>
+                      <p class="event-desc">No Event Today</p>
                     </div>
-                    <p class="event-desc">No Event Today</p>
+                    <h2 class="plus">&#43</h2>
                   </div>
-                  <h2 class="plus">&#43</h2>
-                </div>
                 
-                <form>
-                  <div class="event-input-container hidden">
-                      <div class="formInput">
-                          <label for="firstName">Event title:</label>
-                          <input type="text" id="event-title-input" class="event-input" id="firstName" name="firstName" required>
-                      </div>
-              
-                      <div class="formInput">
-                          <label for="lastName">Event Info</label>
-                          <input type="text" id="event-desc-input" class="event-input" id="lastName" name="lastName" required>
-                      </div>
-              
-                      <button type="submit" class="login-button">Add Event</button>
-                    </div>
-                  </form>
+                  
+
+                  
               </article>
+              <form action = '/calendarEvents' method='POST'>
+                <div class="event-input-container hidden">
+                    <div class="formInput">
+                        <label for="title">Event title:</label>
+                        <input type="text" id="event-title-input" class="event-input" id="title" name="title" required>
+                    </div>
+            
+                    <div class="formInput">
+                        <label for="description">Event Info</label>
+                        <input type="text" id="event-desc-input" class="event-input" id="description" name="description" required>
+                    </div>
+            
+                    <input type="submit" value="Submit" class="login-button">
+                    
+                </div>
+            </form>
         </section>
         <section class="menu-section">
 
