@@ -297,7 +297,7 @@
             <h2>Add a Friend</h2>
 
             <!-- Search Input -->
-            <input type="text" id="friendSearchInput" placeholder="Type friend's name...">
+            <input type="text" id="friendSearchInput" placeholder="Type name...">
 
             <!-- Search Button -->
             <button id="searchFriendBtn">Search</button>
@@ -306,19 +306,43 @@
             <div id="feedbackMessage"></div>
 
             <!-- Friend Requests List -->
-            <h3>Friend Request</h3>
+            <h3>Friend Requests</h3>
             <ul class="request-list" id="friendRequestsList">
-                <!-- Friend request items will be added here -->
+                <% friendRequests.forEach(function(request) { %>
+                    <li>
+                        <img src="<%= request.profilePicture %>" alt="Avatar" class="contact-avatar">
+                        <div class="contact-info">
+                            <p class="contact-name">
+                                <%= request.firstName %>
+                                    <%= request.lastName %>
+                            </p>
+                            <button onclick="addFriend('<%= request._id %>')">Accept</button>
+                        </div>
+                    </li>
+                    <% }); %>
             </ul>
 
             <!-- Pending Requests List -->
-            <h3>Pending Request</h3>
+            <h3>Pending Requests</h3>
             <ul class="request-list" id="pendingRequestsList">
-                <!-- Pending request items will be added here -->
+                <% friends.forEach(function(friend) { %>
+                    <li>
+                        <img src="<%= friend.profilePicture %>" alt="Avatar" class="contact-avatar">
+                        <div class="contact-info">
+                            <p class="contact-name">
+                                <%= friend.firstName %>
+                                    <%= friend.lastName %>
+                            </p>
+                            <span>Friend</span>
+                        </div>
+                    </li>
+                    <% }); %>
             </ul>
         </div>
     </div>
 
+
+    <!-- Friend list page -->
     <div class="search-bar">
         <input type="text" placeholder="Search">
     </div>
@@ -367,68 +391,70 @@
 
 
     <script>
-        // Get the modal
         var modal = document.getElementById("addFriendModal");
-
-        // Get the button that opens the modal
         var btn = document.getElementById("addFriendBtn");
-
-        // Get the <span> element that closes the modal
         var span = document.getElementById("closeModal");
+        var searchButton = document.getElementById("searchFriendBtn");
+        var searchInput = document.getElementById("friendSearchInput");
+        var feedbackMessage = document.getElementById("feedbackMessage");
 
-        // When the user clicks the button, open the modal 
         btn.onclick = function () {
             modal.style.display = "block";
-        }
+        };
 
-        // When the user clicks on <span> (x), close the modal
         span.onclick = function () {
             modal.style.display = "none";
-        }
+        };
 
-        // When the user clicks anywhere outside of the modal, close it
         window.onclick = function (event) {
             if (event.target == modal) {
                 modal.style.display = "none";
             }
-        }
-
-        function populateRequests() {
-            // Dummy data - replace with actual server data
-            const friendRequests = ["John Smith", "Isaiah Jacob"];
-            const pendingRequests = ["Brian Ramirez"];
-            // Get the list elements
-            const friendRequestsList = document.getElementById("friendRequestsList");
-            const pendingRequestsList = document.getElementById("pendingRequestsList");
-            // Clear existing content
-            friendRequestsList.innerHTML = '';
-            pendingRequestsList.innerHTML = '';
-            // Add friend requests
-            friendRequests.forEach(function (name) {
-                const li = document.createElement("li");
-                li.innerHTML = '<img src="path-to-avatar.jpg" alt="">' +
-                    '<p>' + name + '</p>' +
-                    '<i class="fa fa-times decline"></i>' +
-                    '<i class="fa fa-check accept"></i>';
-                friendRequestsList.appendChild(li);
-            });
-            // Add pending requests
-            pendingRequests.forEach(function (name) {
-                const li = document.createElement("li");
-                li.innerHTML = '<img src="path-to-avatar.jpg" alt="">' +
-                    '<p>' + name + '</p>' +
-                    '<i class="fa fa-times decline"></i>';
-                pendingRequestsList.appendChild(li);
-            });
-        }
-
-        // Call populateRequests when the modal is displayed
-        document.getElementById("addFriendBtn").onclick = function () {
-            populateRequests();
-            // Show the modal
-            document.getElementById("addFriendModal").style.display = "block";
         };
+
+        searchButton.onclick = function (event) {
+            event.preventDefault();
+            const name = searchInput.value;
+            fetch(`/api/search-friends?name=${encodeURIComponent(name)}`, {
+                method: 'GET'
+            })
+                .then(response => response.json())
+                .then(data => {
+                    const friendRequestsList = document.getElementById("friendRequestsList");
+                    friendRequestsList.innerHTML = ''; // Clear previous results
+                    if (data.length > 0) {
+                        data.forEach(user => {
+                            const li = document.createElement("li");
+                            li.innerHTML = `${user.firstName} ${user.lastName} - <button onclick="addFriend(${user._id})">Add</button>`;
+                            friendRequestsList.appendChild(li);
+                        });
+                    } else {
+                        feedbackMessage.innerHTML = "No users found.";
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    feedbackMessage.innerHTML = "Error searching for users.";
+                });
+        };
+
+        function addFriend(userId) {
+            fetch('/api/add-friend', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ userId: userId })
+            })
+                .then(response => response.json())
+                .then(data => {
+                    alert(data.message);
+                    modal.style.display = "none"; // Close modal on success
+                })
+                .catch(error => console.error('Error:', error));
+        }
     </script>
+
 </body>
 
 </html>
