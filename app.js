@@ -3,6 +3,8 @@
 // Modules to control application life and create native browser window
 const { app, BrowserWindow } = require('electron')
 const path = require('node:path')
+const friendRoutes = require('./routes/friendRoutes');
+
 
 const createWindow = () => {
   // Create the browser window.
@@ -16,7 +18,7 @@ const createWindow = () => {
   })
 
   mainWindow.setMenuBarVisibility(false)
-  mainWindow.setMinimumSize(800,600)
+  mainWindow.setMinimumSize(800, 600)
 
   mainWindow.once('ready-to-show', () => {
     mainWindow.show()
@@ -24,10 +26,10 @@ const createWindow = () => {
 
 
   // and load the index.html of the app.
-  setTimeout(function() {
+  setTimeout(function () {
     console.log('waiting ....');
     mainWindow.loadURL('http://localhost:3000/');
-},1000);
+  }, 1000);
   // Open the DevTools.
   // mainWindow.webContents.openDevTools()
 }
@@ -80,39 +82,39 @@ application.set("views", path.join(__dirname, "..", "/app/views"));
 application.set('view engine', 'ejs');
 
 // connect to MongoDB
-mongoose.connect('mongodb+srv://kolaman:lol123@cluster0.uhyntkz.mongodb.net/RoommateSync?retryWrites=true&w=majority&appName=Cluster0', 
-                {useNewUrlParser: true, useUnifiedTopology: true})
-.then(()=> {
+mongoose.connect('mongodb+srv://kolaman:lol123@cluster0.uhyntkz.mongodb.net/RoommateSync?retryWrites=true&w=majority&appName=Cluster0',
+  { useNewUrlParser: true, useUnifiedTopology: true })
+  .then(() => {
     //start the server
-    application.listen(port, host, ()=>{
-    console.log('Server is running on port', port);
-});
-})
-.catch(err=>console.log(err.message));
+    application.listen(port, host, () => {
+      console.log('Server is running on port', port);
+    });
+  })
+  .catch(err => console.log(err.message));
 
 // mount middleware
 application.use(
-    session({
-        secret: "ajfeirf90aeu9eroejfoefj",
-        resave: false,
-        saveUninitialized: false,
-        store: new MongoStore({mongoUrl: 'mongodb+srv://kolaman:lol123@cluster0.uhyntkz.mongodb.net/RoommateSync?retryWrites=true&w=majority&appName=Cluster0'}),
-        cookie: {maxAge: 60*60*1000}
-        })
+  session({
+    secret: "ajfeirf90aeu9eroejfoefj",
+    resave: false,
+    saveUninitialized: false,
+    store: new MongoStore({ mongoUrl: 'mongodb+srv://kolaman:lol123@cluster0.uhyntkz.mongodb.net/RoommateSync?retryWrites=true&w=majority&appName=Cluster0' }),
+    cookie: { maxAge: 60 * 60 * 1000 }
+  })
 );
 application.use(flash());
 
 application.use((req, res, next) => {
-    // console.log(req.session);
-    res.locals.user = req.session.user||null;
-    // res.locals.fName = req.session.fName;
-    res.locals.errorMessages = req.flash('error');
-    res.locals.successMessages = req.flash('success');
-    next();
+  // console.log(req.session);
+  res.locals.user = req.session.user || null;
+  // res.locals.fName = req.session.fName;
+  res.locals.errorMessages = req.flash('error');
+  res.locals.successMessages = req.flash('success');
+  next();
 });
 
 application.use(express.static(path.join(__dirname, "..", "/app/public")));
-application.use(express.urlencoded({extended: true}));
+application.use(express.urlencoded({ extended: true }));
 application.use(morgan('tiny'));
 application.use(methodOverride('_method'));
 
@@ -125,21 +127,23 @@ application.use('/events', eventRoutes);
 
 application.use('/users', userRoutes);
 
+app.use('/users', friendRoutes);
 
-application.use((req, res, next)=> {
-    let err = new Error('The server cannot locate ' + req.url);
-    err.status = 404;
-    next(err);
+
+application.use((req, res, next) => {
+  let err = new Error('The server cannot locate ' + req.url);
+  err.status = 404;
+  next(err);
 });
 
-application.use((err, req, res, next)=>{
-    console.log(err.stack);
-    if (!err.status) {
-        err.status = 500;
-        err.message = ("Internal server error");
-    }
+application.use((err, req, res, next) => {
+  console.log(err.stack);
+  if (!err.status) {
+    err.status = 500;
+    err.message = ("Internal server error");
+  }
 
-    res.status(err.status);
-    res.render('error', {error: err});
+  res.status(err.status);
+  res.render('error', { error: err });
 });
 
