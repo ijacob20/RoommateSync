@@ -9,8 +9,8 @@ exports.index = (req, res, next) => {
     Promise.all([
         User.find(),
         Chore.find({ $or: [{ createdBy: userId }, { assignTo: userId }] })
-        .populate('createdBy', 'firstName lastName')
-        .populate('assignTo', 'firstName lastName')
+        .populate('createdBy', 'firstName lastName profile')
+        .populate('assignTo', 'firstName lastName profile')
         .sort({ date: 1 })
     ])
     .then(([users, chores]) => {
@@ -34,8 +34,8 @@ exports.active = (req, res, next) => {
                 { assignTo: userId, completed: false } 
             ]
         })
-        .populate('createdBy', 'firstName lastName')
-        .populate('assignTo', 'firstName lastName')
+        .populate('createdBy', 'firstName lastName profile')
+        .populate('assignTo', 'firstName lastName profile')
         .sort({ date: 1 })
     ])
     .then(([users, chores]) => {
@@ -58,8 +58,8 @@ exports.assigned = (req, res, next) => {
             assignTo: { $ne: null},
             completed: false 
         })
-        .populate('createdBy', 'firstName lastName')
-        .populate('assignTo', 'firstName lastName')
+        .populate('createdBy', 'firstName lastName profile')
+        .populate('assignTo', 'firstName lastName profile')
         .sort({ date: 1 })
     ])
     .then(([users, chores]) => {
@@ -78,8 +78,8 @@ exports.completed = (req, res, next) => {
     Promise.all([
         User.find(),
         Chore.find({ $or: [{ createdBy: userId }, { assignTo: userId }], completed: true })
-        .populate('createdBy', 'firstName lastName')
-        .populate('assignTo', 'firstName lastName')
+        .populate('createdBy', 'firstName lastName profile')
+        .populate('assignTo', 'firstName lastName profile')
         .sort({ date: 1 })
     ])
     .then(([users, chores]) => {

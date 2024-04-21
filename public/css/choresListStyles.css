@@ -32,7 +32,6 @@ input[type="checkbox"]:checked + .circle::after {
 }
 
 .profile-icon {
-    font-size: 23px;
     margin-right: 10px;
     vertical-align: middle;
 }

@@ -46,7 +46,7 @@ exports.login = (req, res, next)=>{
                 user.comparePassword(password)
                 .then(result=>{
                     if(result) {
-                        req.session.user = {_id: user._id, id: user._id, firstName: user.firstName, lastName: user.lastName, email: user.email};
+                        req.session.user = {_id: user._id, id: user._id, firstName: user.firstName, lastName: user.lastName, email: user.email, profile: user.profile};
                         // req.session.user = user._id;
                         // req.session.fName = user.firstName;
                         req.flash('success', 'You have successfully logged in');
