@@ -97,9 +97,9 @@
                     <% } else { %>
                         <td></td>
                     <% } %>
-                    <td><i class="fas fa-user-circle profile-icon"></i><%= chore.createdBy.firstName + ' ' + chore.createdBy.lastName %></td>
+                    <td><img src="<%= chore.createdBy.profile %>" alt="profile picture" height="30" width="30" class="profile-icon"><%= chore.createdBy.firstName + ' ' + chore.createdBy.lastName %></td>
                     <% if (chore.assignTo) { %>
-                        <td><i class="fas fa-user-circle profile-icon"></i><%= chore.assignTo.firstName + ' ' + chore.assignTo.lastName %></td>
+                        <td><img src="<%= chore.assignTo.profile %>" alt="profile picture" height="30" width="30" class="profile-icon"><%= chore.assignTo.firstName + ' ' + chore.assignTo.lastName %></td>
                     <% } else { %>
                         <td></td>
                     <% } %>
