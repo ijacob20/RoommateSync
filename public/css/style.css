@@ -276,9 +276,6 @@ height: 95vh;
   align-content: center;
 }
 
-.menu-section{
-display: flex;
-}
 
 .menu-choices {
   display: grid;
@@ -533,3 +530,109 @@ margin-right: 11px;
 
 /* Style for Message Page */
 
+/* New home page styles */
+body {
+  background-color: #FFF2E2 ; 
+}
+
+nav {
+  font-family: "Roboto", sans-serif;
+
+}
+
+nav a {
+  text-decoration: none;
+  color: inherit;        
+}
+
+.sync-header {
+  color: #64A5CA; 
+}
+
+.nav-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 1.5rem;
+  margin-right: 2rem;
+  margin-left: 2rem;
+}
+
+.nav-container h1 {
+  display:flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.nav-container img {
+  margin-right: 10px;
+}
+
+.logout-btn {
+  color: white;
+  background-color: #64A5CA; 
+  padding: 0.8rem;
+  font-size: 1rem;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.menu-options {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr); 
+  grid-template-rows: repeat(2, auto); 
+  gap: 20px; 
+  cursor:pointer;
+}
+.menu-icon-container {
+  background-color: white;
+  padding: 2rem;
+  border-radius: 10px;
+  box-shadow: 0 15px 40px rgba(0,0,0,0.12);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.menu-options a{
+  text-decoration: none;
+  color: inherit;    
+}
+
+.menu-icon-label {
+  margin-top: 0.6rem;
+  font-size: 1.2rem;
+}
+
+.event-container, .event-wrapper {
+  background-color: white;
+}
+
+.menu-section {
+  display: flex;
+  margin-top: -3rem;
+  flex-direction: column;
+  align-items: center; 
+  margin-left: 2.5rem;
+}
+
+.profile-container{
+  display:flex;
+  align-items: center;
+  margin-bottom: 1.5rem;
+}
+
+.profile-container h2 {
+  margin-right: 0.8rem;
+}
+
+.menu-main {
+  margin-top: -3rem;
+}
+
+nav h1 {
+  font-size: 1.7rem;
+}
