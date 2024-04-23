@@ -21,6 +21,7 @@ function sendMessage() {
   // console.log(messageInput.value)
   const data = {
     message: messageInput.value,
+    username: 'empty',
     dateTime: new Date(),
   }
   socket.emit('message', data)

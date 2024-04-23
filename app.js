@@ -100,6 +100,8 @@ mongoose.connect('mongodb+srv://kolaman:lol123@cluster0.uhyntkz.mongodb.net/Room
 const messagesSchema = new mongoose.Schema({
   // sender: { type: Schema.Types.ObjectId, ref: 'User' },
   message: { type: String, required: [true, "Text message is required"] },
+  usersName: { type: String, required: [true, "User's name is required"] },
+  userId: { type: String, required: [true, "userId is required"] },
   date: {
     type: Date,
     default: Date.now, // Set default value to current date and time
@@ -117,13 +119,25 @@ server.listen(port, host, () => {
   console.log('Server is running on port', port);
 });
 
+
+const sessionMiddleware = session({
+  secret: "ajfeirf90aeu9eroejfoefj",
+  resave: false,
+  saveUninitialized: false,
+  store: new MongoStore({ mongoUrl: 'mongodb+srv://kolaman:lol123@cluster0.uhyntkz.mongodb.net/RoommateSync?retryWrites=true&w=majority&appName=Cluster0' }),
+  cookie: { maxAge: 60 * 60 * 1000 }
+});
 // Socket.IO event handling
 let socketsConnected = new Set()
+
+io.engine.use(sessionMiddleware); //Socket io now has access to session
+
 
 io.on('connection', onConnected)
 
 function onConnected(socket) {
   console.log('Socket connected', socket.id)
+  console.log(socket.request.session.user.firstName);
   socketsConnected.add(socket.id)
   io.emit('clients-total', socketsConnected.size)
 
@@ -139,7 +153,8 @@ function onConnected(socket) {
     // Save message to the database
     try {
       const newMessage = new Message({
-        username: data.username,
+        usersName: socket.request.session.user.firstName,
+        userId: socket.request.session.user._id,
         message: data.message
       });
       await newMessage.save();
@@ -157,15 +172,7 @@ function onConnected(socket) {
 }
 
 // mount middleware
-application.use(
-  session({
-    secret: "ajfeirf90aeu9eroejfoefj",
-    resave: false,
-    saveUninitialized: false,
-    store: new MongoStore({ mongoUrl: 'mongodb+srv://kolaman:lol123@cluster0.uhyntkz.mongodb.net/RoommateSync?retryWrites=true&w=majority&appName=Cluster0' }),
-    cookie: { maxAge: 60 * 60 * 1000 }
-  })
-);
+application.use(sessionMiddleware);
 application.use(flash());
 
 application.use((req, res, next) => {
