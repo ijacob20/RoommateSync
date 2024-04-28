@@ -40,7 +40,7 @@ exports.login = (req, res, next)=>{
         .then(user => {
             if (!user) {
                 console.log('wrong email address');
-                req.flash('error', 'wrong email address');  
+                req.flash('error', 'Could not find this RoommateSync account');  
                 res.redirect('/users/login');
                 } else {
                 user.comparePassword(password)
@@ -55,7 +55,7 @@ exports.login = (req, res, next)=>{
                         res.redirect('/')
 
                 } else {
-                    req.flash('error', 'wrong password');      
+                    req.flash('error', 'Wrong password. Please try again');      
                     res.redirect('/users/login');
                 }
                 });     
