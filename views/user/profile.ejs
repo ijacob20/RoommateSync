@@ -1,75 +1,122 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="UTF-8" />
-    <!-- https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP -->
-    <meta
-      http-equiv="Content-Security-Policy"
-      content="default-src 'self'; script-src 'self'"
-    />
-    <meta
-      http-equiv="X-Content-Security-Policy"
-      content="default-src 'self'; script-src 'self'"
-    />
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@200..700&family=PT+Serif&family=Patua+One&display=swap" rel="stylesheet">
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Profile Page</title>
+<style>
+    .profile-page {
+        font-family: 'Arial', sans-serif;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    .header {
+        width: 100%;
+        padding: 20px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+    .profile {
+        text-align: center;
+        margin: 50px 0;
+    }
+    .profile-icon {
+        border-radius: 50%;
+        width: 100px;
+        height: 100px;
+        margin-bottom: 40px;
+    }
+    .profile-name {
+        font-size: 24px;
+        font-weight: bold;
+        margin-bottom: 10px;
+    }
+    .edit-profile {
+        background: none;
+        border: 1px solid black;
+        padding: 10px 20px;
+        cursor: pointer;
+    }
+    .menu-item {
+        display: flex;
+        align-items: center;
+        padding: 20px;
+        width: 90%;
+        margin: 10px 0;
+        border-radius: 10px;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+    .dropdown {
+        width: 30px;
+        height: 30px;
+        margin-right: 20px;
+    }
+    .nav-arrow {
+        width: 30px;
+        height: 30px;
+        margin-left: 20px;
+    }
+</style>
+</head>
+<body>
+<div class="profile-page">
+<div class="header">
+    <div class="nav-arrow">
+        <a href="/"> <img src="/images/back-arrow.jpg" alt="profile account logo" width="35" height="35"> </a>
+    </div>
+    <div class="dropdown">
+        <a> <img src="/images/drop-down.jpg" alt="profile account logo" width="45" height="45"> </a>
+    </div>
+</div>
 
-  <link rel="stylesheet" href="/css/style.css">
-  <title>Roommate Sync</title>
-    <script src="./renderer.js"></script>
-  </head>
-  <body>
-    <main>
-      <div class="roommate">
-        <div class="roommate-h1">
-          <h1 id="test">Roommate Sync</h1>
-        </div>
-        <div class="roommate-img">
-          <a href="/"><img src="/images/roommate-sync-logo.png"  alt="roommate sync logo"></a>
-        </div>
-      </div>
-  
-      <form action = '/users/login' method = 'POST'>
-        <div class="account">
-          <!-- <label for="username">Username</label> -->
-          <img src="/images/accountjpg.jpg" alt="account logo">
-          <input type="email" placeholder="Email" id="email" name="email" required>
-        </div>
-  
-        <div class="password">
-          <!-- <label for="password">Password</label> -->
-          <img src="/images/password-logo.png" alt="password logo">
-          <input type="password" placeholder="Password" id="password" name="password" required>
-        </div>
+<div class="profile">
+    <div class="profile-icon">
+            <img src="/images/profile-icon.jpg" alt="profile account logo" width="130" height="130">
+    </div>
+    <div class="profile-name"><%=user.firstName%> <%=user.lastName%></div>
+    <button class="edit-profile">Edit profile</button>
+</div>
 
-  
-      <div class="signup-buttons">
+<div class="menu-item">
+    <div class="menu-icon">
+        <img src="/images/calendar.jpg" alt="profile account logo" width="40" height="40">
+    </div>
+    <%if(events.length){%>
+      <p class="pt-4 ps-5">Chores:</p>
+      <%events.forEach(event => {%>
+          <ul class="list-group">
+             <li class=""> <a class="" href = '/events'><p class=""><%=event.title%></p></a> 
+              <form class="" >
+                  <!-- <button type="submit" formmethod="GET" formaction="/events/<%= event.id%>/edit" class="">Edit</button>
+                  <button type="submit" formmethod="POST" formaction="/events/<%= event.id%>?_method=DELETE" class="">Delete</button> -->
+              </form>
+              </li>
+          </ul>
+      <%});
+  } else {%>
+      <p class="ps-5">No Chores</p>
+  <%}%>
+</div>
 
-        <a id="newAccount" href="/users/new">Create account</a>
-        
-        <input type="submit" value="Login">
+<div class="menu-item">
+    <div class="menu-icon">
+        <img src="/images/billing.jpg" alt="profile account logo" width="40" height="40">
+    </div>
+    Billing
+</div>
 
-      </div>
-    </form>
+<div class="menu-item">
+    <div class="menu-icon">
+        <img src="/images/message.jpg" alt="profile account logo" width="30" height="30">
+    </div>
+    Message
+</div>
 
-    </main>
-    <% if(errorMessages.length > 0) {%>
-      <% errorMessages.forEach(message=>{%>
-          <div class='error'>
-              <%=message%>
-          </div>
-          <%});%>
-              <%}%>
-  
-                  <% if(successMessages.length > 0) {%>
-  
-                      <% successMessages.forEach(message=>{%>
-                          <div class='success'>
-                              <%=message%>
-                          </div>
-                          <%});%>
-                              <%}%>
-  </body>
-  
+</div>
+</body>
 </html>
