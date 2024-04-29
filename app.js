@@ -133,7 +133,7 @@ application.use((req, res, next)=> {
     next(err);
 });
 
-application.use((err, req, res, next)=>{
+/* application.use((err, req, res, next)=>{
     console.log(err.stack);
     if (!err.status) {
         err.status = 500;
@@ -143,4 +143,4 @@ application.use((err, req, res, next)=>{
     res.status(err.status);
     res.render('error', {error: err});
 });
-
+ */

@@ -120,7 +120,8 @@ const renderCalendar = () => {
     plusIcon.addEventListener("click", function() {
         inputHide();
     });
-
+    const activeElem = document.querySelector(".event-desc");
+    //activeElem.innerHTML = calendarEvents;
 }
 renderCalendar();
 
@@ -158,7 +159,7 @@ function addChore(e) {
         inputHide();
     }
 }
-submitBtn.addEventListener('click', addChore);
+//submitBtn.addEventListener('click', addChore);
 
 prevNextIcon.forEach(icon => { // getting prev and next icons
     icon.addEventListener("click", () => { // adding click event on both icons

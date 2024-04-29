@@ -1,10 +1,19 @@
 const model = require('../models/main');
+const Calendar = require('../models/calendarEvent');
 
-exports.index = (req, res) => {
+exports.index = async(req, res) => {
+    let id = req.params.id;
     //res.send('send all events');
     //console.log('send all events');
     //res.send(model.find());
     // let events = model.find();
+    /* try{
+        const [calendarEvents] = await Promise.all([Calendar.findById(id)]);
+        res.render('./partials/header.ejs', {calendarEvents});
+    }catch(err){
+        next(err);
+    }
+    res.send(Calendar.findById(id)); */
     res.render('index');
 };
 

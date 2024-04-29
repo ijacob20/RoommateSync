@@ -65,18 +65,25 @@
                     <div class="event-title-container">
                       <div class="header-wrapper">
                         <p class="event-header"></p>
+                        <!-- TODO: ADD DISPLAY: NONE -->
                         <p class="event-title"></p>
                         <!-- <h2 class="plus">&#43</h2> -->
                       </div>
-                        <!-- TODO: Event title and desc should go here -->
-                        <p class="event-desc">No Event Today</p>
+                      
+                        <%if(calendarEvents.length){%>
+                            
+                        <%}else{%>
+                            <p class="event-desc">No Event Today</p>
+                        <%}%>
                     </div>
                     <h2 class="plus">&#43</h2>
                   </div>
+                
+                
+
                   
-
-
               </article>
+              <!-- This is main.ejs-->
               <!-- This is the form for calendarEvents -->
               <form method='POST' action = '/calendarEvents'>
                 <div class="event-input-container hidden">
@@ -105,7 +112,7 @@
 
         <div class="container">
             <div class="roommate">
-              <h1>Welcome back, <%-user.firstName %>!</h1>
+              <h1>Welcome back, !</h1>
 
                 <div class="roommate-img">
                     <img src="/images/roommate-sync-logo.png" alt="roommate sync logo">
