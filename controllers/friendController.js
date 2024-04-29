@@ -1,4 +1,11 @@
-const User = require('../models/users'); // Ensure you have a User model
+const User = require('../models/user'); // Ensure you have a User model
+
+
+
+exports.index = (req, res) => {
+    res.render('../roommate');
+};
+
 
 exports.searchFriends = async (req, res) => {
     const searchTerm = req.query.search;
