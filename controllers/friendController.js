@@ -3,7 +3,7 @@ const User = require('../models/user'); // Ensure you have a User model
 
 
 exports.index = (req, res) => {
-    res.render('../roommate');
+    res.render('../roommates');
 };
 
 

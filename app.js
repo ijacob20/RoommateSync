@@ -127,7 +127,7 @@ application.use('/events', eventRoutes);
 
 application.use('/users', userRoutes);
 
-app.use('/users', friendRoutes);
+application.use('/users', friendRoutes);
 
 
 application.use((req, res, next) => {
