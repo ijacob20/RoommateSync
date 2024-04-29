@@ -1,5 +1,6 @@
 const model = require('../models/user');
-const Event = require('../models/event')
+// const Event = require('../models/event');
+const Chore = require('../models/chore');
 
 exports.new = (req, res)=>{
     return res.render('./user/new');
@@ -68,10 +69,10 @@ exports.login = (req, res, next)=>{
 
 exports.profile = (req, res, next)=>{
     let id = req.session.user;
-    Promise.all([model.findById(id), Event.find({hostName: id})])
+    Promise.all([model.findById(id), Chore.find({assignTo: id})])
     .then(results=>{
-        const [user, events] = results;
-        res.render('./user/profile', {user, events});
+        const [user, chores] = results;
+        res.render('./user/profile', {user, chores});
 
     })
     .catch(err=>next(err));
