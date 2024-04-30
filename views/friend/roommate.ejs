@@ -347,47 +347,32 @@
         <input type="text" placeholder="Search">
     </div>
     <ul class="contact-list">
-        <li>
-            <img src="/public/images/4d60260f-b986-496d-8b12-f508aa2628d2-anime-boy-glaring-into-the-distance-4k-anime-boy-profile-picture-4.png"
-                class="contact-avatar" alt="Avatar">
-            <div class="contact-info">
-                <p class="contact-name">Sergio Joya</p>
-                <span class="status-indicator available"></span>
-                <span class="contact-status">Available</span>
-            </div>
-            <div class="contact-actions">
-                <i class="fa-regular fa-comment-dots" aria-label="Send message"></i>
-                <i class="fa-solid fa-clipboard-list" aria-label="Details"></i>
-            </div>
-        </li>
-        <li>
-            <img src="/public/images/cool-profile-picture-87h46gcobjl5e4xu.jpg" class="contact-avatar" alt="Avatar">
-            <div class="contact-info">
-                <p class="contact-name">Isaiah Jacob</p>
-                <span class="status-indicator busy"></span>
-                <span class="contact-status">Busy</span>
-            </div>
-            <div class="contact-actions">
-                <i class="fa-regular fa-comment-dots" aria-label="Send message"></i>
-                <i class="fa-solid fa-clipboard-list" aria-label="Details"></i>
-            </div>
-        </li>
-        <!-- Repeat for each contact -->
-
-        <li>
-            <img src="/public/images/4d60260f-b986-496d-8b12-f508aa2628d2-anime-boy-glaring-into-the-distance-4k-anime-boy-profile-picture-4.png"
-                class="contact-avatar" alt="Avatar">
-            <div class="contact-info">
-                <p class="contact-name">Yuanjie</p>
-                <span class="status-indicator available"></span>
-                <span class="contact-status">Available</span>
-            </div>
-            <div class="contact-actions">
-                <i class="fa-regular fa-comment-dots" aria-label="Send message"></i>
-                <i class="fa-solid fa-clipboard-list" aria-label="Details"></i>
-            </div>
-        </li>
+        <% if (friends && friends.length> 0) { %>
+            <% friends.forEach(function(friend) { %>
+                <li>
+                    <img src="<%= friend.profilePicture %>" class="contact-avatar" alt="Avatar">
+                    <div class="contact-info">
+                        <p class="contact-name">
+                            <%= friend.firstName %>
+                                <%= friend.lastName %>
+                        </p>
+                        <!-- Replace 'Available' with dynamic status if available in your data -->
+                        <span class="status-indicator <%= friend.status %>"></span>
+                        <span class="contact-status">
+                            <%= friend.status %>
+                        </span>
+                    </div>
+                    <div class="contact-actions">
+                        <i class="fa-regular fa-comment-dots" aria-label="Send message"></i>
+                        <i class="fa-solid fa-clipboard-list" aria-label="Details"></i>
+                    </div>
+                </li>
+                <% }); %>
+                    <% } else { %>
+                        <li>No friends to display</li>
+                        <% } %>
     </ul>
+
 
 
     <script>
@@ -415,7 +400,7 @@
         searchButton.onclick = function (event) {
             event.preventDefault();
             const name = searchInput.value;
-            fetch(`/api/search-friends?name=${encodeURIComponent(name)}`, {
+            fetch(`/users/search-friends?search=${encodeURIComponent(name)}`, {
                 method: 'GET'
             })
                 .then(response => response.json())
@@ -453,6 +438,30 @@
                 })
                 .catch(error => console.error('Error:', error));
         }
+
+        // Example function to update user status
+        function updateStatus(newStatus) {
+            fetch('/users/update-status', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    // Add your session cookie or authentication token if necessary
+                },
+                body: JSON.stringify({ status: newStatus }),
+            })
+                .then(response => response.json())
+                .then(data => {
+                    console.log(data.message);
+                    // Here you can also update the DOM to reflect the new status
+                })
+                .catch(error => console.error('Error:', error));
+        }
+
+        // Example event listener for a status update button
+        document.getElementById('status-update-button').addEventListener('click', function () {
+            const selectedStatus = document.getElementById('status-select').value;
+            updateStatus(selectedStatus);
+        });
     </script>
 
 </body>

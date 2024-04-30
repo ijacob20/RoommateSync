@@ -24,13 +24,14 @@ exports.searchFriends = async (req, res) => {
     try {
         const users = await User.find({
             "$or": [
-                { "firstName": { "$regex": searchTerm, "$options": "i" } },
-                { "lastName": { "$regex": searchTerm, "$options": "i" } }
+                { "firstName": new RegExp(searchTerm, "i") },
+                { "lastName": new RegExp(searchTerm, "i") }
             ]
-        });
+        }).exec();
         res.json(users);
     } catch (err) {
-        res.status(500).json({ message: "Error finding users" });
+        console.error('Error finding users:', err);
+        res.status(500).json({ message: "Error finding users", error: err.message });
     }
 };
 

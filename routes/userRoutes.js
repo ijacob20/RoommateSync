@@ -1,8 +1,8 @@
 const express = require('express');
 const controller = require('../controllers/userController');
-const {isGuest, isLoggedIn} = require('../middleware/auth');
-const {loginLimiter} = require('../middleware/rateLimiters');
-const {validateSignUp, validateLogIn, validateResult} = require('../middleware/validator');
+const { isGuest, isLoggedIn } = require('../middleware/auth');
+const { loginLimiter } = require('../middleware/rateLimiters');
+const { validateSignUp, validateLogIn, validateResult } = require('../middleware/validator');
 
 
 
@@ -22,6 +22,9 @@ router.post('/login', loginLimiter, isGuest, validateLogIn, validateResult, cont
 
 //GET /users/profile: send user's profile page
 router.get('/profile', isLoggedIn, controller.profile);
+
+//POST route to handle the status update
+router.post('/update-status', controller.updateStatus);
 
 //POST /users/logout: logout a user
 router.get('/logout', isLoggedIn, controller.logout);
