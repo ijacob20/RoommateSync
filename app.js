@@ -79,6 +79,7 @@ const application = express();
 let port = 3000;
 let host = 'localhost';
 application.set("views", path.join(__dirname, "..", "/app/views"));
+// application.set("views", path.join(__dirname, "/views"));
 application.set('view engine', 'ejs');
 
 // connect to MongoDB

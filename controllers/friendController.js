@@ -10,19 +10,25 @@ exports.index = (req, res) => {
 exports.friendList = async (req, res) => {
     try {
         if (!req.session.userId) {
-            return res.redirect('/login'); // Redirect to login if no session is found
+            return res.redirect('/login'); // Ensure user is logged in
         }
         const user = await User.findById(req.session.userId).populate('friends');
-        if (!user) {
-            return res.status(404).send('User not found'); // Handle no user found
-        }
-        const friendsList = user.friends || [];
-        res.render('friend/roommate', { friends: friendsList });
+        const friendsList = user && user.friends ? user.friends : [];
+        const friendRequests = []; // Assuming you populate this correctly
+        const pendingRequests = []; // Initialize as empty array if not fetched yet
+
+        res.render('friend/roommate', {
+            friends: friendsList,
+            friendRequests: friendRequests,
+            pendingRequests: pendingRequests // Ensure this is always defined
+        });
     } catch (error) {
         console.error('Error fetching friend information:', error);
         res.status(500).send(`Internal Server Error: ${error.message}`);
     }
 };
+
+
 
 
 exports.searchFriends = async (req, res) => {

@@ -308,27 +308,53 @@
             <!-- Friend Requests List -->
             <h3>Friend Requests</h3>
             <ul class="request-list" id="friendRequestsList">
-                <% friendRequests.forEach(function(request) { %>
-                    <li>
-                        <img src="<%= request.profilePicture %>" alt="Avatar" class="contact-avatar">
-                        <div class="contact-info">
-                            <p class="contact-name">
-                                <%= request.firstName %>
-                                    <%= request.lastName %>
-                            </p>
-                            <i class="fa-solid fa-circle-check"
-                                onclick="handleFriendRequest('accept', '<%= request._id %>')"></i>
-                            <i class="fa-solid fa-circle-xmark"
-                                onclick="handleFriendRequest('decline', '<%= request._id %>')"></i>
-                        </div>
-                    </li>
-                    <% }); %>
+                <% if (friendRequests && friendRequests.length> 0) { %>
+                    <% friendRequests.forEach(function(request) { %>
+                        <li>
+                            <img src="<%= request.profilePicture %>" alt="Avatar" class="contact-avatar">
+                            <div class="contact-info">
+                                <p class="contact-name">
+                                    <%= request.firstName %>
+                                        <%= request.lastName %>
+                                </p>
+
+                                <i class="fa-solid fa-circle-check"
+                                    onclick="handleFriendRequest('accept', '<%= request._id %>')"></i>
+                                <i class="fa-solid fa-circle-xmark"
+                                    onclick="handleFriendRequest('decline', '<%= request._id %>')"></i>
+                            </div>
+                        </li>
+                        <% }); %>
+                            <% } else { %>
+                                <p>No friend requests.</p>
+                                <% } %>
+
             </ul>
 
             <!-- Pending Requests List -->
             <h3>Pending Requests</h3>
             <ul class="request-list" id="pendingRequestsList">
-                <% pendingRequests.forEach(function(request) { %>
+
+
+                <% if (pendingRequests && pendingRequests.length> 0) { %>
+                    <% pendingRequests.forEach(function(request) { %>
+                        <li>
+                            <img src="<%= request.profilePicture %>" alt="Avatar" class="contact-avatar">
+                            <div class="contact-info">
+                                <p class="contact-name">
+                                    <%= request.firstName %>
+                                        <%= request.lastName %>
+                                </p>
+                                <!-- possibly a button to cancel the pending request -->
+                                <i class="fa-solid fa-circle-xmark"
+                                    onclick="handleFriendRequest('remove', '<%= request._id %>')"></i>
+                            </div>
+                        </li>
+                        <% }); %>
+                            <% } else { %>
+                                <p>No pending friend requests.</p>
+                                <% } %>
+                                    <!-- <% pendingRequests.forEach(function(request) { %>
                     <li>
                         <img src="<%= request.profilePicture %>" alt="Avatar" class="contact-avatar">
                         <div class="contact-info">
@@ -341,11 +367,10 @@
 
                         </div>
                     </li>
-                    <% }); %>
+                    <% }); %> -->
             </ul>
         </div>
     </div>
-
 
     <!-- Friend list page -->
     <div class="search-bar">
