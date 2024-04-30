@@ -2,6 +2,8 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
+    <link rel="stylesheet" href="/css/messagesStyles.css">
+
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link
       rel="stylesheet"
@@ -9,7 +11,6 @@
       integrity="sha512-1PKOgIY59xJ8Co8+NE6FZ+LOAZKjy+KY8iq0G4B3CyeY6wYHN3yt9PW0XpSriVlkMXe40PTKnXrLnZ9+fkDaog=="
       crossorigin="anonymous"
     />
-    <link rel="stylesheet" href="/css/messagesStyles.css">
     <script src="/socket.io/socket.io.js"></script>
     <script
       src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.28.0/moment.min.js"
@@ -20,21 +21,26 @@
     <title>Roommate Sync</title>
   </head>
   <body>
-    <div class="roommate">
-        <h1>Welcome back, <%-user.firstName %>!</h1>
-
-          <div class="roommate-img">
-              <a href="/"><img id="logo" src="/images/roommate-sync-logo.png" alt=""></a>
-
-              </div>
+    <nav>
+        <div class="nav-container">
+            <a href="/">
+                <h1>
+                    <img src="/images/sync-logo.png" alt="logo" width="40" height="40">Roommate&nbsp;<span class="sync-header">Sync</span>
+                </h1>
+            </a>
+        </div>
+    </nav>
+    <main>
 
 
     <%if(!messages.length) {%>
-      <h4 class="one-column">You have no messages.</h4>
+      <h2 class="one-column">You have no messages.</h4>
   <%} else { %>
-    <h4 class="one-column">Your Messages:</h4>
+    <h2 class="one-column">Messages:</h4>
 
-    <% for(let i=0; i < messages.length; i++){ %>      
+
+    <% for(let i=0; i < messages.length; i++){ %>  
+        <div class="messages-container">    
           <article class="card">
               <div class="card-header">
                 <span><%=messages[i].date%></span>
@@ -47,9 +53,13 @@
                   </div>
               </div>
           </article>
-      </a>
+        </div>
+
   <% } 
   }%>
-  <a href="/messages/new"><p>New message</p></a>
+</main>
+<div class="buttonContainer">
+    <a href="/messages/new"><button class="newMessage">New message</button></a>
+</div>
   </body>
 </html>

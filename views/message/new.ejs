@@ -9,7 +9,7 @@
       integrity="sha512-1PKOgIY59xJ8Co8+NE6FZ+LOAZKjy+KY8iq0G4B3CyeY6wYHN3yt9PW0XpSriVlkMXe40PTKnXrLnZ9+fkDaog=="
       crossorigin="anonymous"
     />
-    <link rel="stylesheet" href="/css/messagesStyles.css">
+    <link rel="stylesheet" href="/css/messagesNewStyles.css">
     <script src="/socket.io/socket.io.js"></script>
     <script
       src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.28.0/moment.min.js"
@@ -20,36 +20,33 @@
     <title>Roommate Sync</title>
   </head>
   <body>
-    <div class="roommate">
-        <h1 class="username"><%-user.firstName %></h1>
 
-          <div class="roommate-img">
-              <a href="/"><img id="logo" src="/images/roommate-sync-logo.png" alt=""></a>
+        <nav>
+          <div class="nav-container">
+              <a href="/messages/index">
+                  <h1>
+                      <img src="/images/sync-logo.png" alt="logo" width="40" height="40">Roommate&nbsp;<span class="sync-header">Sync</span>
+                  </h1>
+              </a>
+          </div>
+          <h1 class="username"><%-user.firstName %></h1>
 
-              </div>
-
-
-
-
-              <div class="chat-container">
-                <div class="chat-header">
-                    <h2>Chat Window</h2>
-                </div>
-                <div class="chat-messages">
-                 
-                </div>
-                <form class="message-form" id="message-form">
-                    <div class="chat-input">
-                    <input type="text" id="msg"placeholder="Type your message..." name="text">
-                    <button>Send</button>
-                </div>
-            </form>
-            </div>
+      </nav>
+<div class="main">
 
 
-      <ul class="message-container" id="message-container">
-  
-    <h3 class="clients-total" id="client-total">Total Clients: 2</h3>
+
+              <ul class="chat-container">
+                
+          </ul>
+          <form class="message-form" id="message-form">
+            <div class="chat-input">
+            <input type="text" id="msg"placeholder="Type your message..." name="text">
+            <button>Send</button>
+        </div>
+    </form>
+  </div>
+    <h3 class="clients-total" id="client-total">Total Clients: </h3>
 
   
   </body>

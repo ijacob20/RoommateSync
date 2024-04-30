@@ -3,6 +3,7 @@
 margin: 0;
 padding: 0;
 box-sizing: border-box;
+font-family: 'Poppins', sans-serif;
 scroll-behavior: smooth;
 
 }
@@ -36,7 +37,7 @@ main {
   background-color: #64A5CA; 
   border: none;
   border-radius: 15px;
-  box-shadow: 0 4.5px #999;
+  box-shadow: 0 9px #999;
   margin: 0 auto;
 }
 
@@ -55,16 +56,14 @@ main {
 
 
 body {
-  height: 100%;
-
-  /* Center and scale the image nicely */
-  /* background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover; */
-
-  font-family: Arial, sans-serif;
-  margin: 0;
-  padding: 0;
+  font-family: 'Open Sans', sans-serif;
+  /* display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center; */
+  display: grid;
+  place-items: center;
+  background-color: #ebebeb;
 
 }
 
@@ -111,8 +110,8 @@ nav a {
 }
 
 nav h1 {
-  font-size: 1.7rem;
-}
+    font-size: 1.7rem;
+  }
 
 .sync-header {
   color: #64A5CA; 

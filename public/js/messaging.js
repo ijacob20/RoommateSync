@@ -2,9 +2,11 @@ const socket = io()
 
 const clientsTotal = document.getElementById('client-total')
 
-const messageContainer = document.getElementById('message-container')
+const chatMessages = document.querySelector('.chat-container')
 const messageForm = document.getElementById('message-form')
 const messageInput = document.getElementById('msg')
+const messageTone = new Audio('/message-tone.mp3')
+
 
 
 messageForm.addEventListener('submit', (e) => {
@@ -32,45 +34,52 @@ function sendMessage() {
 
 socket.on('chat-message', (data) => {
   // console.log(data)
+  messageTone.play()
+
   addMessageToUI(false, data)
 })
 
 function addMessageToUI(isOwnMessage, data) {
   clearFeedback()
-  const div = document.createElement('div');
-    div.classList.add('message');
-    const user = document.createElement('div');
-    user.classList.add('message-sender');
-    user.textContent = data.username;
-    div.append(user);
+    // const user = document.createElement('div');
+    
+    // user.classList.add('message-sender');
+    // user.textContent = data.username;
+    // div.append(user);
 
-    const messageDiv = document.createElement('div');
-    messageDiv.classList.add('message-text');
-    messageDiv.innerHTML = data.message;
+    const messageLi = document.createElement('li');
+    if (isOwnMessage) {
+      messageLi.classList.add('message-bubble');
+      messageLi.classList.add('message-right');
 
-    div.append(messageDiv);
-    document.querySelector('.chat-messages').append(div);
+    } else {
+      messageLi.classList.add('message-left');
+
+    }
+    messageLi.classList.add('message-bubble');
+
+  const pElement = document.createElement('p');
+  pElement.innerHTML = data.message;
+  const spanElement = document.createElement('span');
+  spanElement.textContent = data.username;
+  pElement.append(spanElement);
+
+  messageLi.append(pElement);
+
+    chatMessages.append(messageLi);
 
   scrollToBottom()
 }
 
 function scrollToBottom() {
-  messageContainer.scrollTo(0, messageContainer.scrollHeight)
+  chatMessages.scrollTo(0, chatMessages.scrollHeight)
 }
 
 
 
 
 
-socket.on('feedback', (data) => {
-  clearFeedback()
-  const element = `
-        <li class="message-feedback">
-          <p class="feedback" id="feedback">${data.feedback}</p>
-        </li>
-  `
-  messageContainer.innerHTML += element
-})
+
 
 function clearFeedback() {
   document.querySelectorAll('li.message-feedback').forEach((element) => {
