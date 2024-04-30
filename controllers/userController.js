@@ -48,14 +48,10 @@ exports.login = (req, res, next) => {
                 user.comparePassword(password)
                     .then(result => {
                         if (result) {
-                            req.session.user = { _id: user._id, firstName: user.firstName };
-                            // req.session.user = user._id;
-                            // req.session.fName = user.firstName;
+                            req.session.userId = user._id;  // Make sure this is set
+                            req.session.user = { _id: user._id, firstName: user.firstName }; // Optional: Maintain this if used elsewhere
                             req.flash('success', 'You have successfully logged in');
-                            // console.log(user.firstName);
-                            // res.redirect('/');
-                            res.redirect('/')
-
+                            res.redirect('/');
                         } else {
                             req.flash('error', 'wrong password');
                             res.redirect('/users/login');
@@ -64,9 +60,10 @@ exports.login = (req, res, next) => {
             }
         })
         .catch(err => next(err));
-
-
 };
+
+
+
 
 exports.profile = (req, res, next) => {
     let id = req.session.user;

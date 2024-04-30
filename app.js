@@ -121,8 +121,6 @@ application.use(methodOverride('_method'));
 // set up routes
 application.use('/', mainRoutes);
 
-
-
 application.use('/events', eventRoutes);
 
 application.use('/users', userRoutes);

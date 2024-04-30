@@ -3,21 +3,26 @@ const User = require('../models/user'); // Ensure you have a User model
 
 
 exports.index = (req, res) => {
-    res.render('roommates');
+    res.render('friend/roommate');
 };
 
 
 exports.friendList = async (req, res) => {
     try {
+        if (!req.session.userId) {
+            return res.redirect('/login'); // Redirect to login if no session is found
+        }
         const user = await User.findById(req.session.userId).populate('friends');
-        const friendsList = user && user.friends ? user.friends : [];
+        if (!user) {
+            return res.status(404).send('User not found'); // Handle no user found
+        }
+        const friendsList = user.friends || [];
         res.render('friend/roommate', { friends: friendsList });
     } catch (error) {
         console.error('Error fetching friend information:', error);
-        return res.status(500).send('Internal Server Error');
+        res.status(500).send(`Internal Server Error: ${error.message}`);
     }
 };
-
 
 
 exports.searchFriends = async (req, res) => {
