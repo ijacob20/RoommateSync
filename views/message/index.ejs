@@ -16,12 +16,12 @@
       integrity="sha512-Q1f3TS3vSt1jQ8AwP2OuenztnLU6LwxgyyYOG1jgMW/cbEMHps/3wjvnl1P3WTrF3chJUWEoxDUEjMxDV8pujg=="
       crossorigin="anonymous"
     ></script>
-    <script src="/js/messaging.js" defer></script>
+    <!-- <script src="/js/messaging.js" defer></script> -->
     <title>Roommate Sync</title>
   </head>
   <body>
     <div class="roommate">
-        <h1 class="username"><%-user.firstName %></h1>
+        <h1>Welcome back, <%-user.firstName %>!</h1>
 
           <div class="roommate-img">
               <a href="/"><img id="logo" src="/images/roommate-sync-logo.png" alt=""></a>
@@ -29,28 +29,27 @@
               </div>
 
 
+    <%if(!messages.length) {%>
+      <h4 class="one-column">You have no messages.</h4>
+  <%} else { %>
+    <h4 class="one-column">Your Messages:</h4>
 
-
-              <div class="chat-container">
-                <div class="chat-header">
-                    <h2>Chat Window</h2>
-                </div>
-                <div class="chat-messages">
-                 
-                </div>
-                <form class="message-form" id="message-form">
-                    <div class="chat-input">
-                    <input type="text" id="msg"placeholder="Type your message..." name="text">
-                    <button>Send</button>
-                </div>
-            </form>
-            </div>
-
-
-      <ul class="message-container" id="message-container">
-  
-    <h3 class="clients-total" id="client-total">Total Clients: 2</h3>
-
-  
+    <% for(let i=0; i < messages.length; i++){ %>      
+          <article class="card">
+              <div class="card-header">
+                <span><%=messages[i].date%></span>
+                  <p><%=messages[i].message%></p>
+              </div>
+              <div class="card-body">
+                  <div>
+                  </div>
+                  <div class="two-column">
+                  </div>
+              </div>
+          </article>
+      </a>
+  <% } 
+  }%>
+  <a href="/messages/new"><p>New message</p></a>
   </body>
 </html>

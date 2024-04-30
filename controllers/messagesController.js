@@ -1,31 +1,20 @@
-const messagesModel = require('../models/messages');
-
-exports.new = (req, res)=>{
-    return res.render('./message/new');
+exports.index = async (req, res, next)=>{
+    // console.log(req.session.user);
+    try {
+        
+        let messages= await req.app.messageModel.find({userId: req.session.user._id})
+        return res.render('./message/index', {messages});
+    
+}catch(err) {
+    next(err);
+} 
 };
 
-exports.create = (req, res, next)=>{
-    let userId = req.session.user._id;
-    let textMessage = req.body.text;
-
-    console.log(userId);
-    console.log(textMessage);
-
-    let newMessage = new messagesModel({
-        sender: userId,
-        text: textMessage,
-    });
-
-    newMessage.save()
-    .then(user=> {
-        req.flash('success', 'message save was successful!');
-        //  res.redirect('/messages/new')
-        })
-    .catch(err=>{
-        req.flash('success', 'message save was NOT successful!');
-        next(err);
-    }); 
 
 
-
+exports.new =  (req, res, next)=>{    
+        return res.render('./message/new');
+    
 };
+ 
+

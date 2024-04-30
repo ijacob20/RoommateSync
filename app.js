@@ -170,6 +170,7 @@ function onConnected(socket) {
     socket.broadcast.emit('feedback', data)
   })
 }
+application.messageModel = Message;
 
 // mount middleware
 application.use(sessionMiddleware);

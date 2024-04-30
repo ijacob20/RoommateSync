@@ -7,9 +7,12 @@ const {validateSignUp, validateLogIn, validateResult} = require('../middleware/v
 const router = express.Router();
 
 //GET /users/new: send html form for creating a message account
+router.get('/index', isLoggedIn, controller.index);
+
+
 router.get('/new', isLoggedIn, controller.new);
 
-router.post('/', controller.create);
+// router.post('/', controller.create);
 
 
 

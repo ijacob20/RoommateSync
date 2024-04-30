@@ -18,10 +18,11 @@ socket.on('clients-total', (data) => {
 
 function sendMessage() {
   if (messageInput.value === '') return
+  const userName = document.querySelector('.username').textContent;
   // console.log(messageInput.value)
   const data = {
     message: messageInput.value,
-    username: 'empty',
+    username: userName,
     dateTime: new Date(),
   }
   socket.emit('message', data)
@@ -40,7 +41,7 @@ function addMessageToUI(isOwnMessage, data) {
     div.classList.add('message');
     const user = document.createElement('div');
     user.classList.add('message-sender');
-    // user.textContent = 'Username Here';
+    user.textContent = data.username;
     div.append(user);
 
     const messageDiv = document.createElement('div');
