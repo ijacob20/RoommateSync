@@ -4,6 +4,8 @@ const friendController = require('../controllers/friendController');
 
 router.get('/', friendController.index);
 
+router.get('/friend', friendController.friendList);
+
 // Route for searching friends
 router.get('/search-friends', friendController.searchFriends);
 

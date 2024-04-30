@@ -3,9 +3,21 @@ const User = require('../models/user'); // Ensure you have a User model
 
 
 exports.index = (req, res) => {
-    res.render('../roommates');
+    res.render('roommates');
 };
 
+exports.friendList = async (req, res) => {
+    try {
+        // This is a mock setup, replace with actual logic to get friend requests and friends.
+        const friendRequests = []; // Replace with actual friend request data retrieval logic
+        const friends = await User.findById(req.session.userId).populate('friends'); // Modify as needed
+
+        res.render('friend/roommate', { friendRequests, friends: friends ? friends.friends : [] });
+    } catch (error) {
+        console.error('Error fetching friend information:', error);
+        res.status(500).render('error', { error: 'Error fetching friend information' });
+    }
+};
 
 exports.searchFriends = async (req, res) => {
     const searchTerm = req.query.search;
