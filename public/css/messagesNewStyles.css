@@ -74,7 +74,7 @@ body {
 }
 
 p {
-  color: #64A5CA; 
+  color: white; 
 ;
 }
 
@@ -222,14 +222,16 @@ nav h1 {
   border-radius: 20px 20px 20px 0px;
   align-self: flex-start;
   justify-content: flex-start;
-  background-color: #fff;
+  background-color: #2d2d2d;
   box-shadow: -2px 2px 4px #dcdcdc;
 }
 
 .message-right {
   border-radius: 20px 20px 0px 20px;
   align-self: flex-end;
-  background-color: #2d2d2d;
+  background: linear-gradient(135deg, #0f89d3, #59c2ff) border-box;
+  /* background-color: #2d2d2d; */
+
   box-shadow: 2px 2px 4px #dcdcdc;
   color: #f6f6f6;
   /* display: flex; */
@@ -243,3 +245,4 @@ nav h1 {
   font-size: 12px;
   margin-top: 4px;
 }
+
