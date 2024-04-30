@@ -316,7 +316,10 @@
                                 <%= request.firstName %>
                                     <%= request.lastName %>
                             </p>
-                            <button onclick="addFriend('<%= request._id %>')">Accept</button>
+                            <i class="fa-solid fa-circle-check"
+                                onclick="handleFriendRequest('accept', '<%= request._id %>')"></i>
+                            <i class="fa-solid fa-circle-xmark"
+                                onclick="handleFriendRequest('decline', '<%= request._id %>')"></i>
                         </div>
                     </li>
                     <% }); %>
@@ -325,15 +328,17 @@
             <!-- Pending Requests List -->
             <h3>Pending Requests</h3>
             <ul class="request-list" id="pendingRequestsList">
-                <% friends.forEach(function(friend) { %>
+                <% pendingRequests.forEach(function(request) { %>
                     <li>
-                        <img src="<%= friend.profilePicture %>" alt="Avatar" class="contact-avatar">
+                        <img src="<%= request.profilePicture %>" alt="Avatar" class="contact-avatar">
                         <div class="contact-info">
                             <p class="contact-name">
-                                <%= friend.firstName %>
-                                    <%= friend.lastName %>
+                                <%= request.firstName %>
+                                    <%= request.lastName %>
                             </p>
-                            <span>Friend</span>
+                            <i class="fa-solid fa-circle-xmark"
+                                onclick="handleFriendRequest('remove', '<%= request._id %>')"></i>
+
                         </div>
                     </li>
                     <% }); %>
@@ -439,6 +444,28 @@
                 .catch(error => console.error('Error:', error));
         }
 
+        function handleFriendRequest(action, requestId) {
+            fetch(`/users/${action}-friend`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json',
+                },
+                body: JSON.stringify({ requestId: requestId })
+            })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        alert(data.message);
+                        window.location.reload(); // Reload the page to reflect the changes
+                    } else {
+                        alert(data.message);
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                });
+        }
         // Example function to update user status
         function updateStatus(newStatus) {
             fetch('/users/update-status', {

@@ -12,6 +12,9 @@ const userSchema = new Schema({
     enum: ['online', 'offline', 'busy'],
     default: 'offline'
   },
+  friends: [{ type: Schema.Types.ObjectId, ref: 'User' }],
+  friendRequests: [{ type: Schema.Types.ObjectId, ref: 'User' }],
+  pendingRequests: [{ type: Schema.Types.ObjectId, ref: 'User' }],
   profile: { type: String, default: '/images/default.png' }
 }
 );
