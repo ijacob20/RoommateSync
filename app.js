@@ -68,7 +68,7 @@ const mainRoutes = require('./routes/mainRoutes');
 const userRoutes = require('./routes/userRoutes');
 const messageRoutes = require('./routes/messageRoutes');
 
-
+const choreRoutes = require('./routes/choreRoutes');
 
 
 // create app
@@ -192,14 +192,11 @@ application.use(methodOverride('_method'));
 
 // set up routes
 application.use('/', mainRoutes);
-
-
-
 application.use('/events', eventRoutes);
-
 application.use('/users', userRoutes);
 
 application.use('/messages', messageRoutes);
+application.use('/chores', choreRoutes);
 
 
 application.use((req, res, next) => {

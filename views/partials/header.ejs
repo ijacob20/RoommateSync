@@ -31,10 +31,19 @@
     <script src="/js/calendar.js" defer></script>
 
     <title>Roommate Sync</title>
-    </h1>
 
   </head>
   <body>
+    <nav>
+      <div class="nav-container">
+          <a href="/">
+              <h1>
+                  <img src="/images/sync-logo.png" alt="logo" width="40" height="40">Roommate&nbsp;<span class="sync-header">Sync</span>
+              </h1>
+          </a>
+          <a href="/users/logout"><button type="button" class="logout-btn">Logout</button></a>
+      </div>
+  </nav>
     <main class="menu-main">
         <section class="calendar-section">
             <div class="calendar-wrapper">
@@ -92,12 +101,16 @@
         <section class="menu-section">
 
 
-        <div class="container">
-            <div class="roommate">
-              <h1>Welcome back, <%-user.firstName %>!</h1>
-
-                <div class="roommate-img">
-                    <img src="/images/roommate-sync-logo.png" alt="roommate sync logo">
+          <section class="menu-section">
+            <div class="profile-container">
+                <h2>Welcome back, <%= user.firstName %>!</h2>
+                <img src="<%= user.profile %>" alt="profile picture" height="45" width="45">
+            </div>
+            <div class="menu-options">
+              <a href="/chores">
+                <div class="menu-icon-container">
+                  <img src="/images/add-friend.png" alt="friends icon" width="75" height="75">
+                  <div class="menu-icon-label">Roommates</div>
                 </div>
 
                 <div class="menu-choices">
@@ -117,20 +130,27 @@
                         <!-- add friends should be a button inside the roommates page-->
                         <h2>Profile</h2>
                     </a>
-                    <a href="/events" class="menu-choice-5">
-                        <!-- add friends should be a button inside the roommates page-->
-                        <h2>Chores</h2>
-                    </a>
-                    <a href="" class="menu-choice-6">
-                        <!-- add friends should be a button inside the roommates page-->
-                        <h2>Bill Splitting</h2>
-                    </a>
+              </a>
+              <a href="/chores">
+                <div class="menu-icon-container">
+                    <img src="/images/message.png" alt="messages icon" width="75" height="75">
+                    <div class="menu-icon-label">Messages</div>
                 </div>
-               
-              </div>
-            <a href='/users/logout'><button class="logout">Logout</button></a>
-        </div>
-       </section>
+              </a>
+              <a href="/chores">
+                <div class="menu-icon-container">
+                  <img src="/images/chores.png" alt="chores icon" width="75" height="75">
+                  <div class="menu-icon-label">Chores</div>
+                </div>
+              </a>
+              <a href="/users/profile">
+                <div class="menu-icon-container">
+                    <img src="/images/settings.png" alt="profile icon" width="75" height="75">
+                    <div class="menu-icon-label">Profile</div>
+                </div>
+              </a>
+            </div>
+        </section>
 
 
     </main>
