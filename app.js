@@ -102,6 +102,7 @@ const messagesSchema = new mongoose.Schema({
   message: { type: String, required: [true, "Text message is required"] },
   usersName: { type: String, required: [true, "User's name is required"] },
   userId: { type: String, required: [true, "userId is required"] },
+  receiver: { type: String },
   date: {
     type: Date,
     default: Date.now, // Set default value to current date and time

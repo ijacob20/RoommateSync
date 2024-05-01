@@ -31,6 +31,13 @@
         </div>
     </nav>
     <main>
+<h2>Users</h2>
+    <% for(let i=0; i < users.length; i++){ %>  
+<p><a href="/messages/<%= users[i]._id%>"><%=users[i].firstName + ' ' + users[i].lastName%> </a></p>
+
+
+
+<% } %>
 
 
     <%if(!messages.length) {%>

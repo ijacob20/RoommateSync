@@ -5,9 +5,6 @@ exports.index = (req, res) => {
     res.render('index');
 };
 
-exports.messages = (req, res) => {
-    res.render('messages');
-};
 
 
 exports.contact = (req, res) => {

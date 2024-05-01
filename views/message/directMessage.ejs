@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <a href="/messages"><button>Back</button></a>
+    <p>DMs</p>
+    <%if(!messages.length) {%>
+        <h2 class="one-column">You have no messages.</h4>
+    <%} else { %>
+      <h2 class="one-column">Messages:</h4>
+  
+  
+      <% for(let i=0; i < messages.length; i++){ %>  
+          <div class="messages-container">    
+            <article class="card">
+                <div class="card-header">
+                  <span><%=messages[i].date%></span>
+                    <p><%= messages[i].usersName + ': ' + messages[i].message%></p>
+                </div>
+                <div class="card-body">
+                    <div>
+                    </div>
+                    <div class="two-column">
+                    </div>
+                </div>
+            </article>
+          </div>
+  
+    <% } 
+    }%>
+</body>
+</html>
