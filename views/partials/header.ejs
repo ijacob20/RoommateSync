@@ -45,59 +45,79 @@
       </div>
   </nav>
     <main class="menu-main">
-        <section class="calendar-section">
-            <div class="calendar-wrapper">
-                <header>
-                  <p class="current-date"></p>
-                  <div class="icons">
-                    <span id="prev" class="material-symbols-rounded">chevron_left</span>
-                    <span id="next" class="material-symbols-rounded">chevron_right</span>
-                  </div>
-                </header>
-                <div class="calendar">
-                  <ul class="weeks">
-                    <li>Sun</li>
-                    <li>Mon</li>
-                    <li>Tue</li>
-                    <li>Wed</li>
-                    <li>Thu</li>
-                    <li>Fri</li>
-                    <li>Sat</li>
-                  </ul>
-                  <ul class="days"></ul>
-                </div>
+      <section class="calendar-section">
+        <div class="calendar-wrapper">
+            <header>
+              <p class="current-date"></p>
+              <div class="icons">
+                <span id="prev" class="material-symbols-rounded"></span>
+                <span id="next" class="material-symbols-rounded"></span>
               </div>
-              <article class="event-wrapper">
-                <div class="event-container">
-                  <div class="event-title-container">
-                    <div class="header-wrapper">
-                      <p class="event-header"></p>
-                      <!-- TODO: ADD DISPLAY: NONE -->
-                      <p class="event-title"></p>
-                      <!-- <h2 class="plus">&#43</h2> -->
-                    </div>
-                    <p class="event-desc">No Event Today</p>
-                  </div>
-                  <h2 class="plus">&#43</h2>
+            </header>
+            <div class="calendar">
+              <ul class="weeks">
+                <li>Sun</li>
+                <li>Mon</li>
+                <li>Tue</li>
+                <li>Wed</li>
+                <li>Thu</li>
+                <li>Fri</li>
+                <li>Sat</li>
+              </ul>
+              <ul class="days"></ul>
+            </div>
+          </div>
+          <article class="event-wrapper">
+            <div class="event-container">
+              <div class="event-title-container">
+                <div class="header-wrapper">
+                  <p class="event-header"></p>
+                  <p class="event-title"></p>
                 </div>
-                
-                <form>
-                  <div class="event-input-container hidden">
-                      <div class="formInput">
-                          <label for="firstName">Event title:</label>
-                          <input type="text" id="event-title-input" class="event-input" id="firstName" name="firstName" required>
-                      </div>
-              
-                      <div class="formInput">
-                          <label for="lastName">Event Info</label>
-                          <input type="text" id="event-desc-input" class="event-input" id="lastName" name="lastName" required>
-                      </div>
-              
-                      <button type="submit" class="login-button">Add Event</button>
-                    </div>
-                  </form>
-              </article>
-        </section>
+                <p class="event-desc">No Event Today</p>
+
+                <% if(calendarEvents !="undefined"){%>
+                <!-- CalendarEvent Display logic-->
+                <p class="calendarEventsLength hidden"><%=calendarEvents.length%></p>
+                <%calendarEvents.forEach(calendarEvent=>{%>
+                  
+                  <p class="dayOfMonth hidden"><%=calendarEvent.date.getUTCDate()%></p>
+
+                  <h3 class="calendarTitle hidden"><%=calendarEvent.title%>:</h2>
+
+                  <p class="calendarDesc hidden"><%=calendarEvent.description%></p>
+
+                <%});%>
+                  <%}%>
+              </div>
+              <h2 class="plus">&#43</h2>
+             </div>
+            
+             <!-- Calendar Form-->
+
+            <form method='POST' action = '/calendarEvents'>
+              <div class="event-input-container hidden">
+                  <div class="formInput">
+                      <label for="title">Event title:</label>
+                      <input type="text" class="event-input" id="title" name="title" required>
+                  </div>
+          
+                  <div class="formInput">
+                      <label for="description">Event Info</label>
+                      <input type="text" class="event-input" id="description" name="description" required>
+                  </div>
+
+                  <div class="formInput">
+                    <label for="date">Event Info</label>
+                    <input type="date" class="event-input" id="date" name="date" required>
+                  </div>
+          
+                  <input type="submit" value="Submit" class="login-button">
+                  
+              </div>
+          </form>
+          </article>
+    </section>
         <section class="menu-section">
 
 

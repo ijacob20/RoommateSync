@@ -254,6 +254,35 @@ p {
   color: green;
 }
 
+h3 {
+  color: green;
+}
+
+/* .event-desc{
+  color: rgb(146, 2, 2);
+  /* color: rgb(187, 3, 3); */
+/*}*/
+
+.calendarTitle{
+  color: rgb(146, 2, 2);
+  color: rgb(1, 97, 1);
+}
+
+.upcoming-calendarTitle{
+  color: rgb(146, 2, 2);
+  color: rgb(1, 97, 1);
+}
+
+.calendarDesc{
+  color: rgb(187, 3, 3);
+  color: rgb(1, 97, 1);
+}
+
+.upcoming-calendarDesc{
+  color: rgb(187, 3, 3);
+  color: rgb(1, 97, 1);
+}
+
 label {
   color: rgb(153, 151, 151);
   font-weight: 500;
@@ -448,7 +477,8 @@ box-shadow: 0 15px 40px rgba(0,0,0,0.12);
 display: flex;
 flex-direction: column;
 gap: 1rem;
-margin-right: 6rem;
+  /* margin-right: 6rem; */
+  margin-left: 0.7rem;
 }
 
 .header-wrapper {

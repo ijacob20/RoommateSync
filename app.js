@@ -68,6 +68,7 @@ const mainRoutes = require('./routes/mainRoutes');
 const userRoutes = require('./routes/userRoutes');
 
 const choreRoutes = require('./routes/choreRoutes');
+const calendarEventRoutes = require('./routes/calendarEventRoutes');
 
 
 // create app
@@ -121,6 +122,7 @@ application.use('/', mainRoutes);
 application.use('/events', eventRoutes);
 application.use('/users', userRoutes);
 application.use('/chores', choreRoutes);
+application.use('/calendarEvents', calendarEventRoutes);
 
 application.use((req, res, next)=> {
     let err = new Error('The server cannot locate ' + req.url);
