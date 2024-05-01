@@ -6,7 +6,7 @@ exports.index = async (req, res, next)=>{
     try {
         
         let [messages, users]= await Promise.all([
-                                req.app.messageModel.find({userId: req.session.user._id}),
+                                req.app.messageModel.find({sender: req.session.user._id}),
                                 userModel.find()
                                     ]);
         return res.render('./message/index', {messages, users});
@@ -18,14 +18,17 @@ exports.index = async (req, res, next)=>{
 
 exports.messaging = async (req, res, next)=>{    
     let id = req.params.id;
-    let myId = req.session.user._id;
-    console.log(id);
+    console.log('This is the id' + id)
+    let myId = req.session.user;
+    console.log('This is the myId' + myId)
     try {
         let messages = await req.app.messageModel.find({
             $or: [
-            {userId: myId, receiver: id},
-            {userId: id, receiver: myId}
+            {sender: myId, receiver: id},
+            {sender: id, receiver: myId}
             ]})
+            .populate('sender', 'firstName lastName profile')
+            console.log(messages)
         return res.render('./message/directMessage', {messages});
 
 

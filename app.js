@@ -100,9 +100,8 @@ mongoose.connect('mongodb+srv://kolaman:lol123@cluster0.uhyntkz.mongodb.net/Room
 const messagesSchema = new mongoose.Schema({
   // sender: { type: Schema.Types.ObjectId, ref: 'User' },
   message: { type: String, required: [true, "Text message is required"] },
-  usersName: { type: String, required: [true, "User's name is required"] },
-  userId: { type: String, required: [true, "userId is required"] },
-  receiver: { type: String },
+  sender: { type: mongoose.Schema.Types.ObjectId, ref: 'User'},
+  receiver: { type: mongoose.Schema.Types.ObjectId, ref: 'User'},
   date: {
     type: Date,
     default: Date.now, // Set default value to current date and time
@@ -139,6 +138,7 @@ io.on('connection', onConnected)
 function onConnected(socket) {
   console.log('Socket connected', socket.id)
   console.log(socket.request.session.user.firstName);
+
   socketsConnected.add(socket.id)
   io.emit('clients-total', socketsConnected.size)
 
@@ -154,9 +154,9 @@ function onConnected(socket) {
     // Save message to the database
     try {
       const newMessage = new Message({
-        usersName: socket.request.session.user.firstName,
-        userId: socket.request.session.user._id,
-        message: data.message
+        sender: socket.request.session.user._id,
+        message: data.message,
+        receiver: data.receiver
       });
       await newMessage.save();
       console.log('Message saved to database:', newMessage);
