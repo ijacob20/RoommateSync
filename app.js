@@ -105,6 +105,9 @@ application.use(
 );
 application.use(flash());
 
+application.use(express.json()); // For parsing application/json
+application.use(express.urlencoded({ extended: true }));
+
 application.use((req, res, next) => {
   // console.log(req.session);
   res.locals.user = req.session.user || null;

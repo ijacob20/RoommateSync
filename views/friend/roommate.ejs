@@ -308,6 +308,7 @@
             <!-- Friend Requests List -->
             <h3>Friend Requests</h3>
             <ul class="request-list" id="friendRequestsList">
+
                 <% if (friendRequests && friendRequests.length> 0) { %>
                     <% friendRequests.forEach(function(request) { %>
                         <li>
@@ -330,45 +331,6 @@
                                 <% } %>
 
             </ul>
-
-            <!-- Pending Requests List -->
-            <h3>Pending Requests</h3>
-            <ul class="request-list" id="pendingRequestsList">
-
-
-                <% if (pendingRequests && pendingRequests.length> 0) { %>
-                    <% pendingRequests.forEach(function(request) { %>
-                        <li>
-                            <img src="<%= request.profilePicture %>" alt="Avatar" class="contact-avatar">
-                            <div class="contact-info">
-                                <p class="contact-name">
-                                    <%= request.firstName %>
-                                        <%= request.lastName %>
-                                </p>
-                                <!-- possibly a button to cancel the pending request -->
-                                <i class="fa-solid fa-circle-xmark"
-                                    onclick="handleFriendRequest('remove', '<%= request._id %>')"></i>
-                            </div>
-                        </li>
-                        <% }); %>
-                            <% } else { %>
-                                <p>No pending friend requests.</p>
-                                <% } %>
-                                    <!-- <% pendingRequests.forEach(function(request) { %>
-                    <li>
-                        <img src="<%= request.profilePicture %>" alt="Avatar" class="contact-avatar">
-                        <div class="contact-info">
-                            <p class="contact-name">
-                                <%= request.firstName %>
-                                    <%= request.lastName %>
-                            </p>
-                            <i class="fa-solid fa-circle-xmark"
-                                onclick="handleFriendRequest('remove', '<%= request._id %>')"></i>
-
-                        </div>
-                    </li>
-                    <% }); %> -->
-            </ul>
         </div>
     </div>
 
@@ -377,30 +339,32 @@
         <input type="text" placeholder="Search">
     </div>
     <ul class="contact-list">
-        <% if (friends && friends.length> 0) { %>
-            <% friends.forEach(function(friend) { %>
-                <li>
-                    <img src="<%= friend.profilePicture %>" class="contact-avatar" alt="Avatar">
-                    <div class="contact-info">
-                        <p class="contact-name">
-                            <%= friend.firstName %>
-                                <%= friend.lastName %>
-                        </p>
-                        <!-- Replace 'Available' with dynamic status if available in your data -->
-                        <span class="status-indicator <%= friend.status %>"></span>
-                        <span class="contact-status">
-                            <%= friend.status %>
-                        </span>
-                    </div>
-                    <div class="contact-actions">
-                        <i class="fa-regular fa-comment-dots" aria-label="Send message"></i>
-                        <i class="fa-solid fa-clipboard-list" aria-label="Details"></i>
-                    </div>
-                </li>
-                <% }); %>
-                    <% } else { %>
-                        <li>No friends to display</li>
-                        <% } %>
+        <% (friends); %>
+            <% if (friends && friends.length> 0) { %>
+                <% friends.forEach(function(friend) { %>
+                    <li>
+                        <img src="<%= friend.profilePicture %>" class="contact-avatar" alt="Avatar">
+                        <div class="contact-info">
+                            <p class="contact-name">
+                                <%= friend.firstName %>
+                                    <%= friend.lastName %>
+                            </p>
+                            <!-- Replace 'Available' with dynamic status if available in your data -->
+                            <span class="status-indicator <%= friend.status %>"></span>
+                            <span class="contact-status">
+                                <%= friend.status %>
+                            </span>
+
+                        </div>
+                        <div class="contact-actions">
+                            <i class="fa-regular fa-comment-dots" aria-label="Send message"></i>
+                            <i class="fa-solid fa-clipboard-list" aria-label="Details"></i>
+                        </div>
+                    </li>
+                    <% }); %>
+                        <% } else { %>
+                            <li>No friends to display</li>
+                            <% } %>
     </ul>
 
 
@@ -436,14 +400,28 @@
                 .then(response => response.json())
                 .then(data => {
                     const friendRequestsList = document.getElementById("friendRequestsList");
-                    friendRequestsList.innerHTML = ''; // Clear previous results
                     if (data.length > 0) {
                         data.forEach(user => {
+                            // Create a list item and button elements
                             const li = document.createElement("li");
-                            li.innerHTML = `${user.firstName} ${user.lastName} - <button onclick="addFriend(${user._id})">Add</button>`;
+                            const button = document.createElement("button");
+
+                            // Set button text and attach click event listener
+                            button.textContent = 'Add';
+                            console.log(user._id);
+                            button.addEventListener('click', () => addFriend(user._id));
+
+                            // Set the inner HTML of the list item to include the user's name
+                            li.innerHTML = `${user.firstName} ${user.lastName} - `;
+
+                            // Append the button to the list item
+                            li.appendChild(button);
+
+                            // Append the list item to the friendRequestsList
                             friendRequestsList.appendChild(li);
                         });
                     } else {
+                        // Update feedbackMessage if no users are found
                         feedbackMessage.innerHTML = "No users found.";
                     }
                 })
@@ -454,23 +432,30 @@
         };
 
         function addFriend(userId) {
-            fetch('/api/add-friend', {
+            console.log("Adding friend with ID:", userId); // Debug: Log the ID being passed
+            fetch('/users/add-friend', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
+                    'Accept': 'application/json' // Expect JSON response
                 },
-                body: JSON.stringify({ userId: userId })
+                body: JSON.stringify({ userId })
             })
-                .then(response => response.json())
+                .then(response => response.json()) // Convert response to JSON
                 .then(data => {
+                    console.log("Response received:", data); // Debug: Log the response
                     alert(data.message);
-                    modal.style.display = "none"; // Close modal on success
+                    console.log("Friend ID:", friendId, "User ID:", userId);
+                    modal.style.display = "none"; // Optionally close the modal on success
                 })
-                .catch(error => console.error('Error:', error));
+                .catch(error => {
+                    feedbackMessage.innerHTML = "Error adding friend. Please try again.";
+                });
         }
 
+
         function handleFriendRequest(action, requestId) {
-            fetch(`/users/${action}-friend`, {
+            fetch(`/users/${action}-friend-request`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -482,7 +467,7 @@
                 .then(data => {
                     if (data.success) {
                         alert(data.message);
-                        window.location.reload(); // Reload the page to reflect the changes
+                        updateFriendRequestsList(); // Implement this function to refresh the list of friend requests
                     } else {
                         alert(data.message);
                     }
@@ -491,29 +476,6 @@
                     console.error('Error:', error);
                 });
         }
-        // Example function to update user status
-        function updateStatus(newStatus) {
-            fetch('/users/update-status', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    // Add your session cookie or authentication token if necessary
-                },
-                body: JSON.stringify({ status: newStatus }),
-            })
-                .then(response => response.json())
-                .then(data => {
-                    console.log(data.message);
-                    // Here you can also update the DOM to reflect the new status
-                })
-                .catch(error => console.error('Error:', error));
-        }
-
-        // Example event listener for a status update button
-        document.getElementById('status-update-button').addEventListener('click', function () {
-            const selectedStatus = document.getElementById('status-select').value;
-            updateStatus(selectedStatus);
-        });
     </script>
 
 </body>

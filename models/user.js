@@ -7,17 +7,11 @@ const userSchema = new Schema({
   email: { type: String, required: [true, 'email address is required'], unique: [true, 'this email address has been used'] },
   password: { type: String, required: [true, 'password is required'] },
 
-  status: {
-    type: String,
-    enum: ['online', 'offline', 'busy'],
-    default: 'offline'
-  },
   friends: [{ type: Schema.Types.ObjectId, ref: 'User' }],
   friendRequests: [{ type: Schema.Types.ObjectId, ref: 'User' }],
-  pendingRequests: [{ type: Schema.Types.ObjectId, ref: 'User' }],
   profile: { type: String, default: '/images/default.png' }
-}
-);
+});
+
 
 userSchema.pre('save', function (next) {
   let user = this;

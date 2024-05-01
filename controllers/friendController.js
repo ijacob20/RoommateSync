@@ -1,5 +1,5 @@
 const User = require('../models/user'); // Ensure you have a User model
-
+// const Friend = require('../models/friend');
 
 
 exports.index = (req, res) => {
@@ -7,27 +7,30 @@ exports.index = (req, res) => {
 };
 
 
+
+
 exports.friendList = async (req, res) => {
     try {
         if (!req.session.userId) {
             return res.redirect('/login'); // Ensure user is logged in
         }
-        const user = await User.findById(req.session.userId).populate('friends');
-        const friendsList = user && user.friends ? user.friends : [];
-        const friendRequests = []; // Assuming you populate this correctly
-        const pendingRequests = []; // Initialize as empty array if not fetched yet
+        const user = await User.findById(req.session.userId)
+            .populate('friends')
+            .populate('friendRequests');
+
+        const friendsList = user.friends ? user.friends : [];
+        const friendRequests = user.friendRequests ? user.friendRequests : []; // Only incoming requests
+        console.log(friendsList, friendRequests);
 
         res.render('friend/roommate', {
             friends: friendsList,
-            friendRequests: friendRequests,
-            pendingRequests: pendingRequests // Ensure this is always defined
+            friendRequests: friendRequests
         });
     } catch (error) {
         console.error('Error fetching friend information:', error);
         res.status(500).send(`Internal Server Error: ${error.message}`);
     }
 };
-
 
 
 
@@ -47,28 +50,44 @@ exports.searchFriends = async (req, res) => {
     }
 };
 
-// friendController.js
+
 exports.addFriend = async (req, res) => {
-    const { friendId } = req.body;
-    const userId = req.session.userId; // The current logged-in user
+    console.log(req.body.userId);
+
+    const friendId = req.body.userId;
+    const userId = req.session.userId;
+    console.log(`User ID ${userId} is adding Friend ID ${friendId}`);
+
+
+    if (!friendId || !userId) {
+        return res.status(400).json({ message: "Missing friendId or userId" });
+    }
+
+    // Log for debugging
+    // console.log(`User ID ${userId} is adding Friend ID ${friendId}`);
 
     try {
-        // Add the friend's ID to the user's pendingRequests
-        await User.findByIdAndUpdate(userId, { $push: { pendingRequests: friendId } }, { new: true });
+        const friend = await User.findByIdAndUpdate(friendId,
+            { $push: { friendRequests: userId } },
+            { new: true, runValidators: true });
 
-        // Add the user's ID to the friend's friendRequests
-        await User.findByIdAndUpdate(friendId, { $push: { friendRequests: userId } }, { new: true });
-
-        res.json({ message: "Friend request sent" });
+        if (!friend) {
+            return res.status(404).json({ message: "Friend not found" });
+        }
+        res.json({ message: "Friend request sent", friend });
     } catch (err) {
+        console.error('Failed to add friend:', err);
         res.status(500).json({ message: "Error adding friend", error: err.message });
     }
 };
 
 
+
+
+
 exports.acceptFriendRequest = async (req, res) => {
     const { requestId } = req.body; // Assuming requestId is the ID of the friend request to accept
-    const userId = req.session.userId; // The ID of the user accepting the request
+    const userId = req.session.user; // The ID of the user accepting the request
 
     try {
         await User.findByIdAndUpdate(userId,
@@ -89,7 +108,7 @@ exports.acceptFriendRequest = async (req, res) => {
 
 exports.declineFriendRequest = async (req, res) => {
     const { requestId } = req.body;
-    const userId = req.session.userId;
+    const userId = req.session.user;
 
     try {
         // Decline the friend request logic
@@ -106,7 +125,7 @@ exports.declineFriendRequest = async (req, res) => {
 
 exports.removePendingRequest = async (req, res) => {
     const { requestId } = req.body;
-    const userId = req.session.userId;
+    const userId = req.session.user;
 
     try {
         // Remove the pending request logic
