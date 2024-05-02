@@ -121,16 +121,14 @@
           </form>
           </article>
     </section>
-        <section class="menu-section">
 
-
-          <section class="menu-section">
+    <section class="menu-section">
             <div class="profile-container">
                 <h2>Welcome back, <%= user.firstName %>!</h2>
                 <img src="<%= user.image %>" alt="profile account logo" width="70" height="70">
             </div>
             <div class="menu-options">
-              <a href="/chores">
+              <a href="/users/friend">
                 <div class="menu-icon-container">
                   <img src="/images/add-friend.png" alt="friends icon" width="75" height="75">
                   <div class="menu-icon-label">Roommates</div>
@@ -155,50 +153,7 @@
                 </div>
               </a>
             </div>
-        </section>
-
-
-      <div class="container">
-        <div class="roommate">
-          <h1>Welcome back, <%-user.firstName %>!</h1>
-
-          <div class="roommate-img">
-            <img src="/images/roommate-sync-logo.png" alt="roommate sync logo">
-          </div>
-
-          <div class="menu-choices">
-            <a href="/users/friend" class="menu-choice-1">
-              <!-- add friends should be a button inside the roommates page-->
-              <h2>Roommates</h2>
-            </a>
-            <a href="message.html" class="menu-choice-2">
-              <!-- add friends should be a button inside the roommates page-->
-              <h2>Messages</h1>
-            </a>
-            <a href="" class="menu-choice-3">
-              <!-- add friends should be a button inside the roommates page-->
-              <h2>Calender</h2>
-            </a>
-            <a href="profile.html" class="menu-choice-4">
-              <!-- add friends should be a button inside the roommates page-->
-              <h2>Profile</h2>
-            </a>
-            <a href="/events" class="menu-choice-5">
-              <!-- add friends should be a button inside the roommates page-->
-              <h2>Chores</h2>
-            </a>
-            <a href="" class="menu-choice-6">
-              <!-- add friends should be a button inside the roommates page-->
-              <h2>Bill Splitting</h2>
-            </a>
-          </div>
-
-        </div>
-        <a href='/users/logout'><button class="logout">Logout</button></a>
-      </div>
     </section>
-
-
   </main>
 </body>
 

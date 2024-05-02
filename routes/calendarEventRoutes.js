@@ -6,7 +6,7 @@ const router = express.Router();
 /// POST /calendarEvents: create a new event
 router.post('/', controller.create);
 
-// GET /calendarEvents: displays the events on their date
+// GET /calendarEvents: displays the events on their date 
 router.get('/', controller.index);
 
 module.exports = router;

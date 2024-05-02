@@ -130,6 +130,7 @@ application.use('/events', eventRoutes);
 application.use('/users', userRoutes);
 application.use('/chores', choreRoutes);
 application.use('/calendarEvents', calendarEventRoutes);
+application.use('/users', friendRoutes);
 
 
 application.use((req, res, next) => {
