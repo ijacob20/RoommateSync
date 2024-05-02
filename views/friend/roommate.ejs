@@ -357,8 +357,15 @@
 
                         </div>
                         <div class="contact-actions">
-                            <i class="fa-regular fa-comment-dots" aria-label="Send message"></i>
-                            <i class="fa-solid fa-clipboard-list" aria-label="Details"></i>
+                            <!-- <i class="fa-regular fa-comment-dots" aria-label="Send message"></i>
+                            <i class="fa-solid fa-clipboard-list" aria-label="Details"></i> -->
+
+                            <a href="/messages/<%= friend._id %>">
+                                <i class="fa-regular fa-comment-dots" aria-label="Send message"></i>
+                            </a>
+                            <a href="/chores" class="icon-link">
+                                <i class="fa-solid fa-clipboard-list" aria-label="Details"></i>
+                            </a>
                         </div>
                     </li>
                     <% }); %>
