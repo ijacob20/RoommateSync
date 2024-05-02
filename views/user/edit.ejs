@@ -5,46 +5,82 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Profile Page</title>
 <style>
-    .profile-page {
-        font-family: 'Arial', sans-serif;
+    body, html {
         margin: 0;
         padding: 0;
+        font-family: 'Arial', sans-serif;
+        background: #f4f4f4;
+    }
+    .profile-page {
         display: flex;
         flex-direction: column;
         align-items: center;
+        width: 100%;
     }
     .header {
         width: 100%;
         padding: 20px;
+        background-color: #fff;
         display: flex;
         justify-content: space-between;
         align-items: center;
-        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        box-shadow: 0 2px 5px rgba(0,0,0,0.1);
     }
     .profile {
         text-align: center;
-        margin: 50px 0;
+        margin: 20px 0;
+        background-color: #fff;
+        border-radius: 8px;
+        padding: 20px;
+        box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        width: 90%;
+        max-width: 500px;
     }
-    .profile-icon {
+    .profile-icon img {
         border-radius: 50%;
-        width: 100px;
-        height: 100px;
-        margin-bottom: 40px;
+        width: 130px;
+        height: 130px;
+        display: block; /* Centering the image */
+        margin: 0 auto; /* Centering the image */
     }
     .profile-name {
         font-size: 24px;
         font-weight: bold;
-        margin-bottom: 10px;
+        margin: 20px 0;
     }
     .edit-profile {
-        background: none;
-        border: 1px solid black;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    .custom-file-input {
+        margin-bottom: 10px;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+    }
+    input[type="submit"] {
+        background-color: #007bff;
+        color: white;
+        border: none;
+        border-radius: 4px;
         padding: 10px 20px;
         cursor: pointer;
+        transition: background-color 0.3s ease;
+    }
+    input[type="submit"]:hover {
+        background-color: #0056b3;
     }
     a {
-    text-decoration: none;
-    color: black;
+        text-decoration: none;
+        color: black;
+        background-color: #ddd;
+        padding: 10px 20px;
+        border-radius: 4px;
+        transition: background-color 0.3s ease;
+    }
+    a:hover {
+        background-color: #ccc;
     }
 </style>
 </head>
@@ -53,20 +89,20 @@
 <div class="profile-page">
 
     <div class="header">
-        <a href="/"><button>Go back</button></a>
+        <a href="/users/profile"><button>Go back</button></a>
     </div>
 
     <div class="profile">
         <div class="profile-icon">
-                <img src="<%= user.image %>" alt="profile account logo" width="130" height="130">
+            <img src="<%= user.image %>" alt="profile account logo">
         </div>
 
-        <div class="profile-name"><%=user.firstName%> <%=user.lastName%></div>
+        <div class="profile-name"><%= user.firstName %> <%= user.lastName %></div>
         
         <form method='POST' enctype="multipart/form-data" action="/users/profile">
             <div class="edit-profile">
                 <input type="file" class="custom-file-input form-control" id="image" name="image" required>
-                <input onclick=" window.location.href='/users/profile' " type="submit" value="Submit">
+                <input type="submit" value="Submit">
             </div>
         </form>
     </div>

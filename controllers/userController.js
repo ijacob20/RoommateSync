@@ -71,23 +71,6 @@ exports.profile = (req, res, next) => {
         .catch(err => next(err));
 };
 
-// function within a controller when  need to update a user's status.
-exports.updateStatus = (req, res) => {
-    const userId = req.session.userId;
-    const status = req.body.status;
-
-    userService.setUserStatus(userId, status)
-        .then(user => {
-            // Handle success, such as sending a response or emitting a socket event
-            res.json({ message: 'Status updated successfully', status: user.status });
-        })
-        .catch(err => {
-            // Handle errors
-            console.error('Error updating user status', err);
-            res.status(500).json({ message: 'Error updating status' });
-        });
-};
-
 exports.editPage= (req, res, next)=>{
     let id = req.session.user;
     model.findById(id)

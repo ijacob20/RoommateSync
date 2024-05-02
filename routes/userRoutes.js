@@ -30,9 +30,6 @@ router.get('/edit', controller.editPage);
 //POST /users/profile update user profile    
 router.post('/profile', fileUpload, controller.edit);
 
-//POST route to handle the status update
-router.post('/update-status', controller.updateStatus);
-
 //POST /users/logout: logout a user
 router.get('/logout', isLoggedIn, controller.logout);
 
