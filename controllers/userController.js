@@ -1,6 +1,6 @@
 const model = require('../models/user');
-const Event = require('../models/event');
-const userService = require('../models/userService');
+// const Event = require('../models/event');
+const Chore = require('../models/chore');
 
 exports.new = (req, res) => {
     return res.render('./user/new');
@@ -42,22 +42,22 @@ exports.login = (req, res, next) => {
         .then(user => {
             if (!user) {
                 console.log('wrong email address');
-                req.flash('error', 'wrong email address');
+                req.flash('error', 'Could not find this RoommateSync account');  
                 res.redirect('/users/login');
             } else {
                 user.comparePassword(password)
-                    .then(result => {
-                        if (result) {
-                            req.session.userId = user._id;  // Make sure this is set
-                            req.session.user = { _id: user._id, firstName: user.firstName }; // Optional: Maintain this if used elsewhere
-                            req.flash('success', 'You have successfully logged in');
-                            res.redirect('/');
-                        } else {
-                            req.flash('error', 'wrong password');
-                            res.redirect('/users/login');
-                        }
-                    });
-            }
+                .then(result=>{
+                    if(result) {
+                        req.session.user = {_id: user._id, id: user._id, firstName: user.firstName, lastName: user.lastName, email: user.email, image: user.image};
+                        req.flash('success', 'You have successfully logged in');
+                        res.redirect('/')
+
+                } else {
+                    req.flash('error', 'Wrong password. Please try again');      
+                    res.redirect('/users/login');
+                }
+                });     
+            }     
         })
         .catch(err => next(err));
 };
@@ -67,10 +67,10 @@ exports.login = (req, res, next) => {
 
 exports.profile = (req, res, next) => {
     let id = req.session.user;
-    Promise.all([model.findById(id), Event.find({ hostName: id })])
-        .then(results => {
-            const [user, events] = results;
-            res.render('./user/profile', { user, events });
+    Promise.all([model.findById(id), Chore.find({assignTo: id})])
+    .then(results=>{
+        const [user, chores] = results;
+        res.render('./user/profile', {user, chores});
 
         })
         .catch(err => next(err));
@@ -91,6 +91,39 @@ exports.updateStatus = (req, res) => {
             console.error('Error updating user status', err);
             res.status(500).json({ message: 'Error updating status' });
         });
+};
+
+exports.editPage= (req, res, next)=>{
+    let id = req.session.user;
+    model.findById(id)
+    .then(user=>{      
+            req.flash('success', 'You have successfully edited your profile.');
+            return res.render('./user/edit', {user});
+    })
+    .catch(err=>next(err));
+};
+
+exports.edit = (req, res, next)=>{
+
+    let user = req.body;
+    let id = req.session.user;
+    console.log(req.file);
+
+    if (req.file) {
+        user.image = '/images/'+req.file.filename;
+
+    }
+
+    model.findByIdAndUpdate(id, user, {useFindAndModify: false, runValidators: true})
+    .then(user=>{
+            req.flash('success', 'You have successfully updated your profile');
+            res.redirect('/users/profile');
+    })
+    .catch(err=> {
+        if(err.name === 'ValidationError')
+            err.status = 400;
+        next(err);
+    });
 };
 
 

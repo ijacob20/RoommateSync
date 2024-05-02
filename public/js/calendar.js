@@ -72,25 +72,82 @@ const renderCalendar = () => {
     }
 
 
-    for (let i = 0; i < daysTagli.length; i++) {
+
+
+
+    let calendarEventsLength = document.querySelector(".calendarEventsLength").innerHTML
+
+    let dayOfMonth = document.querySelectorAll(".dayOfMonth");
+    let calendarDesc = document.querySelectorAll(".calendarDesc");
+
+    document.querySelector(".event-desc").classList.remove('hidden');
+    for(let j = 0; j < calendarEventsLength; j++){
+
+            //document.querySelector(".event-desc").classList.remove('hidden');
+        if(dayOfMonth[j].innerHTML == document.querySelector(".active").innerHTML){
+            document.querySelectorAll(".calendarTitle")[j].classList.remove('hidden');
+            document.querySelectorAll(".calendarDesc")[j].classList.remove('hidden');
+            document.querySelector(".event-desc").classList.add('hidden');
+        }else{
+            document.querySelectorAll(".calendarTitle")[j].classList.add('hidden');
+            document.querySelectorAll(".calendarDesc")[j].classList.add('hidden');
+        }
+
+        /* let currDay = date.getDate();
+        const daysOfWeek = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+        document.querySelector(".upcoming-calendarDesc")
+        //console.log(currDay);
+        //console.log(dayOfMonth[j].innerHTML);
+        if(currDay <= dayOfMonth[j].innerHTML){
+            document.querySelectorAll(".upcoming-calendarTitle")[j].classList.remove('hidden');
+            document.querySelectorAll(".upcoming-calendarDesc")[j].classList.remove('hidden');
+            
+        } */
         
+    }
+
+
+
+    for (let i = 0; i < daysTagli.length; i++) {
 
         daysTagli[i].addEventListener("click", function() {
-            console.log(daysTagli[i]);
+            /* console.log(daysTagli[i]);
             console.log(daysTagli[i].innerHTML);
-            console.log(date.getDate().innerHTML);
-
+            console.log(date.getDate().innerHTML); */
             
             for (let j = 0; j < daysTagli.length; j++) {
                 // changes the highlighted dates by iterating through every date
                 daysTagli[j].classList.remove("active");
                 daysTagli[i].classList.add("active");
+                
 
                 // TODO: Delete and replace when the server is up
                 // resets the event title and desc when the date is switched
-                eventTitle.innerHTML = '';
-                eventDesc.innerHTML = 'No Event Today';
+                /* eventTitle.innerHTML = '';
+                eventDesc.innerHTML = 'No Event Today'; */
             }
+            
+            // CalendarEvent Display logic: This is how I got the dom and ejs to interact, I did all of the logic is js and used hidden <p> elements as variables
+            let calendarEventsLength = document.querySelector(".calendarEventsLength").innerHTML
+
+            let dayOfMonth = document.querySelectorAll(".dayOfMonth");
+            let calendarDesc = document.querySelectorAll(".calendarDesc");
+
+            document.querySelector(".event-desc").classList.remove('hidden');
+            for(let i = 0; i < calendarEventsLength; i++){
+
+                    //document.querySelector(".event-desc").classList.remove('hidden');
+                if(dayOfMonth[i].innerHTML == document.querySelector(".active").innerHTML){
+                    document.querySelectorAll(".calendarTitle")[i].classList.remove('hidden');
+                    document.querySelectorAll(".calendarDesc")[i].classList.remove('hidden');
+                    document.querySelector(".event-desc").classList.add('hidden');
+                }else{
+                    document.querySelectorAll(".calendarTitle")[i].classList.add('hidden');
+                    document.querySelectorAll(".calendarDesc")[i].classList.add('hidden');
+                }
+            }
+
+
 
             daysTagli[i].classList.toggle("selected-day"); 
 
@@ -158,7 +215,7 @@ function addChore(e) {
         inputHide();
     }
 }
-submitBtn.addEventListener('click', addChore);
+// submitBtn.addEventListener('click', addChore);
 
 prevNextIcon.forEach(icon => { // getting prev and next icons
     icon.addEventListener("click", () => { // adding click event on both icons

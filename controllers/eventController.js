@@ -10,7 +10,7 @@ exports.index = (req, res, next) => {
     // res.send(model.find());
     
     // let categories = model.categories();
-    model.find().populate('hostName', 'firstName lastName profile')
+    model.find().populate('hostName', 'firstName lastName image')
     .then(events=>{
         model.distinct('category')
             .then(categories=> res.render('./event/index', {events, categories}))

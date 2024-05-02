@@ -1,0 +1,72 @@
+.table th, .table td {
+    vertical-align: middle;
+}
+
+input[type="checkbox"] {
+    display: none;
+}
+
+.circle {
+    background-color: #fff;
+    border: 1px solid #9d9b9b;
+    border-radius: 50px; 
+    cursor: pointer;
+    display: inline-block;
+    height: 20px; 
+    width: 20px; 
+    position: relative;
+}
+
+input[type="checkbox"]:checked + .circle {
+    background-color: #34f31b;
+}
+
+input[type="checkbox"]:checked + .circle::after {
+    color: #3d3d3d;
+    content: '\2713'; 
+    font-size: 14px; 
+    position: absolute;
+    transform: translate(-50%, -50%);
+    top: 50%;
+    left: 50%;
+}
+
+.profile-icon {
+    margin-right: 10px;
+    vertical-align: middle;
+}
+
+.edit-icon {
+    color: rgb(37, 175, 37);
+}
+
+.trash-icon {
+    color: red;
+}
+
+.add-task-icon {
+    margin-right: 5px;
+}
+
+button {
+    cursor: pointer;
+}
+
+/*Flash message styles*/
+.success {
+    background: rgba(108, 192, 112, 0.7);
+    color: #fff;
+    width: 30%;
+    margin: 0 auto 1rem auto;
+    text-align: center;
+    padding: 0.5rem 0;
+}
+
+.error {
+    background: rgba(255, 102, 51, 0.7);
+    color: #fff;
+    width: 70%;
+    margin: 0 auto 1rem auto;
+    text-align: center;
+    padding: 0.5rem 0;
+}

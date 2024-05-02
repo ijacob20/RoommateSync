@@ -69,7 +69,8 @@ const eventRoutes = require('./routes/eventRoutes');
 const mainRoutes = require('./routes/mainRoutes');
 const userRoutes = require('./routes/userRoutes');
 
-
+const choreRoutes = require('./routes/choreRoutes');
+const calendarEventRoutes = require('./routes/calendarEventRoutes');
 
 
 // create app
@@ -118,18 +119,17 @@ application.use((req, res, next) => {
 });
 
 application.use(express.static(path.join(__dirname, "..", "/app/public")));
-application.use(express.urlencoded({ extended: true }));
+// application.use(express.static(path.resolve('./public')));
+application.use(express.urlencoded({extended: true}));
 application.use(morgan('tiny'));
 application.use(methodOverride('_method'));
 
 // set up routes
 application.use('/', mainRoutes);
-
 application.use('/events', eventRoutes);
-
 application.use('/users', userRoutes);
-
-application.use('/users', friendRoutes);
+application.use('/chores', choreRoutes);
+application.use('/calendarEvents', calendarEventRoutes);
 
 
 application.use((req, res, next) => {
