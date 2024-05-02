@@ -1,0 +1,255 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap');
+*{
+margin: 0;
+padding: 0;
+box-sizing: border-box;
+scroll-behavior: smooth;
+font-family: 'Poppins', 'Arial';
+font-weight: 1000;
+
+}
+
+
+main {
+ display: grid;
+ grid-template-columns: auto auto auto;
+ margin: 0 1rem;
+ padding: 2rem;
+ gap: 1rem;
+ border: 5px solid black ;
+ border-radius: 24px;
+}
+.buttonContainer {
+  display: flex;
+  justify-content: center;
+}
+
+.messages-container {
+  background-color: rgba(128, 128, 128, 0.603);
+  border-radius: 4px;
+}
+
+.newMessage {
+  display: inline-block;
+  padding: 15px 25px;
+  font-size: 24px;
+  cursor: pointer;
+  text-align: center;
+  text-decoration: none;
+  outline: none;
+  color: #fff;
+  background-color: #64A5CA; 
+  border: none;
+  border-radius: 15px;
+  box-shadow: 0 4.5px #999;
+  margin: 0 auto;
+}
+
+.newMessage:hover {background-color: #4d8fb4}
+
+.newMessage:active {
+  background-color: #366b8a;
+  box-shadow: 0 5px #666;
+  transform: translateY(4px);
+}
+
+
+/** Profile Page  **/
+
+/**TODO: Transfer styles to this CSS page **/
+
+
+body {
+  height: 100%;
+
+  /* Center and scale the image nicely */
+  /* background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover; */
+
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+
+}
+
+.main {
+  border: 8px solid #dddddd;
+  border-radius: 24px;
+  overflow: hidden;
+}
+
+p {
+  color: #64A5CA; 
+;
+}
+
+label {
+  color: rgb(153, 151, 151);
+  font-weight: 500;
+}
+
+input:focus {
+  outline: none;
+}
+
+
+.hidden {
+display: none;
+}
+
+/* Style for Message Page */
+
+/* New home page styles */
+
+h2 {
+  padding: 0.5rem;
+}
+body {
+  background-color: #FFF2E2 ; 
+}
+
+nav {
+  font-family: "Roboto", sans-serif;
+
+}
+
+ a {
+  text-decoration: none;
+  color: inherit;        
+}
+
+nav h1 {
+  font-size: 1.7rem;
+}
+
+.sync-header {
+  color: #64A5CA; 
+}
+
+.nav-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 1.5rem;
+  margin-right: 2rem;
+  margin-left: 2rem;
+}
+
+.nav-container h1 {
+  display:flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.nav-container img {
+  margin-right: 10px;
+}
+
+.chat-container {
+  display: flex;
+  flex-direction: column;
+  background-color: #f6f6f6;
+  width: 400px;
+  height: 600px;
+  overflow-y: scroll;
+  overflow-x: hidden;
+}
+
+.chat-header {
+  background-color: gray;
+  color: #fff;
+  padding: 10px;
+  text-align: center;
+}
+
+.chat-messages {
+  display: flex;
+  flex-direction: column;
+  background-color: #f6f6f6;
+  width: 400px;
+  height: 600px;
+  overflow-y: scroll;
+  overflow-x: hidden;
+
+
+  /* height: 300px;
+  overflow-y: scroll;
+  padding: 10px;
+  display: flex; */
+}
+
+.message {
+  margin-bottom: 10px;
+  display: grid;
+ 
+}
+
+.message-sender {
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+
+
+.chat-input {
+  padding: 10px;
+  background-color: #f2f3f5;
+}
+
+.chat-input input[type="text"] {
+  width: calc(100% - 70px);
+  padding: 8px;
+  border: none;
+  border-radius: 5px;
+  margin-right: 10px;
+}
+
+.chat-input button {
+  padding: 8px 15px;
+  border: none;
+  border-radius: 5px;
+  background-color: gray;
+  color: #fff;
+  cursor: pointer;
+}
+
+.chat-input button:hover {
+  background-color: #19191a;
+}
+
+.message-left,
+.message-right {
+  list-style: none;
+  padding: 8px 12px;
+  margin: 12px;
+  max-width: 250px;
+  font-size: 18px;
+  word-wrap: break-word;
+}
+
+.message-left {
+  border-radius: 20px 20px 20px 0px;
+  align-self: flex-start;
+  justify-content: flex-start;
+  background-color: #fff;
+  box-shadow: -2px 2px 4px #dcdcdc;
+}
+
+.message-right {
+  border-radius: 20px 20px 0px 20px;
+  align-self: flex-end;
+  background-color: #2d2d2d;
+  box-shadow: 2px 2px 4px #dcdcdc;
+  color: #f6f6f6;
+  /* display: flex; */
+  justify-content: flex-end;
+}
+
+.message-left > p > span,
+.message-right > p > span {
+  display: block;
+  font-style: italic;
+  font-size: 12px;
+  margin-top: 4px;
+}

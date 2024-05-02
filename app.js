@@ -68,6 +68,7 @@ const flash = require('connect-flash');
 const eventRoutes = require('./routes/eventRoutes');
 const mainRoutes = require('./routes/mainRoutes');
 const userRoutes = require('./routes/userRoutes');
+const messageRoutes = require('./routes/messageRoutes');
 
 const choreRoutes = require('./routes/choreRoutes');
 const calendarEventRoutes = require('./routes/calendarEventRoutes');
@@ -75,6 +76,12 @@ const calendarEventRoutes = require('./routes/calendarEventRoutes');
 
 // create app
 const application = express();
+
+const http = require('http');
+const socketIo = require('socket.io');
+
+const server = http.createServer(application);
+const io = socketIo(server);
 
 // configure app
 let port = 3000;
@@ -86,24 +93,83 @@ application.set('view engine', 'ejs');
 // connect to MongoDB
 mongoose.connect('mongodb+srv://kolaman:lol123@cluster0.uhyntkz.mongodb.net/RoommateSync?retryWrites=true&w=majority&appName=Cluster0',
   { useNewUrlParser: true, useUnifiedTopology: true })
-  .then(() => {
-    //start the server
-    application.listen(port, host, () => {
-      console.log('Server is running on port', port);
-    });
+
+
+const messagesSchema = new mongoose.Schema({
+  // sender: { type: Schema.Types.ObjectId, ref: 'User' },
+  message: { type: String, required: [true, "Text message is required"] },
+  sender: { type: mongoose.Schema.Types.ObjectId, ref: 'User'},
+  receiver: { type: mongoose.Schema.Types.ObjectId, ref: 'User'},
+  date: {
+    type: Date,
+    default: Date.now, // Set default value to current date and time
+    // Optionally, specify a custom format for the date using the `get` method
+    get: function (date) {
+      return date.toLocaleString(); // Format date using the built-in `toLocaleString` method
+      // You can use other date formatting methods here as per your requirement
+    }
+  }
+});
+
+const Message = mongoose.model('Mssg', messagesSchema);
+// Start the server
+server.listen(port, host, () => {
+  console.log('Server is running on port', port);
+});
+
+
+const sessionMiddleware = session({
+  secret: "ajfeirf90aeu9eroejfoefj",
+  resave: false,
+  saveUninitialized: false,
+  store: new MongoStore({ mongoUrl: 'mongodb+srv://kolaman:lol123@cluster0.uhyntkz.mongodb.net/RoommateSync?retryWrites=true&w=majority&appName=Cluster0' }),
+  cookie: { maxAge: 60 * 60 * 1000 }
+});
+// Socket.IO event handling
+let socketsConnected = new Set()
+
+io.engine.use(sessionMiddleware); //Socket io now has access to session
+
+
+io.on('connection', onConnected)
+
+function onConnected(socket) {
+  console.log('Socket connected', socket.id)
+  console.log(socket.request.session.user.firstName);
+
+  socketsConnected.add(socket.id)
+  io.emit('clients-total', socketsConnected.size)
+
+  socket.on('disconnect', () => {
+    console.log('Socket disconnected', socket.id)
+    socketsConnected.delete(socket.id)
+    io.emit('clients-total', socketsConnected.size)
   })
-  .catch(err => console.log(err.message));
+
+  socket.on('message', async (data) => {
+    console.log(data);
+
+    // Save message to the database
+    try {
+      const newMessage = new Message({
+        sender: socket.request.session.user._id,
+        message: data.message,
+        receiver: data.receiver
+      });
+      await newMessage.save();
+      console.log('Message saved to database:', newMessage);
+    } catch (error) {
+      console.error('Error saving message:', error);
+    }
+
+    socket.broadcast.emit('chat-message', data);
+  })
+
+}
+application.messageModel = Message;
 
 // mount middleware
-application.use(
-  session({
-    secret: "ajfeirf90aeu9eroejfoefj",
-    resave: false,
-    saveUninitialized: false,
-    store: new MongoStore({ mongoUrl: 'mongodb+srv://kolaman:lol123@cluster0.uhyntkz.mongodb.net/RoommateSync?retryWrites=true&w=majority&appName=Cluster0' }),
-    cookie: { maxAge: 60 * 60 * 1000 }
-  })
-);
+application.use(sessionMiddleware);
 application.use(flash());
 
 application.use(express.json()); // For parsing application/json
@@ -128,6 +194,8 @@ application.use(methodOverride('_method'));
 application.use('/', mainRoutes);
 application.use('/events', eventRoutes);
 application.use('/users', userRoutes);
+
+application.use('/messages', messageRoutes);
 application.use('/chores', choreRoutes);
 application.use('/calendarEvents', calendarEventRoutes);
 application.use('/users', friendRoutes);
