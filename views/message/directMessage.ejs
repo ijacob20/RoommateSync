@@ -262,7 +262,8 @@ nav h1 {
 </head>
 <body>
     <a href="/messages"><button>Back</button></a>
-    <h1 class="username"><%-user.firstName %></h1>
+    <img src="<%= thisUser.profile%>" alt="profilePic">
+    <h1 class="username"><%-thisUser.firstName + ' ' + thisUser.lastName%></h1>
     <p>DMs</p>
     <%if(!messages.length) {%>
         <h2 class="one-column">You have no messages.</h4>

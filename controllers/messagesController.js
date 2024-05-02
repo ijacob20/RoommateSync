@@ -22,14 +22,17 @@ exports.messaging = async (req, res, next)=>{
     let myId = req.session.user;
     console.log('This is the myId' + myId)
     try {
-        let messages = await req.app.messageModel.find({
+        let [messages, thisUser] = await Promise.all([ 
+            req.app.messageModel.find({
             $or: [
             {sender: myId, receiver: id},
             {sender: id, receiver: myId}
             ]})
-            .populate('sender', 'firstName lastName profile')
+            .populate('sender', 'firstName lastName profile'),
+            userModel.findById(id)
+        ])
             console.log(messages)
-        return res.render('./message/directMessage', {messages});
+        return res.render('./message/directMessage', {messages, thisUser});
 
 
     } catch(err) {
