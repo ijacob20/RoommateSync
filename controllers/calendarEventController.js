@@ -7,7 +7,6 @@ exports.index = async(req, res, next)=>{
     //res.send('test');
     //res.send(id);
     try{
-        
         // The events in the DB are being send to the ejs file
         // Not sure how to display them on the correct dates
         const [calendarEvents] = await Promise.all([model.find({})]);
