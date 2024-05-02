@@ -1,12 +1,12 @@
-const {body} = require('express-validator');
-const {validationResult} = require('express-validator');
+const { body } = require('express-validator');
+const { validationResult } = require('express-validator');
 
 
-exports.validateId = (req, res, next)=>{
+exports.validateId = (req, res, next) => {
     let id = req.params.id;
-        //an objectId is a 24-bit Hex string
-    if(id.match(/^[0-9a-fA-F]{24}$/)) {
-       return next();
+    //an objectId is a 24-bit Hex string
+    if (id.match(/^[0-9a-fA-F]{24}$/)) {
+        return next();
     } else {
         let err = new Error('Invalid event id');
         err.status = 400;
@@ -19,26 +19,17 @@ body('lastName', 'Last name is required').notEmpty().trim().escape(),
 body('email').trim().escape().notEmpty().withMessage('Email is required')
     .if(body('email').notEmpty()).isEmail().withMessage('Email is not valid').normalizeEmail(),
 
-body('password', 'Password must be atleast 8 characters and at most 64 characters').isLength({min: 8, max: 64}).trim()];
+body('password', 'Password must be atleast 8 characters and at most 64 characters').isLength({ min: 8, max: 64 }).trim()];
 
 exports.validateLogIn = [body('email').trim().escape().notEmpty().withMessage('Email is required')
     .if(body('email').notEmpty()).isEmail().withMessage('Email is not valid').normalizeEmail(),
-    
-body('password', 'Password must be atleast 8 characters and at most 64 characters').isLength({min: 8, max: 64}).trim()];
 
-// [body('email').trim().escape().notEmpty().withMessage('Email is required')
-//     .if(body('email').notEmpty()).normalizeEmail().withMessage('Email must be a validd email address'),
-// body('password', 'Password must be atleast 8 characters and at most 64 characters').isLength({min: 8, max: 64}).trim()];
-
-// .if(body('startDateTime').notEmpty()).isISO8601().withMessage('Start date must be a valid ISO 8601 date')],
-
-// [body('email', 'Email must be a valid email address').isEmail().trim().escape().normalizeEmail(),
-// body('password', 'Password must be atleast 8 characters and at most 64 characters').isLength({min: 8, max: 64}).trim()];
+body('password', 'Password must be atleast 8 characters and at most 64 characters').isLength({ min: 8, max: 64 }).trim()];
 
 exports.validateResult = (req, res, next) => {
     let errors = validationResult(req);
-    if(!errors.isEmpty()) {
-        errors.array().forEach(error=>{
+    if (!errors.isEmpty()) {
+        errors.array().forEach(error => {
             req.flash('error', error.msg);
         });
         return res.redirect('back');

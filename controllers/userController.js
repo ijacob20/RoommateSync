@@ -2,48 +2,49 @@ const model = require('../models/user');
 // const Event = require('../models/event');
 const Chore = require('../models/chore');
 
-exports.new = (req, res)=>{
+exports.new = (req, res) => {
     return res.render('./user/new');
 };
 
-exports.create = (req, res, next)=>{
-        let user = new model(req.body);
-        user.save()
-        .then(user=> {
+exports.create = (req, res, next) => {
+    let user = new model(req.body);
+    user.save()
+        .then(user => {
             req.flash('success', 'Registration successful!');
-             res.redirect('/users/login')})
-        .catch(err=>{
-            if(err.name === 'ValidationError' ) {
-                req.flash('error', err.message);  
+            res.redirect('/users/login')
+        })
+        .catch(err => {
+            if (err.name === 'ValidationError') {
+                req.flash('error', err.message);
                 return res.redirect('/users/new');
             }
-    
-            if(err.code === 11000) {
-                req.flash('error', 'Email has been used');  
+
+            if (err.code === 11000) {
+                req.flash('error', 'Email has been used');
                 return res.redirect('/users/new');
             }
-            
+
             next(err);
-        }); 
+        });
 
 
-   
+
 };
 
 exports.getUserLogin = (req, res, next) => {
-        return res.render('./user/login');
+    return res.render('./user/login');
 }
 
-exports.login = (req, res, next)=>{
-        let email = req.body.email;
-        let password = req.body.password;
-        model.findOne({ email: email })
+exports.login = (req, res, next) => {
+    let email = req.body.email;
+    let password = req.body.password;
+    model.findOne({ email: email })
         .then(user => {
             if (!user) {
                 console.log('wrong email address');
                 req.flash('error', 'Could not find this RoommateSync account');  
                 res.redirect('/users/login');
-                } else {
+            } else {
                 user.comparePassword(password)
                 .then(result=>{
                     if(result) {
@@ -61,15 +62,35 @@ exports.login = (req, res, next)=>{
         .catch(err => next(err));
 };
 
-exports.profile = (req, res, next)=>{
+
+
+
+exports.profile = (req, res, next) => {
     let id = req.session.user;
     Promise.all([model.findById(id), Chore.find({assignTo: id})])
     .then(results=>{
         const [user, chores] = results;
         res.render('./user/profile', {user, chores});
 
-    })
-    .catch(err=>next(err));
+        })
+        .catch(err => next(err));
+};
+
+// function within a controller when  need to update a user's status.
+exports.updateStatus = (req, res) => {
+    const userId = req.session.userId;
+    const status = req.body.status;
+
+    userService.setUserStatus(userId, status)
+        .then(user => {
+            // Handle success, such as sending a response or emitting a socket event
+            res.json({ message: 'Status updated successfully', status: user.status });
+        })
+        .catch(err => {
+            // Handle errors
+            console.error('Error updating user status', err);
+            res.status(500).json({ message: 'Error updating status' });
+        });
 };
 
 exports.editPage= (req, res, next)=>{
@@ -106,15 +127,15 @@ exports.edit = (req, res, next)=>{
 };
 
 
-exports.logout = (req, res, next)=>{
-    req.session.destroy(err=>{
-        if(err) 
-           return next(err);
-       else
-            res.redirect('/');  
+exports.logout = (req, res, next) => {
+    req.session.destroy(err => {
+        if (err)
+            return next(err);
+        else
+            res.redirect('/');
     });
-   
- };
+
+};
 
 
 
