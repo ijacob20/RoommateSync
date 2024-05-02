@@ -1,5 +1,4 @@
 const model = require('../models/user');
-// const Event = require('../models/event');
 const Chore = require('../models/chore');
 
 exports.new = (req, res) => {
@@ -26,9 +25,6 @@ exports.create = (req, res, next) => {
 
             next(err);
         });
-
-
-
 };
 
 exports.getUserLogin = (req, res, next) => {
@@ -61,8 +57,6 @@ exports.login = (req, res, next) => {
         })
         .catch(err => next(err));
 };
-
-
 
 
 exports.profile = (req, res, next) => {
