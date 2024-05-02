@@ -76,7 +76,7 @@
                 </div>
                 <p class="event-desc">No Event Today</p>
 
-                <% if(calendarEvents !="undefined"){%>
+                <% if(typeof calendarEvents !="undefined"){%>
                 <!-- CalendarEvent Display logic-->
                 <p class="calendarEventsLength hidden"><%=calendarEvents.length%></p>
                 <%calendarEvents.forEach(calendarEvent=>{%>
