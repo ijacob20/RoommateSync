@@ -53,7 +53,7 @@ exports.addFriend = async (req, res) => {
     console.log(req.body.userId);
 
     const friendId = req.body.userId;
-    const userId = req.session.userId;
+    const userId = req.session.user.id;
     console.log(`User ID ${userId} is adding Friend ID ${friendId}`);
 
 
@@ -77,6 +77,7 @@ exports.addFriend = async (req, res) => {
         console.error('Failed to add friend:', err);
         res.status(500).json({ message: "Error adding friend", error: err.message });
     }
+    res.redirect('/friend/roommate')
 };
 
 

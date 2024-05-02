@@ -312,7 +312,7 @@
                 <% if (friendRequests && friendRequests.length> 0) { %>
                     <% friendRequests.forEach(function(request) { %>
                         <li>
-                            <img src="<%= request.profilePicture %>" alt="Avatar" class="contact-avatar">
+                            <img src="<%= request.image %>" alt="Avatar" class="contact-avatar">
                             <div class="contact-info">
                                 <p class="contact-name">
                                     <%= request.firstName %>
@@ -343,7 +343,7 @@
             <% if (friends && friends.length> 0) { %>
                 <% friends.forEach(function(friend) { %>
                     <li>
-                        <img src="<%= friend.profilePicture %>" class="contact-avatar" alt="Avatar">
+                        <img src="<%= friend.image %>" class="contact-avatar" alt="Avatar">
                         <div class="contact-info">
                             <p class="contact-name">
                                 <%= friend.firstName %>
