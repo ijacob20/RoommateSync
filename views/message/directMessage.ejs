@@ -296,8 +296,18 @@ nav h1 {
 
 
         <ul class="chat-container">
-          
-    </ul>
+            <% for(let i=0; i < messages.length; i++){ %>  
+
+                <li class="message-bubble message-right">
+                <p><%= messages[i].message%>
+                <span><%=  messages[i].sender.firstName %></span>
+            </p>
+        </li>
+        <% } %>
+            </ul>
+       
+        
+        
     <form class="message-form" id="message-form">
       <div class="chat-input">
       <input type="text" id="msg"placeholder="Type your message..." name="text">
