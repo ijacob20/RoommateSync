@@ -73,7 +73,9 @@ const renderCalendar = () => {
 
 
 
-
+    
+    
+    let monthOfYear = document.querySelectorAll(".monthofYear"); 
 
     let calendarEventsLength = document.querySelector(".calendarEventsLength").innerHTML
 
@@ -82,6 +84,12 @@ const renderCalendar = () => {
 
     document.querySelector(".event-desc").classList.remove('hidden');
     for(let j = 0; j < calendarEventsLength; j++){
+        //console.log(currMonth+1);
+        //console.log(monthOfYear[j].innerHTML);
+        if(currMonth+1==monthOfYear[j].innerHTML){
+            //console.log('works');
+        }
+
 
             //document.querySelector(".event-desc").classList.remove('hidden');
         if(dayOfMonth[j].innerHTML == document.querySelector(".active").innerHTML){
@@ -135,9 +143,11 @@ const renderCalendar = () => {
 
             document.querySelector(".event-desc").classList.remove('hidden');
             for(let i = 0; i < calendarEventsLength; i++){
+                console.log(currMonth+1);
+                console.log(monthOfYear[i].innerHTML);
 
                     //document.querySelector(".event-desc").classList.remove('hidden');
-                if(dayOfMonth[i].innerHTML == document.querySelector(".active").innerHTML){
+                if(dayOfMonth[i].innerHTML == document.querySelector(".active").innerHTML && currMonth+1 == monthOfYear[i].innerHTML){
                     document.querySelectorAll(".calendarTitle")[i].classList.remove('hidden');
                     document.querySelectorAll(".calendarDesc")[i].classList.remove('hidden');
                     document.querySelector(".event-desc").classList.add('hidden');

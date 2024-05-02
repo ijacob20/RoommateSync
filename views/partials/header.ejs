@@ -81,6 +81,9 @@
                 <p class="calendarEventsLength hidden"><%=calendarEvents.length%></p>
                 <%calendarEvents.forEach(calendarEvent=>{%>
                   
+                  <p class="monthofYear hidden"><%=calendarEvent.date.getUTCMonth()+1%></p>
+                  
+
                   <p class="dayOfMonth hidden"><%=calendarEvent.date.getUTCDate()%></p>
 
                   <h3 class="calendarTitle hidden"><%=calendarEvent.title%>:</h2>
