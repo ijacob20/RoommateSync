@@ -28,7 +28,6 @@ router.get('/profile', controller.profile);
 router.get('/edit', controller.editPage);
 
 //POST /users/profile update user profile    
-//EITHER POST OR PUT
 router.post('/profile', fileUpload, controller.edit);
 
 //POST route to handle the status update

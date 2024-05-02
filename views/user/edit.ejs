@@ -42,15 +42,6 @@
         padding: 10px 20px;
         cursor: pointer;
     }
-    .menu-item {
-        display: flex;
-        align-items: center;
-        padding: 20px;
-        width: 90%;
-        margin: 10px 0;
-        border-radius: 10px;
-        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-    }
     a {
     text-decoration: none;
     color: black;
@@ -58,42 +49,27 @@
 </style>
 </head>
 <body>
+
 <div class="profile-page">
-<div class="header">
-    <a href="/"><button>Go back</button></a>
-</div>
 
-<div class="profile">
-    <div class="profile-icon">
-            <img src="<%= user.image %>" alt="profile account logo" width="130" height="130">
+    <div class="header">
+        <a href="/"><button>Go back</button></a>
     </div>
-    <div class="profile-name"><%=user.firstName%> <%=user.lastName%></div>
-    
-    <form method='POST' enctype="multipart/form-data" action="/users/profile">
-        <div class="">
-            <input type="file" class="custom-file-input form-control" id="image" name="image" required>
+
+    <div class="profile">
+        <div class="profile-icon">
+                <img src="<%= user.image %>" alt="profile account logo" width="130" height="130">
         </div>
-        <input onclick=" window.location.href='/users/profile' " type="submit" value="Submit">
-    </form>
-</div>
 
-<div class="menu-item">
-    <div class="menu-icon">
-        <img src="/images/chores.png" alt="chores logo" width="40" height="40">
+        <div class="profile-name"><%=user.firstName%> <%=user.lastName%></div>
+        
+        <form method='POST' enctype="multipart/form-data" action="/users/profile">
+            <div class="edit-profile">
+                <input type="file" class="custom-file-input form-control" id="image" name="image" required>
+                <input onclick=" window.location.href='/users/profile' " type="submit" value="Submit">
+            </div>
+        </form>
     </div>
-</div>
-
-<div class="menu-item">
-    <div class="menu-icon">
-        <img src="/images/add-friend.png" alt="friend account logo" width="40" height="40">
-    </div>
-</div>
-
-<div class="menu-item">
-    <div class="menu-icon">
-        <img src="/images/message.png" alt="messages account logo" width="30" height="30">
-    </div>
-</div>
 
 </div>
 </body>

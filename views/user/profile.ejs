@@ -93,7 +93,16 @@
     <div class="menu-icon">
         <img src="/images/add-friend.png" alt="friend account logo" width="40" height="40">
     </div>
-    Friends
+    <% if (user.friends && user.friends.length> 0) { %>
+        <p class="pt-4 ps-5">Friends:</p>
+        <%user.friends.forEach(function(friend) {%>
+            <ul class="list-group">
+               <li> <a href = '/users/friend'><p class=""><%= friend.firstName %></p></a> </li>
+            </ul>
+        <%});
+    } else {%>
+        <p class="ps-5">No Friends Added</p>
+    <%}%>
 </div>
 
 <div class="menu-item">

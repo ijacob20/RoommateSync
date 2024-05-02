@@ -61,7 +61,8 @@ exports.login = (req, res, next) => {
 
 exports.profile = (req, res, next) => {
     let id = req.session.user;
-    Promise.all([model.findById(id), Chore.find({assignTo: id})])
+    Promise.all([model.findById(id).populate('friends'), Chore.find({assignTo: id}) 
+    ])
     .then(results=>{
         const [user, chores] = results;
         res.render('./user/profile', {user, chores});
