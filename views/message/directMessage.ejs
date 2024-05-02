@@ -3,308 +3,53 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- <link rel="stylesheet" href="/css/messagesNewStyles.css"> -->
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap');
-*{
-margin: 0;
-padding: 0;
-box-sizing: border-box;
-font-family: 'Poppins', sans-serif;
-scroll-behavior: smooth;
-
-}
-
-main {
- display: grid;
- grid-template-columns: auto auto;
- margin: 0 auto;
- padding: 2rem;
- gap: 1rem;
-}
-.buttonContainer {
-  display: flex;
-  justify-content: center;
-}
-
-.messages-container {
-  background-color: rgba(128, 128, 128, 0.603);
-  border-radius: 4px;
-}
-
-.newMessage {
-  display: inline-block;
-  padding: 15px 25px;
-  font-size: 24px;
-  cursor: pointer;
-  text-align: center;
-  text-decoration: none;
-  outline: none;
-  color: #fff;
-  background-color: #64A5CA; 
-  border: none;
-  border-radius: 15px;
-  box-shadow: 0 9px #999;
-  margin: 0 auto;
-}
-
-.newMessage:hover {background-color: #4d8fb4}
-
-.newMessage:active {
-  background-color: #366b8a;
-  box-shadow: 0 5px #666;
-  transform: translateY(4px);
-}
-
-
-/** Profile Page  **/
-
-/**TODO: Transfer styles to this CSS page **/
-
-
-body {
-  font-family: 'Open Sans', sans-serif;
-  /* display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center; */
-  display: grid;
-  place-items: center;
-  background-color: #ebebeb;
-
-}
-
-.main {
-  border: 8px solid #dddddd;
-  border-radius: 24px;
-  overflow: hidden;
-}
-
-p {
-  color: white; 
-;
-}
-
-label {
-  color: rgb(153, 151, 151);
-  font-weight: 500;
-}
-
-input:focus {
-  outline: none;
-}
-
-
-.hidden {
-display: none;
-}
-
-/* Style for Message Page */
-
-/* New home page styles */
-body {
-  background-color: #FFF2E2 ; 
-}
-
-nav {
-  font-family: "Roboto", sans-serif;
-
-}
-
-nav a {
-  text-decoration: none;
-  color: inherit;        
-}
-
-nav h1 {
-    font-size: 1.7rem;
-  }
-
-.sync-header {
-  color: #64A5CA; 
-}
-
-.nav-container {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-top: 1.5rem;
-  margin-right: 2rem;
-  margin-left: 2rem;
-}
-
-.nav-container h1 {
-  display:flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.nav-container img {
-  margin-right: 10px;
-}
-
-.chat-container {
-  display: flex;
-  flex-direction: column;
-  background-color: #f6f6f6;
-  width: 400px;
-  height: 600px;
-  overflow-y: scroll;
-  overflow-x: hidden;
-}
-
-.chat-header {
-  background-color: gray;
-  color: #fff;
-  padding: 10px;
-  text-align: center;
-}
-
-.chat-messages {
-  display: flex;
-  flex-direction: column;
-  background-color: #f6f6f6;
-  width: 400px;
-  height: 600px;
-  overflow-y: scroll;
-  overflow-x: hidden;
-
-
-  /* height: 300px;
-  overflow-y: scroll;
-  padding: 10px;
-  display: flex; */
-}
-
-.message {
-  margin-bottom: 10px;
-  display: grid;
- 
-}
-
-.message-sender {
-  font-weight: bold;
-  margin-bottom: 5px;
-}
-
-
-
-.chat-input {
-  padding: 10px;
-  background-color: #f2f3f5;
-}
-
-.chat-input input[type="text"] {
-  width: calc(100% - 70px);
-  padding: 8px;
-  border: none;
-  border-radius: 5px;
-  margin-right: 10px;
-}
-
-.chat-input button {
-  padding: 8px 15px;
-  border: none;
-  border-radius: 5px;
-  background-color: gray;
-  color: #fff;
-  cursor: pointer;
-}
-
-.chat-input button:hover {
-  background-color: #19191a;
-}
-
-.message-left,
-.message-right {
-  list-style: none;
-  padding: 8px 12px;
-  margin: 12px;
-  max-width: 250px;
-  font-size: 18px;
-  word-wrap: break-word;
-}
-
-.message-left {
-  border-radius: 20px 20px 20px 0px;
-  align-self: flex-start;
-  justify-content: flex-start;
-  background-color: #2d2d2d;
-  box-shadow: -2px 2px 4px #dcdcdc;
-}
-
-.message-right {
-  border-radius: 20px 20px 0px 20px;
-  align-self: flex-end;
-  background: linear-gradient(135deg, #0f89d3, #59c2ff) border-box;
-  /* background-color: #2d2d2d; */
-
-  box-shadow: 2px 2px 4px #dcdcdc;
-  color: #f6f6f6;
-  /* display: flex; */
-  justify-content: flex-end;
-}
-
-.message-left > p > span,
-.message-right > p > span {
-  display: block;
-  font-style: italic;
-  font-size: 12px;
-  margin-top: 4px;
-}
-
-
-    </style>
+    <link rel="stylesheet" href="/css/messagesNewStyles.css">
     <script src="/socket.io/socket.io.js"></script>
-    <!-- <script src="/js/messaging.js" defer></script> -->
+    <script src="/js/messaging.js" defer></script>
   
     <title>Roommate Sync</title>
 </head>
 <body>
     <a href="/messages"><button>Back</button></a>
+    <div class="header">
     <img src="<%= thisUser.profile%>" alt="profilePic">
     <h1 class="username"><%-thisUser.firstName + ' ' + thisUser.lastName%></h1>
-    <p>DMs</p>
-    <%if(!messages.length) {%>
-        <h2 class="one-column">You have no messages.</h4>
-    <%} else { %>
-      <h2 class="one-column">Messages:</h4>
-  
-  
-      <% for(let i=0; i < messages.length; i++){ %>  
-          <div class="messages-container">    
-            <article class="card">
-                <div class="card-header">
-                  <span><%=messages[i].date%></span>
-                  <img src="<%= messages[i].sender.profile%>" alt="profilePic">
-                    <p><%= messages[i].sender.firstName + ': ' + messages[i].message%></p>
+    <h2>DMs</h2>
+</div>
 
-                </div>
-                <div class="card-body">
-                    <div>
-                    </div>
-                    <div class="two-column">
-                    </div>
-                </div>
-            </article>
-          </div>
-  
-    <% } 
-    }%>
-    <div class="main">
 
+        <%if(!messages.length) {%>
+            <h4 class="one-column">You have no messages with this user. Say hello!</h4>
+            <div class="main">
+
+            <ul class="chat-container">
+<p></p>
+            </ul>
+
+
+        <%} else { %>
+        
+        <div class="main">
 
 
         <ul class="chat-container">
             <% for(let i=0; i < messages.length; i++){ %>  
 
-                <li class="message-bubble message-right">
+                <% if(messages[i].sender.id === thisUser.id)  { %> 
+                <li class="message-bubble message-left">
+                    <% } else { %> 
+                
+                    <li class="message-bubble message-right">
+
+                    <%    }%> 
                 <p><%= messages[i].message%>
-                <span><%=  messages[i].sender.firstName %></span>
+                <span></span>
             </p>
         </li>
         <% } %>
             </ul>
+            <%  }%>
+
        
         
         
@@ -315,104 +60,7 @@ nav h1 {
   </div>
 </form>
 </div>
-<h3 class="clients-total" id="client-total">Total Clients: </h3>
 
 
 </body>
 </html>
-<script defer>
-    const socket = io()
-
-const clientsTotal = document.getElementById('client-total')
-
-const chatMessages = document.querySelector('.chat-container')
-const messageForm = document.getElementById('message-form')
-const messageInput = document.getElementById('msg')
-const messageTone = new Audio('/message-tone.mp3')
-let url = window.location.pathname;
-
-let urlId = url.split("/messages/")[1];
-
-console.log('the id in this url is: ' + urlId);
-
-
-
-messageForm.addEventListener('submit', (e) => {
-e.preventDefault()
-sendMessage()
-})
-
-socket.on('clients-total', (data) => {
-clientsTotal.innerText = `Total Clients: ${data}`
-})
-
-function sendMessage() {
-if (messageInput.value === '') return
-const userName = document.querySelector('.username').textContent;
-// console.log(messageInput.value)
-const data = {
-message: messageInput.value,
-receiver: urlId,
-dateTime: new Date(),
-}
-socket.emit('message', data)
-addMessageToUI(true, data)
-messageInput.value = ''
-}
-
-socket.on('chat-message', (data) => {
-// console.log(data)
-messageTone.play()
-
-addMessageToUI(false, data)
-})
-
-function addMessageToUI(isOwnMessage, data) {
-clearFeedback()
-// const user = document.createElement('div');
-
-// user.classList.add('message-sender');
-// user.textContent = data.username;
-// div.append(user);
-
-const messageLi = document.createElement('li');
-if (isOwnMessage) {
-  messageLi.classList.add('message-bubble');
-  messageLi.classList.add('message-right');
-
-} else {
-  messageLi.classList.add('message-left');
-
-}
-messageLi.classList.add('message-bubble');
-
-const pElement = document.createElement('p');
-pElement.innerHTML = data.message;
-const spanElement = document.createElement('span');
-spanElement.textContent = data.username;
-pElement.append(spanElement);
-
-messageLi.append(pElement);
-
-chatMessages.append(messageLi);
-
-scrollToBottom()
-}
-
-function scrollToBottom() {
-chatMessages.scrollTo(0, chatMessages.scrollHeight)
-}
-
-
-
-
-
-
-
-function clearFeedback() {
-document.querySelectorAll('li.message-feedback').forEach((element) => {
-element.parentNode.removeChild(element)
-})
-}
-
-</script>

@@ -50,9 +50,6 @@ main {
 }
 
 
-/** Profile Page  **/
-
-/**TODO: Transfer styles to this CSS page **/
 
 
 body {
@@ -68,8 +65,8 @@ body {
 }
 
 .main {
-  border: 8px solid #dddddd;
   border-radius: 24px;
+  
   overflow: hidden;
 }
 
@@ -92,6 +89,18 @@ input:focus {
 display: none;
 }
 
+img {
+  width: 75px;
+  height: 75px;
+}
+
+.header {
+  display: flex;
+  flex-direction: column;
+  /* gap: 10px; */
+  align-items: center;
+
+}
 /* Style for Message Page */
 
 /* New home page styles */
@@ -139,11 +148,12 @@ nav h1 {
 .chat-container {
   display: flex;
   flex-direction: column;
-  background-color: #f6f6f6;
+  background-color: #2d2d2e;
   width: 400px;
   height: 600px;
   overflow-y: scroll;
   overflow-x: hidden;
+  scrollbar-width: none;
 }
 
 .chat-header {
@@ -184,15 +194,16 @@ nav h1 {
 
 .chat-input {
   padding: 10px;
-  background-color: #f2f3f5;
+  background-color: #2d2d2e;
 }
 
 .chat-input input[type="text"] {
-  width: calc(100% - 70px);
   padding: 8px;
   border: none;
   border-radius: 5px;
   margin-right: 10px;
+  background-color: #363636;
+  color:white;
 }
 
 .chat-input button {
@@ -205,7 +216,7 @@ nav h1 {
 }
 
 .chat-input button:hover {
-  background-color: #19191a;
+  background-color: #307fda;
 }
 
 .message-left,
@@ -222,8 +233,7 @@ nav h1 {
   border-radius: 20px 20px 20px 0px;
   align-self: flex-start;
   justify-content: flex-start;
-  background-color: #2d2d2d;
-  box-shadow: -2px 2px 4px #dcdcdc;
+  background-color: #585555;
 }
 
 .message-right {
@@ -232,7 +242,7 @@ nav h1 {
   background: linear-gradient(135deg, #0f89d3, #59c2ff) border-box;
   /* background-color: #2d2d2d; */
 
-  box-shadow: 2px 2px 4px #dcdcdc;
+  /* box-shadow: 2px 2px 4px #dcdcdc; */
   color: #f6f6f6;
   /* display: flex; */
   justify-content: flex-end;

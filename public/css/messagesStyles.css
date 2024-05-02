@@ -4,15 +4,20 @@ margin: 0;
 padding: 0;
 box-sizing: border-box;
 scroll-behavior: smooth;
+font-family: 'Poppins', 'Arial';
+font-weight: 1000;
 
 }
 
+
 main {
  display: grid;
- grid-template-columns: auto auto;
- margin: 0 auto;
+ grid-template-columns: auto auto auto;
+ margin: 0 1rem;
  padding: 2rem;
  gap: 1rem;
+ border: 5px solid black ;
+ border-radius: 24px;
 }
 .buttonContainer {
   display: flex;
@@ -96,6 +101,10 @@ display: none;
 /* Style for Message Page */
 
 /* New home page styles */
+
+h2 {
+  padding: 0.5rem;
+}
 body {
   background-color: #FFF2E2 ; 
 }
@@ -105,7 +114,7 @@ nav {
 
 }
 
-nav a {
+ a {
   text-decoration: none;
   color: inherit;        
 }

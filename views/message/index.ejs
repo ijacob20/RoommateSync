@@ -30,43 +30,19 @@
             </a>
         </div>
     </nav>
+    <h2>Users</h2>
+
     <main>
-<h2>Users</h2>
     <% for(let i=0; i < users.length; i++){ %>  
-<p><a href="/messages/<%= users[i]._id%>"><%= users[i].firstName + ' ' + users[i].lastName%> </a></p>
+<p class="users"><a href="/messages/<%= users[i]._id%>"><%= users[i].firstName + ' ' + users[i].lastName%> </a></p>
 
 
 
 <% } %>
 
 
-    <%if(!messages.length) {%>
-      <h2 class="one-column">You have no messages.</h4>
-  <%} else { %>
-    <h2 class="one-column">Messages:</h4>
 
-
-    <% for(let i=0; i < messages.length; i++){ %>  
-        <div class="messages-container">    
-          <article class="card">
-              <div class="card-header">
-                <span><%=messages[i].date%></span>
-                  <p><%=messages[i].message%></p>
-              </div>
-              <div class="card-body">
-                  <div>
-                  </div>
-                  <div class="two-column">
-                  </div>
-              </div>
-          </article>
-        </div>
-
-  <% } 
-  }%>
 </main>
-<div class="buttonContainer">
-    <a href="/messages/new"><button class="newMessage">New message</button></a>
-</div>
+
   </body>
 </html>
