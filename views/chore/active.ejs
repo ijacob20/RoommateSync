@@ -96,7 +96,7 @@
                     <% } else { %>
                         <td></td>
                     <% } %>
-                    <td><img src="<%= chore.createdBy.profile %>" alt="profile picture" height="30" width="30" class="profile-icon"><%= chore.createdBy.firstName + ' ' + chore.createdBy.lastName %></td>
+                    <td><img src="<%= chore.createdBy.image %>" alt="profile picture" height="30" width="30" class="profile-icon"><%= chore.createdBy.firstName + ' ' + chore.createdBy.lastName %></td>
                     <td><%= chore.formattedDate%></td>
                     <td>
                         <% if (chore.createdBy._id.toString() === user.id) { %>

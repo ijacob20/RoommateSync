@@ -68,8 +68,12 @@
             <img src="<%= user.image %>" alt="profile account logo" width="130" height="130">
     </div>
     <div class="profile-name"><%=user.firstName%> <%=user.lastName%></div>
-    <form>
-        <button type="submit" formmethod="GET" formaction="/users/edit" class="edit-profile">Edit profile</button>
+    
+    <form method='POST' enctype="multipart/form-data" action="/users/profile">
+        <div class="">
+            <input type="file" class="custom-file-input form-control" id="image" name="image" required>
+        </div>
+        <input onclick=" window.location.href='/users/profile' " type="submit" value="Submit">
     </form>
 </div>
 
@@ -77,16 +81,6 @@
     <div class="menu-icon">
         <img src="/images/chores.png" alt="chores logo" width="40" height="40">
     </div>
-    <%if(chores.length){%>
-      <p class="pt-4 ps-5">Chores:</p>
-      <%chores.forEach(chore => {%>
-          <ul class="list-group">
-             <li> <a href = '/chores'><p class=""><%= chore.title %></p></a> </li>
-          </ul>
-      <%});
-  } else {%>
-      <p class="ps-5">No Chores Assigned</p>
-  <%}%>
 </div>
 
 <div class="menu-item">

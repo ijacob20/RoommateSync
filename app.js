@@ -77,6 +77,7 @@ const application = express();
 let port = 3000;
 let host = 'localhost';
 application.set("views", path.join(__dirname, "..", "/app/views"));
+// application.set("views", path.join(__dirname, "/views"));
 application.set('view engine', 'ejs');
 
 // connect to MongoDB
@@ -112,6 +113,7 @@ application.use((req, res, next) => {
 });
 
 application.use(express.static(path.join(__dirname, "..", "/app/public")));
+// application.use(express.static(path.resolve('./public')));
 application.use(express.urlencoded({extended: true}));
 application.use(morgan('tiny'));
 application.use(methodOverride('_method'));

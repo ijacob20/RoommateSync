@@ -47,12 +47,8 @@ exports.login = (req, res, next)=>{
                 user.comparePassword(password)
                 .then(result=>{
                     if(result) {
-                        req.session.user = {_id: user._id, id: user._id, firstName: user.firstName, lastName: user.lastName, email: user.email, profile: user.profile};
-                        // req.session.user = user._id;
-                        // req.session.fName = user.firstName;
+                        req.session.user = {_id: user._id, id: user._id, firstName: user.firstName, lastName: user.lastName, email: user.email, image: user.image};
                         req.flash('success', 'You have successfully logged in');
-                        // console.log(user.firstName);
-                        // res.redirect('/');
                         res.redirect('/')
 
                 } else {
@@ -63,8 +59,6 @@ exports.login = (req, res, next)=>{
             }     
         })
         .catch(err => next(err));
-
-   
 };
 
 exports.profile = (req, res, next)=>{
@@ -76,6 +70,39 @@ exports.profile = (req, res, next)=>{
 
     })
     .catch(err=>next(err));
+};
+
+exports.editPage= (req, res, next)=>{
+    let id = req.session.user;
+    model.findById(id)
+    .then(user=>{      
+            req.flash('success', 'You have successfully edited your profile.');
+            return res.render('./user/edit', {user});
+    })
+    .catch(err=>next(err));
+};
+
+exports.edit = (req, res, next)=>{
+
+    let user = req.body;
+    let id = req.session.user;
+    console.log(req.file);
+
+    if (req.file) {
+        user.image = '/images/'+req.file.filename;
+
+    }
+
+    model.findByIdAndUpdate(id, user, {useFindAndModify: false, runValidators: true})
+    .then(user=>{
+            req.flash('success', 'You have successfully updated your profile');
+            res.redirect('/users/profile');
+    })
+    .catch(err=> {
+        if(err.name === 'ValidationError')
+            err.status = 400;
+        next(err);
+    });
 };
 
 
