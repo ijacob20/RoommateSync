@@ -9,7 +9,6 @@ const userSchema = new Schema({
     image: {type: String, default: '/images/default.png', required: false},
     friends: [{ type: Schema.Types.ObjectId, ref: 'User' }],
     friendRequests: [{ type: Schema.Types.ObjectId, ref: 'User' }],
-    profile: { type: String, default: '/images/default.png' }
 });
 
 

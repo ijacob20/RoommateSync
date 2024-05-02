@@ -11,10 +11,8 @@ exports.index = (req, res) => {
 
 exports.friendList = async (req, res) => {
     try {
-        if (!req.session.userId) {
-            return res.redirect('/login'); // Ensure user is logged in
-        }
-        const user = await User.findById(req.session.userId)
+       
+        const user = await User.findById(req.session.user.id)
             .populate('friends')
             .populate('friendRequests');
 
